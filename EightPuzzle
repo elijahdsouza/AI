@@ -1,0 +1,77 @@
+successor([0,A,C,B,D,E,F,G,H], [A,0,C,B,D,E,F,G,H]).
+
+successor([0,A,C,B,D,E,F,G,H], [B,A,C,0,D,E,F,G,H]).
+
+successor([C,D,E,A,F,G,0,B,H], [C,D,E,0,F,G,A,B,H]).
+
+successor([C,D,E,A,F,G,0,B,H], [C,D,E,A,F,G,B,0,H]).
+
+successor([C,D,E,F,G,B,H,A,0], [C,D,E,F,G,B,H,0,A]).
+
+successor([C,D,E,F,G,B,H,A,0], [C,D,E,F,G,0,H,A,B]).
+
+successor([C,A,0,D,E,B,F,G,H], [C,0,A,D,E,B,F,G,H]).
+
+successor([C,A,0,D,E,B,F,G,H], [C,A,B,D,E,0,F,G,H]).
+
+successor([A,0,B,D,C,E,F,G,H], [0,A,B,D,C,E,F,G,H]).
+
+successor([A,0,B,D,C,E,F,G,H], [A,B,0,D,C,E,F,G,H]).
+
+successor([A,0,B,D,C,E,F,G,H], [A,C,B,D,0,E,F,G,H]).
+
+successor([A,D,E,0,C,F,B,G,H], [0,D,E,A,C,F,B,G,H]).
+
+successor([A,D,E,0,C,F,B,G,H], [A,D,E,B,C,F,0,G,H]).
+
+successor([A,D,E,0,C,F,B,G,H], [A,D,E,C,0,F,B,G,H]).
+
+successor([D,E,A,F,C,0,G,H,B], [D,E,0,F,C,A,G,H,B]).
+
+successor([D,E,A,F,C,0,G,H,B], [D,E,A,F,C,B,G,H,0]).
+
+successor([D,E,A,F,C,0,G,H,B], [D,E,A,F,0,C,G,H,B]).
+
+successor([D,E,F,G,C,H,A,0,B], [D,E,F,G,C,H,0,A,B]).
+
+successor([D,E,F,G,C,H,A,0,B], [D,E,F,G,C,H,A,B,0]).
+
+successor([D,E,F,G,C,H,A,0,B], [D,E,F,G,0,H,A,C,B]).
+
+successor([E,A,F,B,0,C,G,D,H], [E,0,F,B,A,C,G,D,H]).
+
+successor([E,A,F,B,0,C,G,D,H], [E,A,F,0,B,C,G,D,H]).
+
+successor([E,A,F,B,0,C,G,D,H], [E,A,F,B,C,0,G,D,H]).
+
+successor([E,A,F,B,0,C,G,D,H], [E,A,F,B,D,C,G,0,H]).
+
+
+%is_Goal([0,1,2,3,4,5,6,7,8]).
+accMD([], _, RunningSum, RunningSum).
+
+accMD([0|T], CurState, RunningSum, MDtotal):- accMD(T, CurState, RunningSum, MDtotal).
+
+
+accMD([H|T], CurState, RunningSum, MDtotal):- is_goal(Goal),  
+									nth0(Index, CurState, H),
+									nth0(Index2, Goal, H),
+									CurrXpos is mod(Index,3),
+									GoalXpos is mod(Index2,3),
+									CurrYpos is div(Index, 3),
+									GoalYpos is div(Index2, 3),
+									Dist is (abs(CurrYpos-GoalYpos) + abs(CurrXpos-GoalXpos)),
+									NewRunningSum is Dist + RunningSum,
+									accMD(T,CurState, NewRunningSum, MDtotal).
+
+h(CurState, MDtotal):- accMD( CurState, CurState, 0, MDtotal).
+
+
+neighbors(State, Neighbors) :-	findall(Neighbor, successor(State, Neighbor), Neighbors).
+
+
+
+%solution(problem0,S).
+% - md_Total([7,2,4,5,0,6,8,3,1],X).
+
+
