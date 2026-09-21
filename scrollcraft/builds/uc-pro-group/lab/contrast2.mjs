@@ -4,6 +4,10 @@ const b=await chromium.launch({executablePath:CHROME,args:['--no-sandbox','--dis
 const p=await b.newPage({viewport:{width:1440,height:900}});
 await p.goto('http://localhost:4500/index.html',{waitUntil:'networkidle'});
 await p.waitForTimeout(1500);
+// walk the whole page so lazy/offscreen sections are laid out
+await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=700){
+  scrollTo(0,y); await new Promise(r=>setTimeout(r,45));} scrollTo(0,0);});
+await p.waitForTimeout(600);
 const rows=await p.evaluate(()=>{
   const lum=c=>{const [r,g,bl]=c.map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
     return 0.2126*r+0.7152*g+0.0722*bl;};
@@ -24,7 +28,7 @@ const rows=await p.evaluate(()=>{
     return acc.v.map((x,i)=>x*acc.a+body[i]*(1-acc.a));
   }
   const out=[];
-  document.querySelectorAll('h1,h2,h3,p,li,a,span,figcaption,b').forEach(el=>{
+  document.querySelectorAll('h1,h2,h3,p,li,a,span,figcaption,b,td,th,summary,blockquote').forEach(el=>{
     const t=el.textContent.trim(); if(!t||el.children.length>1) return;
     const cs=getComputedStyle(el), r=el.getBoundingClientRect();
     if(r.width<4||r.height<4) return;

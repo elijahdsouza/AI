@@ -1,6 +1,6 @@
 # UC Pro Group — BRIEF
 
-**Status:** interviewed. Answers below are the user's, from the AskUserQuestion
+**Status:** interviewed. **Superseded in part, see "Direction change" below.** Answers below are the user's, from the AskUserQuestion
 round and their follow-up message. Authored decisions are labelled as such.
 
 **Source of truth for messaging:** the signed-off narrative handover v1.0
@@ -272,3 +272,80 @@ egress policy, so the skill's own kie.mjs pipeline is unavailable here.
    here, framed as the wider Uncommon Collective community and kept visibly
    distinct from Pro Group membership, because chapter 07 opens by admitting
    there are no members yet.
+
+
+---
+
+# Direction change · v3
+
+The "Spread" grammar in this brief was built, reviewed and **rejected**: it read
+as a book. The archived build is `archive/spread-v1.html`. Two further things in
+this brief are now factually wrong and are corrected here.
+
+## What replaced it
+
+**Media company crossed with a startup community page.** Heading at the top, full
+width. Sticky bar with nav and one CTA. No folio, no chapters, no gutter rule.
+
+**Three grounds, and the rule is not alternation for its own sake:**
+
+| Ground | Value | Carries |
+|---|---|---|
+| Dark | `#0E0D0B` | Hero, the third space, the standard, the close. Where they feel. |
+| Light | `#F2F0EA` | Problem, pillars, proof, comparison, pricing, FAQ. Where they read and compare. |
+| Gold | `#7A6522` | The founding offer, and the two callout cards. The moment of commitment, rationed. |
+
+**On the gold.** The raw brand gold `#8A7328` cannot carry body text on any
+ground: it is mid-luminance, so it measures 3.78 against near-black and 3.86
+against bone, both under the 4.5 floor. As a *ground* it was first lifted to
+`#A98B33` with dark ink, then deepened to `#7A6522` so that **white** clears at
+5.64, which is what was asked for. The brand gold survives untouched wherever it
+is an accent rather than a text ground.
+
+Two further two-stop tokens exist for the same reason:
+`--acc` is display weight (3:1 is enough), `--acc-text` is body weight. On light,
+`--acc-text` is `#6F5C1F`, because the brand gold at 10px measures 4.04.
+
+## The hero graphic
+
+The avatar-style figure glyph was rejected as amateur. It is replaced by a **3D
+node lattice**: points in real 3D, rotated by the pointer, perspective projected,
+edges between near neighbours with depth falloff, and pulses travelling the
+lattice. Two modes: over the photograph, or on the bare ground.
+
+## Correction: proof
+
+This brief said **"With no testimonials yet, frequency is the proof."** That was
+wrong. Testimonials and case studies exist, from free community members and
+clients. They are used **anonymised at the user's instruction**: role and market
+only, figures as stated, free-member status labelled on its face.
+
+The "no members yet" honesty is retained where it is still true, and only there:
+there are no *paid Pro Group* members, which is what the FAQ's opening entry
+answers.
+
+## Correction: section count
+
+All fifteen narrative sections are built, plus the v19 comparison table and the
+new proof section. The section inventory is in the commit message for this build.
+
+## Conversion rules now honoured
+
+From the messaging handover, Part One:
+
+1. One primary CTA label everywhere: `Join the founding waitlist`.
+2. One transitional CTA: `Come to the next dinner`.
+3. Proof adjacency: no CTA sits more than one screen from a number or a name.
+4. Specificity over adjectives.
+5. Scarcity is real: 50 seats, a true countdown to 3 October 2026.
+6. **Sticky CTA in the mobile thumb zone**, appearing only once the hero's own
+   CTAs have left the screen so the page never shows two live copies of the
+   same button.
+
+## Still unconfirmed
+
+Pricing is drafted from v19 ($49 Momentum, $159 Inner Circle) and is labelled
+"draft pricing, not confirmed" on the page itself. Seats taken (13) is a
+placeholder. The intake date 3 October 2026 comes from v19 and drives a live
+countdown; the narrative doc says late October, so these disagree and the page
+currently follows v19.
