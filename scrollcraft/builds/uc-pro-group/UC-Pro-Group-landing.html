@@ -23,9 +23,10 @@
   --ink:#14120E;   --ink-2:#1A1A1A;
   --gold:#8A7328;          /* the brand gold. Accent only.               */
   --gold-lift:#C9A84A;     /* lifted for dark grounds: 7.6 on near-black  */
-  --gold-ground:#7A6522;   /* the brand gold, deepened until WHITE clears
-                              the 4.5 body floor on it (5.64). Bright gold
-                              tops out at 3.27 for white, which fails.    */
+  --gold-ground:#BBAB69;   /* muted mustard, specified by the client. It is
+                              a LIGHT gold (luminance .41), so it takes dark
+                              ink at 8.14. White on it is 2.30 and fails,
+                              which is why this ground is not white-on-gold. */
   --indigo-d:#5560D8;      /* on dark: 3.72 edge, white on it 5.18       */
   --indigo-l:#3B48A8;      /* on light: 6.88 edge, white on it 7.84      */
 
@@ -62,11 +63,11 @@
   --line:rgba(26,26,26,.16); --line-2:rgba(26,26,26,.08);
   background:var(--g); color:var(--fg);
 }
-.gold,.callout{
-  --g:var(--gold-ground); --fg:#FFFFFF; --fg-2:#EFE7CE;
-  --acc:#FFFFFF; --acc-text:#FFFFFF;
-  --cta:#FFFFFF; --cta-fg:#14120E; --card:rgba(255,255,255,.10);
-  --line:rgba(255,255,255,.32); --line-2:rgba(255,255,255,.17);
+.gold{
+  --g:var(--gold-ground); --fg:#14120E; --fg-2:#3A3118;   /* 8.14 / 5.60 */
+  --acc:#14120E; --acc-text:#14120E;
+  --cta:#14120E; --cta-fg:#F4F1EA; --card:rgba(255,255,255,.22);
+  --line:rgba(20,18,14,.30); --line-2:rgba(20,18,14,.15);
   background:var(--g); color:var(--fg);
 }
 
@@ -225,13 +226,15 @@ html[data-graphic="room"] .stage__photo{opacity:1}
 
 /* -------------------------------------------------------- gold callout - */
 .callout{
-  border-radius:4px; padding:clamp(22px,2.6vw,34px);
+  background:var(--card); border:1px solid var(--line-2);
+  border-left:3px solid var(--acc); border-radius:4px;
+  padding:clamp(22px,2.6vw,34px);
   display:flex; gap:clamp(16px,2vw,30px); align-items:flex-start; flex-wrap:wrap;
 }
 .callout h3{font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.2;margin-bottom:8px}
 .callout p{margin:0;font-size:14.5px;line-height:1.6;color:var(--fg-2);max-width:62ch}
 .callout__i{flex:none;width:34px;height:34px}
-.callout__i [data-s]{fill:none;stroke:var(--fg);stroke-width:1.4;stroke-linecap:round}
+.callout__i [data-s]{fill:none;stroke:var(--acc);stroke-width:1.4;stroke-linecap:round}
 
 /* ================================================== the peak, §5 ======= */
 .peak__plate{position:relative;margin-top:clamp(28px,4vw,52px);
@@ -326,21 +329,21 @@ html[data-graphic="room"] .stage__photo{opacity:1}
 
 /* ======================================================= founding gold = */
 .count{display:flex;gap:clamp(10px,1.4vw,20px);flex-wrap:wrap;margin-top:26px}
-.count div{background:rgba(16,13,4,.16);border:1px solid rgba(255,255,255,.24);
+.count div{background:rgba(255,255,255,.26);border:1px solid rgba(20,18,14,.18);
   border-radius:4px;padding:12px 16px;min-width:74px;text-align:center}
 .count b{display:block;font-family:var(--display);font-weight:700;
   font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1;letter-spacing:-.02em}
 .count span{display:block;margin-top:5px;font-family:var(--mono);font-size:9.5px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--fg-2)}
 .seats{margin-top:26px}
-.seats__bar{height:6px;background:rgba(255,255,255,.22);border-radius:999px;overflow:hidden}
-.seats__bar i{display:block;height:100%;background:#FFFFFF;width:0%}
+.seats__bar{height:6px;background:rgba(20,18,14,.18);border-radius:999px;overflow:hidden}
+.seats__bar i{display:block;height:100%;background:#14120E;width:0%}
 .seats__l{margin:10px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.13em;
   text-transform:uppercase;color:var(--fg-2)}
 .reversal{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px);
   margin-top:clamp(28px,3.6vw,48px)}
 @media (max-width:760px){.reversal{grid-template-columns:1fr}}
-.reversal div{border-top:1.5px solid rgba(255,255,255,.34);padding-top:16px}
+.reversal div{border-top:1.5px solid rgba(20,18,14,.32);padding-top:16px}
 .reversal b{display:block;font-family:var(--display);font-weight:700;
   font-size:clamp(1.02rem,1.35vw,1.22rem);margin-bottom:6px}
 .reversal p{margin:0;font-size:13.5px;color:var(--fg-2);line-height:1.55}
@@ -352,7 +355,7 @@ html[data-graphic="room"] .stage__photo{opacity:1}
 .cmp thead th{padding:13px 11px;text-align:left;vertical-align:bottom;
   background:var(--g);color:var(--fg);border-bottom:2px solid var(--acc);font-weight:500}
 .cmp thead th:first-child{min-width:210px}
-.cmp .col-uc{background:var(--gold-ground);color:#FFFFFF;--fg-2:#EFE7CE}
+.cmp .col-uc{background:var(--gold-ground);color:#14120E;--fg-2:#3A3118}
 .cmp .cname{display:block;font-family:var(--display);font-size:13.5px;font-weight:700;
   line-height:1.25;margin-bottom:3px}
 .cmp .cprice{display:block;font-size:10.5px;font-weight:400;color:var(--fg-2);line-height:1.3}
@@ -1137,7 +1140,7 @@ h2.mission em{font-style:italic;color:var(--acc)}
 
     <div style="margin-top:clamp(28px,3.4vw,44px);display:flex;gap:12px;flex-wrap:wrap;align-items:center">
       <a class="btn" href="#founding">Join the founding waitlist</a>
-      <a class="btn btn--ghost" href="#rhythm" style="border-color:rgba(255,255,255,.4)">Come to the next dinner</a>
+      <a class="btn btn--ghost" href="#rhythm" style="border-color:rgba(20,18,14,.34)">Come to the next dinner</a>
       <span class="seats__l" style="margin:0">Then a 15 minute fit call once the group reaches critical mass</span>
     </div>
   </div>
