@@ -19,7 +19,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT_NAME = "UC-Pro-Group-hero-directions.html"
+OUT_NAME = "UC-Pro-Group-landing.html"
 
 REPLACEMENTS = [
     ('<link rel="stylesheet" href="scrollcraft.css">',
@@ -37,10 +37,11 @@ IMAGES = {"assets/table.jpg": ("image/jpeg", "assets/table.jpg")}
 def main() -> int:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
 
+    # The engine links are optional: the current page is standalone, while
+    # archive/spread-v1.html still links them. Inline whatever is present.
     for needle, src, wrapper in REPLACEMENTS:
         if needle not in html:
-            print(f"error: {needle!r} not found in index.html", file=sys.stderr)
-            return 1
+            continue
         html = html.replace(needle, wrapper.format(
             (ROOT / src).read_text(encoding="utf-8")))
 

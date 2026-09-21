@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UC Pro Group · a third space for founders, operators and creators</title>
+<meta name="description" content="A third space in Melbourne for founders, operators and creators, from emerging small business to high growth. 50 founding seats, rate locked for 12 months.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231A1A1A'/><circle cx='16' cy='13' r='4' fill='none' stroke='%238A7328' stroke-width='1.6'/><path d='M9 24a7 7 0 0 1 14 0' fill='none' stroke='%238A7328' stroke-width='1.6'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+/* ===========================================================================
+   UC Pro Group · grammar "The Spread"
+   Brand tokens read off the Uncommon Collective partner 2-pager.
+   Gold owns the editorial voice. Indigo owns exactly one job: the primary CTA.
+   ======================================================================== */
+:root{
+  --uc-bone:   #F2F0EA;
+  --uc-grey:   #E9E9E9;
+  --uc-ink:    #1A1A1A;
+  --uc-gold:   #8A7328;
+  --uc-gold-lift:#C9A84A;
+  --uc-indigo: #3B48A8;
+
+  --sc-canvas:     var(--uc-bone);
+  --sc-surface:    var(--uc-grey);
+  --sc-ink:        var(--uc-ink);
+  --sc-ink-soft:   #5A564C;          /* tinted from the ground, not flat grey */
+  --sc-accent:     var(--uc-gold);
+  --sc-accent-ink: var(--uc-bone);
+
+  --sc-font-display:"Playfair Display", Georgia, serif;
+  --sc-font-text:   "Poppins", -apple-system, "Segoe UI", sans-serif;
+  --sc-font-mono:   "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --rail: 56px;            /* folio rail width */
+  --pad:  clamp(20px,3.4vw,52px);
+  --gutter-x: 54vw;        /* the table edge. Chapters may move it.
+                              vw, not %: a % in grid-template-columns
+                              resolves against the grid box, not the
+                              viewport, and the rule is viewport-fixed.    */
+  --page-air: 34px;        /* breathing room either side of the rule       */
+  --hair: color-mix(in oklab, var(--sc-ink) 16%, transparent);
+  --hair-soft: color-mix(in oklab, var(--sc-ink) 9%, transparent);
+  --photo-tone: 0%;        /* the plate is ungraded. This stays 0.           */
+}
+
+/* Black-led weighting. Restates `color` wherever it restates the token,
+   because `color` inherits as a computed value. */
+html[data-theme="black"]{
+  --sc-canvas:   var(--uc-ink);
+  --sc-surface:  #232323;
+  --sc-ink:      var(--uc-bone);
+  --sc-ink-soft: #9A9384;
+  --sc-accent:   var(--uc-gold-lift);
+  --sc-accent-ink: var(--uc-ink);
+  --sc-shadow-color: 40 10% 2%;
+}
+html[data-theme="black"] body{ color:var(--sc-ink); }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--sc-canvas); color:var(--sc-ink);
+  font-family:var(--sc-font-text); font-weight:300;
+  font-size:var(--sc-t-base); line-height:var(--sc-leading-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* --- skip link ---------------------------------------------------------- */
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--uc-indigo); color:#fff; padding:12px 18px;
+  font-family:var(--sc-font-mono); font-size:12px;
+}
+.skip:focus{left:var(--rail)}
+
+:where(a,button,[tabindex]):focus-visible{
+  outline:2px solid var(--uc-indigo); outline-offset:3px; border-radius:2px;
+}
+html[data-theme="black"] :where(a,button,[tabindex]):focus-visible{
+  outline-color:var(--uc-gold-lift);
+}
+
+/* ===================================================== the folio rail ==== */
+.folio{
+  position:fixed; inset:0 auto 0 0; width:var(--rail); z-index:60;
+  border-right:1px solid var(--hair-soft);
+  background:var(--sc-canvas);
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:space-between; padding:18px 0;
+}
+.folio__mark{
+  width:26px;height:26px;flex:none;
+}
+.folio__mark svg{display:block;width:100%;height:100%}
+.folio__run{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--sc-font-mono); font-size:10.5px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--sc-ink-soft);
+  white-space:nowrap;
+}
+.folio__now{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--sc-font-mono); font-size:10.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--sc-accent); white-space:nowrap;
+}
+
+/* ============================================ the gutter: table's edge === */
+/* Fixed, full height, sits at --gutter-x. The seats stamp onto it and stay. */
+.table-edge{
+  position:fixed; top:0; bottom:0; left:var(--gutter-x);
+  width:1px; background:var(--hair); z-index:55; pointer-events:none;
+  transition:left .9s cubic-bezier(.65,0,.35,1);
+}
+.table-edge__seats{
+  position:absolute; inset:0; left:-11px; width:23px; pointer-events:auto;
+}
+.seat{
+  position:absolute; left:0; width:23px; height:23px;
+  transform:translateY(-50%) scale(.55); opacity:0;
+  transition:opacity .5s ease, transform .5s cubic-bezier(.34,1.4,.5,1);
+  display:block; border:0; background:none; padding:0; cursor:pointer;
+}
+.seat svg{display:block;width:100%;height:100%;overflow:visible}
+.seat circle,.seat path{
+  fill:none; stroke:var(--sc-accent); stroke-width:1.4;
+  vector-effect:non-scaling-stroke;
+}
+.seat--open circle,.seat--open path{
+  stroke:var(--sc-ink-soft); stroke-dasharray:2 2.6;
+}
+.seat.is-seated{ opacity:1; transform:translateY(-50%) scale(1); }
+.seat--open.is-seated{ opacity:.85; }
+.seat__label{
+  position:absolute; left:28px; top:50%; transform:translateY(-50%);
+  font-family:var(--sc-font-mono); font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sc-ink-soft); white-space:nowrap;
+  opacity:0; transition:opacity .25s ease; pointer-events:none;
+}
+.seat:hover .seat__label,.seat:focus-visible .seat__label{opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  .seat{transition:none}
+  .table-edge{transition:none}
+}
+
+/* ==================================================== page scaffolding === */
+main{margin-left:var(--rail)}
+.spread{
+  position:relative;
+  padding-inline:var(--pad);
+}
+
+/* The two pages of a spread. Column one ends short of the rule, column two
+   starts past it, so the gutter is empty and the rule never crosses type. */
+.pages{
+  display:grid;
+  grid-template-columns:
+    calc(var(--gutter-x) - var(--rail) - var(--pad) - var(--page-air)) 1fr;
+  gap:calc(var(--page-air) * 2);
+  align-items:start;
+}
+
+/* ============================================================ chapter 00 = */
+.ch00{
+  min-height:100svh; display:flex; flex-direction:column;
+  padding-top:clamp(64px,9vh,120px);
+}
+.ch00__type{flex:1 1 auto; display:flex; align-items:center}
+
+h1.claim{
+  font-family:var(--sc-font-display); font-weight:700;
+  font-size:clamp(2.05rem,3.55vw,3.45rem);
+  line-height:1.07; letter-spacing:-0.02em;
+  margin:0; text-wrap:pretty; max-width:20ch;
+}
+h1.claim .tail{ font-style:italic; color:var(--sc-accent); font-weight:500; }
+.caret{
+  display:inline-block; width:.055em; height:.82em; margin-left:.06em;
+  background:var(--sc-accent); vertical-align:-0.06em;
+  animation:blink 1.06s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+/* Nothing is typing, so nothing should be blinking. */
+@media (prefers-reduced-motion:reduce){ .caret{display:none} }
+
+.positioning{
+  margin:clamp(20px,2.6vw,34px) 0 0;
+  font-size:var(--sc-t-lg); font-weight:300; line-height:1.45;
+  color:var(--sc-ink-soft); max-width:36ch;
+}
+.rule{
+  height:1px; background:var(--hair); border:0; margin:clamp(22px,3vw,36px) 0;
+}
+
+/* the quote page, right of the gutter */
+.quote{ padding-top:clamp(6px,1.4vw,18px); }
+.quote blockquote{
+  margin:0; font-family:var(--sc-font-display); font-weight:400;
+  font-size:clamp(1.35rem,2.05vw,2rem); line-height:1.24;
+  letter-spacing:-0.012em; max-width:24ch;
+}
+.quote blockquote em{ font-style:italic; color:var(--sc-accent); }
+.quote figcaption{
+  margin-top:16px; font-family:var(--sc-font-mono); font-size:10.5px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--sc-ink-soft);
+}
+.quote__sub{
+  margin:clamp(22px,3vw,34px) 0 0; font-size:var(--sc-t-sm);
+  color:var(--sc-ink-soft); max-width:40ch; line-height:1.65;
+}
+
+/* ------------------------------------------------------------- actions -- */
+.actions{ display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center;
+          margin-top:clamp(24px,3vw,34px); }
+.cta{
+  display:inline-block; background:var(--uc-indigo); color:#fff;
+  font-family:var(--sc-font-text); font-weight:500; font-size:var(--sc-t-sm);
+  letter-spacing:.005em; text-decoration:none;
+  padding:15px 26px; border-radius:var(--sc-r-pill);
+  transition:transform .18s ease, background .18s ease;
+}
+.cta:hover{ background:#2F3B92; transform:translateY(-1px); }
+.cta--ghost{
+  background:none; color:var(--sc-ink); padding:15px 4px;
+  border-radius:0; border-bottom:1px solid var(--sc-accent);
+  text-underline-offset:4px;
+}
+.cta--ghost:hover{ background:none; color:var(--sc-accent); }
+@media (prefers-reduced-motion:reduce){ .cta:hover{transform:none} }
+
+/* ---------------------------------------------------- the plate (band) -- */
+/* The photograph is 3.14:1. It is a band, so it is set as one. Every face in
+   the room survives; the full plate is held back for the peak at ch.03.    */
+.plate{
+  margin-top:clamp(22px,3.2vh,44px);
+  margin-inline:calc(-1 * var(--pad));
+  position:relative; overflow:hidden;
+  border-top:1px solid var(--hair-soft);
+  border-bottom:1px solid var(--hair-soft);
+}
+.plate img{
+  display:block; width:100%; height:clamp(168px,25vh,272px);
+  object-fit:cover; object-position:50% 34%;
+  filter:saturate(calc(100% + var(--photo-tone)));
+}
+/* A scrim only where the text sits. The plate itself stays ungraded: the
+   room is the argument, and washing it is what the old page got wrong. */
+.plate figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:30px var(--pad) 11px;
+  font-family:var(--sc-font-mono); font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:#F2F0EA;
+  background:linear-gradient(to top, rgba(10,9,7,.80), rgba(10,9,7,.55) 45%, rgba(10,9,7,0));
+}
+
+/* ------------------------------------------------------ founding strip -- */
+.strip{
+  display:flex; flex-wrap:wrap; gap:8px 30px; align-items:baseline;
+  padding:16px 0 clamp(20px,3vh,34px);
+  font-family:var(--sc-font-mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sc-ink-soft);
+}
+.strip b{ color:var(--sc-accent); font-weight:500; }
+/* A separator nobody can see is not separating anything. */
+.strip .dot{ color:var(--sc-ink-soft); opacity:.6 }
+
+/* ============================================================ chapter 01 = */
+.ch01{ padding-block:clamp(70px,11vh,150px); }
+/* The left page holds while the right page scrolls past it. That is what
+   makes a spread read as a spread rather than as two stacked columns. */
+.chapter-open{ position:sticky; top:clamp(70px,13vh,130px); }
+@supports not (position:sticky){ .chapter-open{ position:static } }
+.chapter-open__n{
+  display:block; font-family:var(--sc-font-mono); font-size:11px;
+  letter-spacing:.2em; color:var(--sc-accent); margin-bottom:14px;
+}
+.chapter-open h2{
+  font-family:var(--sc-font-display); font-weight:700; margin:0;
+  font-size:clamp(1.55rem,2.75vw,2.5rem); letter-spacing:-0.018em;
+  line-height:1.12; max-width:18ch; text-wrap:pretty;
+}
+
+/* calibre strip, on the left page beneath the chapter title */
+.calibre{ margin-top:clamp(30px,4vw,52px); }
+.calibre__lead{
+  font-family:var(--sc-font-mono); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sc-ink-soft); margin:0 0 16px;
+}
+.calibre__names{
+  display:flex; flex-wrap:wrap; gap:9px 22px; margin:0; padding:0;
+  list-style:none; max-width:38ch;
+  font-family:var(--sc-font-mono); font-size:11.5px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--sc-ink);
+  border-top:1px solid var(--hair); padding-top:16px;
+}
+.calibre__names li{ opacity:.78 }
+
+/* the three pointers, stacked on the right page */
+.pointers{ display:flex; flex-direction:column; }
+.pointer{
+  display:grid; grid-template-columns:96px minmax(0,1fr); gap:24px;
+  align-items:start;
+  border-top:1px solid var(--hair); padding:26px 0;
+}
+.pointer:last-child{ border-bottom:1px solid var(--hair); }
+.pointer__art{ grid-column:1; grid-row:1 / span 2; width:96px; height:70px; margin:0; }
+.pointer h3,.pointer p{ grid-column:2; }
+.pointer__art svg{ display:block; width:auto; height:100%; overflow:visible }
+.pointer__art [data-draw]{
+  fill:none; stroke:var(--sc-accent); stroke-width:1.25;
+  stroke-linecap:round; vector-effect:non-scaling-stroke;
+}
+.pointer__art [data-dot]{ fill:var(--sc-accent); stroke:none }
+.pointer__art [data-ghost]{
+  fill:none; stroke:var(--sc-ink-soft); stroke-width:1.1;
+  stroke-dasharray:2 3; vector-effect:non-scaling-stroke;
+}
+.pointer h3{
+  font-family:var(--sc-font-display); font-weight:700; margin:0 0 9px;
+  font-size:var(--sc-t-lg); line-height:1.2; letter-spacing:-0.012em;
+  max-width:24ch;
+}
+.pointer p{ margin:0; font-size:var(--sc-t-sm); color:var(--sc-ink-soft);
+  line-height:1.66; max-width:46ch; }
+
+/* ======================================================== theme control == */
+.weighting{
+  position:fixed; right:18px; bottom:18px; z-index:80;
+  display:flex; align-items:center; gap:2px;
+  background:var(--sc-canvas); border:1px solid var(--hair);
+  border-radius:var(--sc-r-pill); padding:4px;
+  box-shadow:var(--sc-e1);
+}
+.weighting__label{
+  font-family:var(--sc-font-mono); font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--sc-ink-soft); padding:0 8px 0 10px;
+}
+.weighting button{
+  font-family:var(--sc-font-mono); font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; border:0; background:none; color:var(--sc-ink-soft);
+  padding:7px 13px; border-radius:var(--sc-r-pill); cursor:pointer;
+}
+.weighting button[aria-pressed="true"]{
+  background:var(--sc-ink); color:var(--sc-canvas);
+}
+
+/* ============================================================== mobile === */
+@media (max-width:900px){
+  :root{ --rail:40px; }
+  .pages{ grid-template-columns:1fr; gap:clamp(26px,5vw,40px); }
+  /* The edge moves inboard of the folio and the seats sit to its right, so
+     the rail and the table never occupy the same pixels. */
+  .table-edge{ left:calc(var(--rail) + 15px); }
+  .table-edge__seats{ left:3px; width:21px }
+  .seat{ width:19px; height:19px }
+  .seat__label{ display:none }
+  .chapter-open{ position:static }
+  h1.claim{ font-size:clamp(2.1rem,8.2vw,3rem); max-width:none }
+  .positioning{ font-size:var(--sc-t-base); max-width:none }
+  .quote blockquote{ font-size:clamp(1.2rem,4.6vw,1.6rem); max-width:none }
+  .pointer{ grid-template-columns:72px 1fr; gap:18px; padding:22px 0 }
+  .pointer__art{ width:72px; height:56px }
+  .chapter-open h2{ max-width:none }
+  .calibre__names{ max-width:none }
+  .ch00{ padding-top:clamp(40px,7vh,72px) }
+  .plate img{ height:clamp(180px,26vh,240px); object-position:50% 32% }
+  .strip{ gap:6px 18px; font-size:10px }
+  .folio__run{ display:none }
+  .weighting{ right:10px; bottom:10px }
+}
+@media (max-width:560px){
+  .actions{ gap:12px }
+  .cta{ width:100%; text-align:center }
+  .cta--ghost{ width:auto }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================================================ folio ==== -->
+<div class="folio" aria-hidden="true">
+  <span class="folio__mark">
+    <svg viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" rx="7" fill="currentColor" opacity=".08"/>
+      <circle cx="16" cy="13" r="4.2" stroke="var(--sc-accent)" stroke-width="1.5"/>
+      <path d="M8.6 24.4a7.4 7.4 0 0 1 14.8 0" stroke="var(--sc-accent)" stroke-width="1.5"/>
+    </svg>
+  </span>
+  <span class="folio__run">Uncommon Collective &nbsp;·&nbsp; Melbourne</span>
+  <span class="folio__now" id="folio-now">ch. 00 &nbsp;title</span>
+</div>
+
+<!-- ================================================ the table's edge ===== -->
+<!-- Signature move. One seat is stamped for every chapter passed, and it
+     stays. By the close the gutter is a table with a room around it. Two
+     seats never fill: that is the founding offer, stated as geometry. -->
+<div class="table-edge" id="tableEdge">
+  <div class="table-edge__seats" id="seats"></div>
+</div>
+
+<main id="main">
+
+  <!-- ========================================================= ch. 00 ==== -->
+  <section class="spread ch00" id="ch-00" data-chapter="00" data-chapter-title="title">
+    <div class="ch00__type">
+      <div class="pages">
+
+        <div>
+          <h1 class="claim">Making it easier, and more common, to build
+            <span class="tail" id="tw">undeniable momentum.</span><span class="caret" aria-hidden="true"></span>
+          </h1>
+          <p class="positioning">
+            We create spaces where founders, operators and creators build
+            undeniable momentum.
+          </p>
+          <div class="actions">
+            <a class="cta" href="#waitlist">Join the founding waitlist</a>
+            <a class="cta cta--ghost" href="#dinner">Come to the next dinner</a>
+          </div>
+        </div>
+
+        <figure class="quote">
+          <blockquote>
+            “I’ve outgrown my friends, and need new ones who get me.
+            <em>But I haven’t made it yet to be friends with them.</em>”
+          </blockquote>
+          <figcaption>Founder, in their own words</figcaption>
+          <p class="quote__sub">
+            A third space in Melbourne for founders, operators and creators,
+            from emerging small business through to high growth. Not a desk,
+            not a program with an end date.
+          </p>
+        </figure>
+
+      </div>
+    </div>
+
+    <figure class="plate">
+      <img src="assets/table.jpg" width="1750" height="558"
+           alt="Seventeen founders, operators and creators standing together outside a Melbourne café, mid-conversation."
+           fetchpriority="high" decoding="async">
+      <figcaption>The table, Melbourne</figcaption>
+    </figure>
+
+    <p class="strip">
+      <span><b>50</b> founding seats</span>
+      <span class="dot">·</span>
+      <span>rate locked <b>12 months</b></span>
+      <span class="dot">·</span>
+      <span>intake closes <b>[date]</b></span>
+    </p>
+  </section>
+
+  <!-- ========================================================= ch. 01 ==== -->
+  <section class="spread ch01" id="ch-01" data-chapter="01" data-chapter-title="the room">
+    <div class="pages">
+
+      <div class="chapter-open">
+        <span class="chapter-open__n">ch. 01 &nbsp;the room</span>
+        <h2>You are not short on effort. You are short on people at your altitude.</h2>
+
+        <div class="calibre">
+          <p class="calibre__lead">Built for the calibre of founder coming out of</p>
+          <ul class="calibre__names">
+            <li>Square Peg</li><li>LaunchVic</li><li>Startmate</li><li>Blackbird</li>
+            <li>Catalysr</li><li>YGAP</li><li>Stone &amp; Chalk</li><li>CSIRO</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointers">
+
+      <article class="pointer" data-sc-in>
+        <div class="pointer__art" aria-hidden="true">
+          <!-- outgrown the circle: rings that no longer contain you -->
+          <svg viewBox="0 0 120 86">
+            <circle data-ghost cx="46" cy="43" r="14"/>
+            <circle data-ghost cx="46" cy="43" r="24"/>
+            <circle data-draw cx="46" cy="43" r="33" data-len="207"/>
+            <circle data-dot cx="99" cy="30" r="2.6"/>
+            <path data-draw d="M79 43 L94 32" data-len="19"/>
+          </svg>
+        </div>
+        <h3>You’ve outgrown your circle.</h3>
+        <p>
+          The people who knew you at the start can’t follow where you’re going,
+          and you’re not yet in the rooms where the next ones are.
+        </p>
+      </article>
+
+      <article class="pointer" data-sc-in>
+        <div class="pointer__art" aria-hidden="true">
+          <!-- burning time and money: a spiral that returns nothing -->
+          <svg viewBox="0 0 120 86">
+            <path data-draw d="M60 43 m0 -30 a30 30 0 1 1 -21 51 a21 21 0 1 1 21 -36 a12 12 0 1 1 -8 20" data-len="240"/>
+            <circle data-dot cx="52" cy="47" r="2.4"/>
+            <path data-ghost d="M14 71 H106"/>
+          </svg>
+        </div>
+        <h3>You’re burning time and money on things that don’t work.</h3>
+        <p>
+          Programs, memberships and groups that deliver content instead of
+          relationships, and noise instead of people worth knowing.
+        </p>
+      </article>
+
+      <article class="pointer" data-sc-in>
+        <div class="pointer__art" aria-hidden="true">
+          <!-- confidence leaking: a solid line that breaks into dots -->
+          <svg viewBox="0 0 120 86">
+            <path data-draw d="M10 58 C30 58 34 26 52 26 C66 26 70 44 80 44" data-len="96"/>
+            <circle data-dot cx="88" cy="46" r="2.1"/>
+            <circle data-dot cx="96" cy="49" r="1.7"/>
+            <circle data-dot cx="103" cy="53" r="1.3"/>
+            <circle data-dot cx="109" cy="58" r="1"/>
+            <path data-ghost d="M10 71 H110"/>
+          </svg>
+        </div>
+        <h3>Your confidence is leaking.</h3>
+        <p>
+          Not from lack of ability. From doing it without the connections,
+          opportunities and vehicles that make the next level reachable.
+        </p>
+      </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- prototype tail: enough scroll for the seats to demonstrate -->
+  <section class="spread" style="padding-block:clamp(70px,14vh,180px)" aria-hidden="true">
+    <p style="font-family:var(--sc-font-mono);font-size:11px;letter-spacing:.16em;
+              text-transform:uppercase;color:var(--sc-ink-soft);margin:0">
+      Prototype ends here &nbsp;·&nbsp; chapters 02 to 08 follow in the full build
+    </p>
+  </section>
+
+</main>
+
+<!-- ======================================================== weighting ===== -->
+<div class="weighting" role="group" aria-label="Design weighting">
+  <span class="weighting__label">Weighting</span>
+  <button type="button" id="w-bone"  aria-pressed="true">Bone</button>
+  <button type="button" id="w-black" aria-pressed="false">Black</button>
+</div>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function(){
+  'use strict';
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------------------------------------------- the typewriter --
+     The H1 ships with stem + phrase one already in the DOM, so a screenshot,
+     a link preview and a slow connection all get a complete headline.      */
+  var TAILS = [
+    'undeniable momentum.',
+    'real opportunities.',
+    'friendships that last.',
+    'the life behind the business.'
+  ];
+  var tw = document.getElementById('tw');
+  if (tw && !reduced) {
+    var i = 0, ch = TAILS[0].length, deleting = false;
+    (function tick(){
+      var word = TAILS[i];
+      if (!deleting) {
+        ch++;
+        if (ch >= word.length) { ch = word.length; deleting = true;
+          tw.textContent = word; return setTimeout(tick, 2400); }
+      } else {
+        ch--;
+        if (ch <= 0) { ch = 0; deleting = false; i = (i + 1) % TAILS.length;
+          return setTimeout(tick, 240); }
+      }
+      tw.textContent = word.slice(0, ch);
+      setTimeout(tick, deleting ? 26 : 52);
+    })();
+  }
+
+  /* ------------------------------------------------- the table's edge ---
+     Signature move. One seat per chapter, stamped as it is passed, kept.
+     The last two never fill: the founding offer, stated as geometry.      */
+  var CHAPTERS = [
+    ['00','title'], ['01','the room'], ['02','what doesn’t work'],
+    ['03','the third space'], ['04','a month here'], ['05','the standard'],
+    ['06','the club'], ['07','questions'], ['08','colophon']
+  ];
+  var seatWrap = document.getElementById('seats');
+  var SEATS = CHAPTERS.length + 2;          // two stay open
+  var seatEls = [];
+
+  for (var s = 0; s < SEATS; s++) {
+    var open = s >= CHAPTERS.length;
+    var b = document.createElement(open ? 'span' : 'a');
+    b.className = 'seat' + (open ? ' seat--open' : '');
+    b.style.top = (7 + (s * (86 / (SEATS - 1)))) + '%';
+    if (!open) {
+      b.href = '#ch-' + CHAPTERS[s][0];
+      b.setAttribute('aria-label', 'Chapter ' + CHAPTERS[s][0] + ', ' + CHAPTERS[s][1]);
+    } else {
+      b.setAttribute('aria-hidden','true');
+    }
+    b.innerHTML =
+      '<svg viewBox="0 0 23 23"><circle cx="11.5" cy="8.2" r="3.4"/>' +
+      '<path d="M4.6 18.6a6.9 6.9 0 0 1 13.8 0"/></svg>' +
+      '<span class="seat__label">' +
+        (open ? 'seat open' : 'ch. ' + CHAPTERS[s][0] + ' · ' + CHAPTERS[s][1]) +
+      '</span>';
+    seatWrap.appendChild(b);
+    seatEls.push(b);
+  }
+
+  /* seat 00 is already taken: the visitor is here */
+  seatEls[0].classList.add('is-seated');
+
+  var folioNow = document.getElementById('folio-now');
+  var sections = Array.prototype.slice.call(
+    document.querySelectorAll('section[data-chapter]'));
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var mid = window.innerHeight * 0.55, current = null;
+      sections.forEach(function(sec){
+        var r = sec.getBoundingClientRect();
+        if (r.top <= mid) current = sec;
+        /* a chapter is "passed" once its top clears 55% of the viewport */
+        if (r.top <= mid) {
+          var n = parseInt(sec.dataset.chapter, 10);
+          if (seatEls[n]) seatEls[n].classList.add('is-seated');
+        }
+      });
+      if (current && folioNow) {
+        folioNow.innerHTML = 'ch.&nbsp;' + current.dataset.chapter +
+                             '&nbsp;&nbsp;' + current.dataset.chapterTitle;
+      }
+      ticking = false;
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll, {passive:true});
+  onScroll();
+
+  /* --------------------------------------------- the pointer line art ---
+     Each mark draws itself once, as it arrives. Restrained: it runs one
+     time and then holds, rather than animating forever in the corner.    */
+  var draws = document.querySelectorAll('.pointer__art [data-draw]');
+  if (!reduced && 'IntersectionObserver' in window) {
+    draws.forEach(function(p){
+      var len = parseFloat(p.getAttribute('data-len')) ||
+                (p.getTotalLength ? p.getTotalLength() : 200);
+      p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var els = e.target.querySelectorAll('[data-draw]');
+        els.forEach(function(p, k){
+          p.style.transition = 'stroke-dashoffset 1.05s cubic-bezier(.5,0,.2,1) ' +
+                               (k * 140 + 90) + 'ms';
+          p.style.strokeDashoffset = '0';
+        });
+        io.unobserve(e.target);
+      });
+    }, {threshold:0.4});
+    document.querySelectorAll('.pointer__art').forEach(function(a){ io.observe(a); });
+  }
+
+  /* ------------------------------------------------------- weighting ---- */
+  var bone = document.getElementById('w-bone'), black = document.getElementById('w-black');
+  function setW(mode){
+    document.documentElement.setAttribute('data-theme', mode);
+    bone.setAttribute('aria-pressed', String(mode === 'bone'));
+    black.setAttribute('aria-pressed', String(mode === 'black'));
+    try { localStorage.setItem('uc-weighting', mode); } catch(e){}
+  }
+  bone.addEventListener('click', function(){ setW('bone'); });
+  black.addEventListener('click', function(){ setW('black'); });
+  try {
+    var saved = localStorage.getItem('uc-weighting');
+    if (saved) setW(saved); else setW('bone');
+  } catch(e){ setW('bone'); }
+
+  if (window.ScrollCraft && ScrollCraft.mount) ScrollCraft.mount(document.body);
+})();
+</script>
+</body>
+</html>

@@ -1,2 +1,4 @@
-node_modules/
+# No trailing slash: with "node_modules/" git only ignores a directory, and
+# the local playwright install here is a symlink, which slipped through.
+node_modules
 lab/serve.log
