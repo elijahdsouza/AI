@@ -18,10 +18,10 @@ await p.evaluate(()=>{
 });
 await p.waitForTimeout(400);
 const H=await p.evaluate(()=>document.documentElement.scrollHeight);
-const W=1100, N=3, slice=Math.ceil(H/N);
+const W=1100, N=5, slice=Math.ceil(H/N);
 for(let i=0;i<N;i++){
   const y=i*slice, h=Math.min(slice, H-y);
-  await p.screenshot({path:`lab/v3-sheet-${i+1}.png`, fullPage:true, clip:{x:0,y,width:W,height:h}});
+  await p.screenshot({path:`lab/print-${i+1}.png`, fullPage:true, clip:{x:0,y,width:W,height:h}});
   console.log(`slice ${i+1}: y=${y} h=${h}`);
 }
 console.log('total height', H);
