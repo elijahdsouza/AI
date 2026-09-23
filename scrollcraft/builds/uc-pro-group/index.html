@@ -1,462 +1,403 @@
 <!doctype html>
-<html lang="en-AU" data-graphic="room">
+<html lang="en-AU">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Uncommon Collective Pro Group · build undeniable momentum</title>
-<meta name="description" content="A third space in Melbourne for founders, operators and creators, from emerging small business to high growth. 50 founding seats, rate locked for 12 months.">
+<title>UC Pro Group · a third space for founders, operators and creators</title>
+<meta name="description" content="A third space in Melbourne for founders, operators and creators, from emerging small business to high growth. Founding rate locked for life for the first 100.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230E0D0B'/><circle cx='16' cy='13' r='3.4' fill='none' stroke='%23C9A84A' stroke-width='1.5'/><path d='M16 16.4V26M16 13l7-5M16 13l-7-5' stroke='%23C9A84A' stroke-width='1.3'/></svg>">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,700&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <style>
 /* ===========================================================================
-   Uncommon Collective · Pro Group
-   Three grounds. Dark is where they feel, light is where they read and
-   compare, gold is the moment of commitment and is rationed to one band.
+   UC Pro Group · built to the Miro change plan
+   Seven grounds. Cream is gone. Every H1/H2 carries a gold accent word.
    ======================================================================== */
 :root{
-  /* raw brand, read off the partner 2-pager */
-  --bone:#F4F1EA;  --bone-2:#E9E6DD;
-  --ink:#14120E;   --ink-2:#1A1A1A;
-  --gold:#8A7328;          /* the brand gold. Accent only.               */
-  --gold-lift:#C9A84A;     /* lifted for dark grounds: 7.6 on near-black  */
-  --gold-ground:#BBAB69;   /* muted mustard, specified by the client. It is
-                              a LIGHT gold (luminance .41), so it takes dark
-                              ink at 8.14. White on it is 2.30 and fails,
-                              which is why this ground is not white-on-gold. */
-  --indigo-d:#5560D8;      /* on dark: 3.72 edge, white on it 5.18       */
-  --indigo-l:#3B48A8;      /* on light: 6.88 edge, white on it 7.84      */
-
-  --display:"Playfair Display", Georgia, serif;
-  --text:"Poppins", -apple-system, "Segoe UI", sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
-
-  --pad:clamp(18px,4vw,68px);
-  --maxw:1520px;
-
-  /* live ground tokens, reassigned per section */
-  --g:#0E0D0B; --fg:#F4F1EA; --fg-2:#9A9384;
-  --acc:var(--gold-lift); --acc-text:var(--gold-lift);
-  --cta:var(--indigo-d); --cta-fg:#fff;
-  --line:rgba(244,241,234,.13); --line-2:rgba(244,241,234,.07);
-  --card:#17150F;
+  --white:#FAF9F7; --grey:#EDEFF2; --goldlt:#F0E8CE;
+  --blue:#16233F;  --green:#16251E; --black:#0E0D0B; --mustard:#BBAB69;
+  --ink:#1A1A1A; --bone:#F4F1EA;
+  --gold:#8A7328; --gold-text:#6F5C1F; --gold-lift:#C9A84A;
+  --indigo:#3B48A8; --indigo-lift:#5560D8;
+  --display:"Playfair Display",Georgia,serif;
+  --text:"Poppins",-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(18px,4vw,64px); --maxw:1480px;
+  /* live ground tokens */
+  --g:var(--black); --fg:var(--bone); --fg2:#9A9384;
+  --acc:var(--gold-lift); --acct:var(--gold-lift);
+  --cta:var(--mustard); --ctafg:#14120E; --card:#17150F;
+  --line:rgba(244,241,234,.14); --line2:rgba(244,241,234,.08);
 }
-
-/* --- the three grounds. `color` is restated on every one, because it
-       inherits as a computed value and redefining --fg alone does not
-       re-ink text that already resolved on an ancestor. ---------------- */
-.dark{
-  --g:#0E0D0B; --fg:#F4F1EA; --fg-2:#9A9384; --acc:var(--gold-lift);
-  --acc-text:var(--gold-lift);            /* 7.64 on this ground */
-  --cta:var(--indigo-d); --cta-fg:#fff; --card:#17150F;
-  --line:rgba(244,241,234,.13); --line-2:rgba(244,241,234,.07);
-  background:var(--g); color:var(--fg);
-}
-.light{
-  --g:#F2F0EA; --fg:#1A1A1A; --fg-2:#5A564C; --acc:var(--gold);
-  --acc-text:#6F5C1F;   /* the brand gold is 4.04 here: fine for display
-                           at 3:1, fails for 10px eyebrows. 5.71.       */
-  --cta:var(--indigo-l); --cta-fg:#fff; --card:#FBF9F4;
-  --line:rgba(26,26,26,.16); --line-2:rgba(26,26,26,.08);
-  background:var(--g); color:var(--fg);
-}
-.gold{
-  --g:var(--gold-ground); --fg:#14120E; --fg-2:#3A3118;   /* 8.14 / 5.60 */
-  --acc:#14120E; --acc-text:#14120E;
-  --cta:#14120E; --cta-fg:#F4F1EA; --card:rgba(255,255,255,.22);
-  --line:rgba(20,18,14,.30); --line-2:rgba(20,18,14,.15);
-  background:var(--g); color:var(--fg);
-}
+/* --- grounds. `color` restated on each: it inherits as a computed value,
+       so redefining --fg alone would not re-ink inherited text. --------- */
+.g-black {--g:var(--black); --fg:var(--bone); --fg2:#9A9384; --acc:var(--gold-lift); --acct:var(--gold-lift);
+          --cta:var(--mustard); --ctafg:#14120E; --card:#17150F;
+          --line:rgba(244,241,234,.14); --line2:rgba(244,241,234,.08); background:var(--g); color:var(--fg)}
+.g-blue  {--g:var(--blue);  --fg:var(--bone); --fg2:#A9B2C4; --acc:var(--gold-lift); --acct:var(--gold-lift);
+          --cta:var(--mustard); --ctafg:#14120E; --card:#1D2C4B;
+          --line:rgba(244,241,234,.18); --line2:rgba(244,241,234,.10); background:var(--g); color:var(--fg)}
+.g-green {--g:var(--green); --fg:var(--bone); --fg2:#9FB0A6; --acc:var(--gold-lift); --acct:var(--gold-lift);
+          --cta:var(--mustard); --ctafg:#14120E; --card:#1D3128;
+          --line:rgba(244,241,234,.18); --line2:rgba(244,241,234,.10); background:var(--g); color:var(--fg)}
+.g-white {--g:var(--white); --fg:var(--ink); --fg2:#5A564C; --acc:var(--gold); --acct:var(--gold-text);
+          --cta:var(--gold); --ctafg:#fff; --card:#FFFFFF;
+          --line:rgba(26,26,26,.15); --line2:rgba(26,26,26,.08); background:var(--g); color:var(--fg)}
+.g-grey  {--g:var(--grey);  --fg:var(--ink); --fg2:#53565E; --acc:var(--gold); --acct:var(--gold-text);
+          --cta:var(--gold); --ctafg:#fff; --card:#F7F8FA;
+          --line:rgba(26,26,26,.15); --line2:rgba(26,26,26,.08); background:var(--g); color:var(--fg)}
+.g-goldlt{--g:var(--goldlt);--fg:#14120E; --fg2:#4A4020; --acc:#14120E; --acct:var(--gold-text);
+          --cta:#14120E; --ctafg:var(--bone); --card:rgba(255,255,255,.5);
+          --line:rgba(20,18,14,.22); --line2:rgba(20,18,14,.12); background:var(--g); color:var(--fg)}
+.g-mustard{--g:var(--mustard);--fg:#14120E;--fg2:#241F0E; --acc:#14120E; --acct:#14120E;
+          --cta:#14120E; --ctafg:var(--bone); --card:rgba(255,255,255,.22);
+          --line:rgba(20,18,14,.30); --line2:rgba(20,18,14,.15); background:var(--g); color:var(--fg)}
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0; background:#0E0D0B; color:#F4F1EA;
-  font-family:var(--text); font-weight:300;
-  font-size:clamp(15px,.5vw+13.4px,17px); line-height:1.6;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;
-}
-img{max-width:100%}
-a{color:inherit}
-:where(a,button,summary,[tabindex]):focus-visible{
-  outline:2px solid var(--acc); outline-offset:3px; border-radius:3px;
-}
-.skip{position:absolute;left:-9999px;top:0;z-index:300;background:var(--indigo-d);
-  color:#fff;padding:12px 18px;font-family:var(--mono);font-size:12px}
+body{margin:0;background:var(--black);color:var(--bone);font-family:var(--text);
+  font-weight:300;font-size:clamp(15px,.5vw+13.4px,17px);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%} a{color:inherit}
+:where(a,button,summary,[tabindex]):focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:-9999px;top:0;z-index:300;background:var(--mustard);color:#14120E;
+  padding:12px 18px;font-family:var(--mono);font-size:12px}
 .skip:focus{left:12px;top:12px}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
-section{ padding-block:clamp(52px,7.5vw,118px) }
-section.tight{ padding-block:clamp(28px,4vw,56px) }
+section{padding-block:clamp(48px,7vw,110px)}
+section.tight{padding-block:clamp(26px,3.6vw,52px)}
 
-.eyebrow{
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--acc-text); margin:0 0 14px;
-}
-h2{
-  font-family:var(--display); font-weight:700; margin:0;
-  font-size:clamp(1.75rem,3.5vw,3.05rem); line-height:1.07;
-  letter-spacing:-.024em; max-width:21ch; text-wrap:pretty;
-}
-h3{ font-family:var(--display); font-weight:700; margin:0; letter-spacing:-.014em }
-.lede{ margin:18px 0 0; color:var(--fg-2); max-width:56ch; font-size:clamp(15px,1vw,17.5px) }
-.rule{ border:0; border-top:1px solid var(--line-2); margin:0 }
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--acct);margin:0 0 14px}
+h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;letter-spacing:-.024em;text-wrap:pretty}
+h2{font-size:clamp(1.7rem,3.3vw,2.9rem);line-height:1.08;max-width:22ch}
+/* the brand signature: one word of every heading in gold */
+.hl{color:var(--acc)}
+.lede{margin:18px 0 0;color:var(--fg2);max-width:58ch;font-size:clamp(15px,1vw,17.5px)}
+.head{margin-bottom:clamp(28px,3.8vw,54px)}
 
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  background:var(--cta); color:var(--cta-fg); text-decoration:none;
-  font-family:var(--text); font-size:14px; font-weight:500;
-  padding:13px 24px; border-radius:999px; border:0; cursor:pointer;
-  white-space:nowrap; transition:transform .16s ease, filter .16s ease;
-}
-.btn:hover{ filter:brightness(1.12); transform:translateY(-1px) }
-.btn--sm{ padding:9px 18px; font-size:13px }
-.btn--ghost{
-  background:none; color:var(--fg); border:1px solid var(--line);
-}
-.btn--ghost:hover{ border-color:var(--acc); filter:none }
-@media (prefers-reduced-motion:reduce){ .btn:hover{transform:none} }
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--cta);
+  color:var(--ctafg);text-decoration:none;font-family:var(--text);font-size:14px;font-weight:500;
+  padding:13px 24px;border-radius:999px;border:0;cursor:pointer;white-space:nowrap;
+  transition:transform .16s ease,filter .16s ease}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn--sm{padding:9px 18px;font-size:13px}
+.btn--gold{background:var(--mustard);color:#14120E}
+.btn--ghost{background:none;color:var(--fg);border:1px solid var(--line)}
+.btn--ghost:hover{border-color:var(--acc);filter:none}
+.btn--link{background:none;color:var(--fg2);padding:6px 0;border-radius:0;font-size:13.5px;
+  border-bottom:1px solid var(--line);text-decoration:none}
+.btn--link:hover{color:var(--acc);border-color:var(--acc);transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+/* --------------------------------------------------- Lucide icon system - */
+.ico{width:24px;height:24px;display:block;stroke:currentColor;fill:none;
+  stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.disc{width:44px;height:44px;border-radius:999px;background:var(--mustard);color:#14120E;
+  display:grid;place-items:center;flex:none}
+.disc .ico{width:21px;height:21px}
+.disc--sm{width:34px;height:34px}.disc--sm .ico{width:17px;height:17px}
+
+/* --------------------------------------------------------- TBC markers -- */
+.tbc{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--acct);border:1px dashed var(--line);
+  border-radius:3px;padding:4px 9px;margin:2px 0}
+.tbc-block{border:1px dashed var(--line);border-radius:4px;padding:clamp(16px,2vw,24px);
+  color:var(--fg2);font-size:13.5px}
 
 /* =============================================================== bar ==== */
-.bar{
-  position:sticky; top:0; z-index:100;
-  background:rgba(14,13,11,.88);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(244,241,234,.07); color:#F4F1EA;
-}
-.bar__in{display:flex;align-items:center;justify-content:space-between;gap:20px;
-  height:64px;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none}
-.brand svg{width:27px;height:27px;display:block;flex:none}
-.brand b{font-family:var(--mono);font-size:11px;letter-spacing:.17em;
-  text-transform:uppercase;font-weight:500;line-height:1.25}
-.bar nav{display:flex;gap:clamp(12px,1.6vw,26px);align-items:center}
-.bar nav a{font-size:13.5px;color:#9A9384;text-decoration:none;transition:color .18s ease}
-.bar nav a:hover{color:#F4F1EA}
-@media (max-width:960px){.bar nav{display:none}}
+.bar{position:sticky;top:0;z-index:100;background:rgba(14,13,11,.9);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(244,241,234,.08);color:var(--bone)}
+.bar__in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:62px;
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand b{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
+  font-weight:500;line-height:1.25}
+.bar nav{display:flex;gap:clamp(10px,1.5vw,24px)}
+.bar nav a{font-size:13px;color:#9A9384;text-decoration:none}
+.bar nav a:hover{color:var(--bone)}
+@media (max-width:1040px){.bar nav{display:none}}
 
 /* ============================================================= hero ===== */
-.hero{ padding-top:clamp(30px,5vh,64px); padding-bottom:0 }
-h1{
-  font-family:var(--display); font-weight:700; margin:14px 0 0;
-  font-size:clamp(2.25rem,5.4vw,4.9rem); line-height:1.02;
-  letter-spacing:-.028em; max-width:19ch; text-wrap:pretty;
-}
+.hero{position:relative;overflow:hidden;padding-block:clamp(40px,7vh,86px) 0;isolation:isolate}
+.hero__bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;
+  filter:grayscale(.3) brightness(.44) contrast(1.05);transform:scale(1.12);
+  will-change:transform}
+.hero__bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(14,13,11,.95) 0%,rgba(14,13,11,.78) 44%,rgba(14,13,11,.5) 100%)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(20px,3vw,54px);align-items:center}
+@media (max-width:1000px){.hero__grid{grid-template-columns:1fr}}
+h1{font-size:clamp(2.1rem,4.6vw,4.1rem);line-height:1.04;max-width:18ch}
 h1 .tail{font-style:italic;color:var(--gold-lift);font-weight:500}
-.caret{display:inline-block;width:.05em;height:.78em;margin-left:.05em;
-  background:var(--gold-lift);vertical-align:-.04em;animation:blink 1.05s steps(1) infinite}
+.caret{display:inline-block;width:.05em;height:.76em;margin-left:.05em;background:var(--gold-lift);
+  vertical-align:-.04em;animation:blink 1.05s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero__row{display:flex;flex-wrap:wrap;align-items:flex-end;
-  justify-content:space-between;gap:clamp(20px,3vw,52px);margin-top:clamp(20px,2.8vw,36px)}
-.hero__sub{margin:0;max-width:46ch;color:#9A9384;font-size:clamp(15px,1.05vw,18px);line-height:1.55}
-.hero__sub b{color:#F4F1EA;font-weight:400}
-.hero__cta{display:flex;gap:12px;flex-wrap:wrap;flex:none}
+.hero__sub{margin:20px 0 0;max-width:46ch;color:#B7B0A2;font-size:clamp(15px,1.05vw,17.5px)}
+.hero__sub b{color:var(--bone);font-weight:400}
+.hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center}
+.hero__link{flex-basis:100%;margin-top:4px}
 
-.stage{
-  position:relative; margin-top:clamp(22px,3vw,40px);
-  height:clamp(240px,42vh,420px);
-  border-top:1px solid rgba(244,241,234,.07);
-  border-bottom:1px solid rgba(244,241,234,.07);
-  overflow:hidden; cursor:crosshair; background:#0E0D0B;
-}
-.stage canvas{display:block;width:100%;height:100%;position:relative;z-index:2}
-.stage__photo{position:absolute;inset:0;z-index:1;opacity:0;
-  transition:opacity .55s ease;pointer-events:none}
-html[data-graphic="room"] .stage__photo{opacity:1}
-.stage__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;
-  filter:grayscale(.34) contrast(1.04) brightness(.50)}
-/* Enough to sit type and lattice on, not so much that the faces go. The
-   faces are the argument; the old .86 falloff was burying them. */
-.stage__photo::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(135% 105% at 50% 44%, rgba(14,13,11,.16) 0%, rgba(14,13,11,.58) 68%, rgba(14,13,11,.88) 100%)}
-.stage__hint{position:absolute;left:var(--pad);bottom:11px;z-index:3;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
-  color:#9A9384;opacity:.6;pointer-events:none}
+/* avatar social proof */
+.avatars{display:flex;align-items:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.avatars__row{display:flex}
+.avatars__row span{width:36px;height:36px;border-radius:999px;border:2px solid var(--black);
+  margin-left:-10px;display:block;background:#2A2620 url(assets/table.jpg) no-repeat;
+  background-size:735px 234px}
+/* six real members, cropped from the community photo by position */
+.avatars__row span:nth-child(1){background-position:-43px -50px}
+.avatars__row span:nth-child(2){background-position:-135px -71px}
+.avatars__row span:nth-child(3){background-position:-280px -52px}
+.avatars__row span:nth-child(4){background-position:-354px -63px}
+.avatars__row span:nth-child(5){background-position:-488px -50px}
+.avatars__row span:nth-child(6){background-position:-658px -71px}
+.avatars__row span:first-child{margin-left:0}
+.avatars__row img{width:100%;height:100%;object-fit:cover}
+.avatars p{margin:0;font-size:13px;color:#B7B0A2;max-width:36ch}
 
-/* ============================================== logos, scrolling ======= */
-.marquee{border-top:1px solid rgba(244,241,234,.07);
-  border-bottom:1px solid rgba(244,241,234,.07);padding-block:18px;overflow:hidden;
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
-          mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}
-.marquee__lead{font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-  text-transform:uppercase;color:#9A9384;padding-inline:var(--pad);margin:0 0 14px}
-.marquee__track{display:flex;width:max-content;animation:slide 54s linear infinite}
-.marquee:hover .marquee__track{animation-play-state:paused}
-.marquee__set{display:flex;align-items:center;gap:clamp(30px,4.2vw,64px);
-  padding-right:clamp(30px,4.2vw,64px)}
-.marquee__set span{font-family:var(--mono);font-size:13px;letter-spacing:.07em;
-  text-transform:uppercase;color:#F4F1EA;opacity:.62;white-space:nowrap;transition:.2s}
-.marquee__set span:hover{opacity:1;color:var(--gold-lift)}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* the lattice, right side of the hero */
+.stage{position:relative;height:clamp(230px,40vh,400px);cursor:crosshair;isolation:isolate}
+/* a scrim only where the lattice sits: the photo stays visible everywhere
+   else, but the gold has a dark field to read against */
+.stage::before{content:"";position:absolute;inset:-12% -8%;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 58% 60% at 50% 50%,rgba(14,13,11,.78) 0%,rgba(14,13,11,.42) 55%,transparent 78%)}
+.stage canvas{display:block;width:100%;height:100%}
+.stage__hint{position:absolute;left:0;bottom:2px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.17em;text-transform:uppercase;color:#8A8377;opacity:.7;pointer-events:none}
+@media (max-width:1000px){.stage{height:clamp(170px,26vh,230px)}}
+
+/* countdown bar under the hero */
+.cdbar{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap;
+  padding:14px var(--pad);border-top:1px solid rgba(244,241,234,.1);
+  border-bottom:1px solid rgba(244,241,234,.1);background:rgba(0,0,0,.34);
+  max-width:100%;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:#B7B0A2;margin-top:clamp(24px,3.4vw,44px)}
+.cdbar__dot{width:7px;height:7px;border-radius:999px;background:var(--gold-lift);flex:none}
+.cdbar b{color:var(--gold-lift);font-weight:500}
+.cdbar__t{display:flex;gap:10px;margin-left:auto}
+.cdbar__t i{font-style:normal;background:rgba(244,241,234,.08);border:1px solid rgba(244,241,234,.14);
+  border-radius:3px;padding:5px 9px;color:var(--bone);font-size:11px}
+
+/* key benefits strip, straddling the hero edge */
+.kbs{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(244,241,234,.1);
+  border-block:1px solid rgba(244,241,234,.1)}
+.kbs__i{background:var(--black);padding:20px clamp(12px,1.5vw,22px);display:flex;
+  flex-direction:column;gap:10px;align-items:flex-start}
+.kbs__i b{font-family:var(--display);font-weight:700;font-size:clamp(.95rem,1.15vw,1.1rem);
+  line-height:1.2;letter-spacing:-.01em}
+.kbs__i > span:not(.disc){font-size:12.5px;color:#9A9384;line-height:1.45}
+@media (max-width:980px){.kbs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.kbs{grid-template-columns:1fr}}
 
 /* ============================================================= stats ==== */
-.stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,40px)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,40px)}
 .stat__n{font-family:var(--display);font-weight:700;color:var(--acc);
-  font-size:clamp(1.85rem,3.4vw,3rem);line-height:1;letter-spacing:-.02em;display:block}
-.stat__l{margin:9px 0 0;font-size:13.5px;color:var(--fg-2);line-height:1.45}
+  font-size:clamp(1.8rem,3.2vw,2.9rem);line-height:1;letter-spacing:-.02em;display:block}
+.stat__l{margin:9px 0 0;font-size:13px;color:var(--fg2);line-height:1.45}
 .note{margin:clamp(16px,2.2vw,26px) 0 0;font-family:var(--mono);font-size:10px;
-  letter-spacing:.13em;text-transform:uppercase;color:var(--fg-2)}
-@media (max-width:760px){.stats__grid{grid-template-columns:repeat(2,1fr);gap:26px}}
+  letter-spacing:.13em;text-transform:uppercase;color:var(--fg2)}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,1fr);gap:24px}}
 
-/* ============================================ generic content blocks === */
-.head{ margin-bottom:clamp(30px,4vw,58px) }
-.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3vw,48px)}
-.cols-4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.2vw,32px)}
-.cols-2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,3.4vw,56px)}
-@media (max-width:980px){.cols-4{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:860px){.cols-3{grid-template-columns:1fr;gap:30px}
-  .cols-2{grid-template-columns:1fr;gap:32px}}
-@media (max-width:560px){.cols-4{grid-template-columns:1fr}}
+/* ====================================================== marquee rows === */
+.mq{overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+.mq__t{display:flex;width:max-content;animation:slide var(--dur,52s) linear infinite}
+.mq:hover .mq__t{animation-play-state:paused}
+.mq__s{display:flex;align-items:center;gap:clamp(24px,3.4vw,54px);padding-right:clamp(24px,3.4vw,54px)}
+.mq__s > span{font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--fg);opacity:.62;white-space:nowrap}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq--cards .mq__s{gap:clamp(12px,1.5vw,20px);padding-right:clamp(12px,1.5vw,20px)}
 
-.item{border-top:1px solid var(--line);padding-top:20px}
-.item h3{font-size:clamp(1.08rem,1.45vw,1.36rem);line-height:1.2;margin-bottom:9px;max-width:22ch}
-.item p{margin:0;font-size:14px;color:var(--fg-2);line-height:1.6;max-width:44ch}
-.art{height:64px;margin-bottom:18px}
-.art svg{height:100%;width:auto;display:block;overflow:visible}
-.art [data-s]{fill:none;stroke:var(--acc);stroke-width:1.25;stroke-linecap:round;
-  vector-effect:non-scaling-stroke}
-.art [data-d]{fill:none;stroke:var(--fg-2);stroke-width:1;stroke-dasharray:2 3.2;
-  vector-effect:non-scaling-stroke}
-.art [data-f]{fill:var(--acc);stroke:none}
-
-/* -------------------------------------------------------- gold callout - */
-.callout{
-  background:var(--card); border:1px solid var(--line-2);
-  border-left:3px solid var(--acc); border-radius:4px;
-  padding:clamp(22px,2.6vw,34px);
-  display:flex; gap:clamp(16px,2vw,30px); align-items:flex-start; flex-wrap:wrap;
-}
-.callout h3{font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.2;margin-bottom:8px}
-.callout p{margin:0;font-size:14.5px;line-height:1.6;color:var(--fg-2);max-width:62ch}
-.callout__i{flex:none;width:34px;height:34px}
-.callout__i [data-s]{fill:none;stroke:var(--acc);stroke-width:1.4;stroke-linecap:round}
-
-/* ================================================== the peak, §5 ======= */
-.peak__plate{position:relative;margin-top:clamp(28px,4vw,52px);
-  margin-inline:calc(-1*var(--pad));overflow:hidden;
-  border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.peak__plate img{display:block;width:100%;height:clamp(230px,44vh,460px);
-  object-fit:cover;object-position:50% 34%}
-.peak__plate figcaption{position:absolute;left:0;right:0;bottom:0;
-  padding:34px var(--pad) 12px;font-family:var(--mono);font-size:10px;
-  letter-spacing:.16em;text-transform:uppercase;color:#F4F1EA;
-  background:linear-gradient(to top,rgba(10,9,7,.84),rgba(10,9,7,.5) 45%,rgba(10,9,7,0))}
-
-/* ================================ §6 vertical becomes horizontal ======= */
-.rail{height:340vh;position:relative}
-.rail__sticky{position:sticky;top:0;height:100svh;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:center}
-.rail__head{max-width:var(--maxw);margin-inline:auto;width:100%;
-  padding-inline:var(--pad);padding-bottom:clamp(18px,2.6vh,36px);flex:none}
-.rail__vp{overflow:hidden;flex:none}
-.rail__track{display:flex;gap:clamp(14px,1.6vw,24px);width:max-content;
+/* ============================================ scroll-linked horizontal = */
+.hrail{position:relative}
+.hrail__sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;
+  flex-direction:column;justify-content:center}
+.hrail__head{max-width:var(--maxw);margin-inline:auto;width:100%;padding-inline:var(--pad);
+  padding-bottom:clamp(18px,2.6vh,36px);flex:none}
+.hrail__vp{overflow:hidden;flex:none}
+.hrail__track{display:flex;gap:clamp(12px,1.6vw,22px);width:max-content;
   padding-inline:var(--pad);will-change:transform}
-.beat{width:clamp(230px,24vw,336px);flex:none;background:var(--card);
-  border:1px solid var(--line-2);border-radius:4px;padding:clamp(17px,1.7vw,24px);
-  display:flex;flex-direction:column;gap:11px;transition:border-color .3s,transform .3s}
-.beat:hover{border-color:var(--acc);transform:translateY(-3px)}
-.beat__w{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--acc-text)}
-.beat h3{font-size:clamp(1.08rem,1.4vw,1.34rem);line-height:1.18}
-.beat p{margin:0;font-size:13.5px;color:var(--fg-2);line-height:1.55}
-.beat .art{height:64px;margin-top:auto;margin-bottom:0}
-.rail__prog{max-width:var(--maxw);margin-inline:auto;width:100%;
-  padding-inline:var(--pad);padding-top:clamp(16px,2.4vh,30px);flex:none}
-.rail__bar{height:2px;background:var(--line-2);position:relative;overflow:hidden}
-.rail__bar i{position:absolute;inset:0 auto 0 0;width:0%;background:var(--acc);display:block}
+.hrail__prog{max-width:var(--maxw);margin-inline:auto;width:100%;padding-inline:var(--pad);
+  padding-top:clamp(14px,2.2vh,28px);flex:none}
+.hrail__bar{height:2px;background:var(--line2);position:relative;overflow:hidden}
+.hrail__bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc);display:block}
 
-/* ============================================================= proof === */
-.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2.4vw,34px)}
-@media (max-width:860px){.quotes{grid-template-columns:1fr}}
-.quote{background:var(--card);border:1px solid var(--line-2);border-radius:4px;
-  padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:16px}
-.quote blockquote{margin:0;font-family:var(--display);font-weight:500;
-  font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.42;letter-spacing:-.008em}
-.quote figcaption{margin-top:auto;font-size:13px;color:var(--fg-2);line-height:1.5}
-.quote figcaption b{display:block;color:var(--fg);font-weight:500;font-size:13.5px}
-.tag{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:9px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--acc-text);
-  border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+/* ============================================================== cards == */
+.card{background:var(--card);border:1px solid var(--line2);border-radius:5px;
+  padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:12px}
+.card h3{font-size:clamp(1.05rem,1.35vw,1.28rem);line-height:1.2}
+.card p{margin:0;font-size:13.5px;color:var(--fg2);line-height:1.58}
+.card--w{width:clamp(226px,24vw,320px);flex:none}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,48px)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,34px)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,28px)}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.8vw,24px)}
+@media (max-width:1040px){.grid-5{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:820px){.grid-3,.grid-2{grid-template-columns:1fr}
+  .grid-5{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid-4,.grid-5{grid-template-columns:1fr}}
 
-/* case studies: a drag rail the visitor controls, not a jacked one */
-.cases{display:flex;gap:clamp(14px,1.8vw,26px);overflow-x:auto;
-  scroll-snap-type:x mandatory;padding-block:6px 18px;margin-top:clamp(26px,3.4vw,44px);
-  scrollbar-width:thin}
-.case{flex:none;width:clamp(262px,30vw,392px);scroll-snap-align:start;
-  background:var(--card);border:1px solid var(--line-2);border-radius:4px;
-  padding:clamp(20px,2.2vw,28px)}
-.case__who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--acc-text);margin:0 0 18px}
-.case__figs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-  padding-bottom:18px;border-bottom:1px solid var(--line-2)}
-.case__n{font-family:var(--display);font-weight:700;font-size:clamp(1.15rem,1.7vw,1.6rem);
-  line-height:1;display:block;letter-spacing:-.018em}
-.case__k{margin:6px 0 0;font-size:11.5px;color:var(--fg-2);line-height:1.35}
-.case blockquote{margin:18px 0 0;font-size:13.5px;color:var(--fg-2);line-height:1.6}
+.item{border-top:1px solid var(--line);padding-top:20px;display:flex;flex-direction:column;gap:11px;align-items:flex-start}
+.item h3{font-size:clamp(1.02rem,1.3vw,1.24rem);line-height:1.22;max-width:24ch}
+.item p{margin:0;font-size:13.5px;color:var(--fg2);line-height:1.58;max-width:44ch}
+
+/* callouts */
+.callout{background:var(--card);border:1px solid var(--line2);border-left:3px solid var(--acc);
+  border-radius:4px;padding:clamp(18px,2.2vw,28px);display:flex;gap:16px;align-items:flex-start}
+.callout p{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(1.08rem,1.6vw,1.45rem);
+  line-height:1.25;letter-spacing:-.014em;max-width:42ch}
+
+/* image placeholder */
+.ph{background:var(--card);border:1px dashed var(--line);border-radius:5px;
+  display:grid;place-items:center;min-height:clamp(180px,26vw,320px);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg2);text-align:center;padding:20px}
+.plate{position:relative;overflow:hidden;border-radius:5px}
+.plate img{display:block;width:100%;height:clamp(200px,32vw,380px);object-fit:cover;object-position:50% 34%}
 
 /* ============================================================ pricing == */
-.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2.4vw,34px);
-  align-items:start}
-@media (max-width:860px){.plans{grid-template-columns:1fr}}
-.plan{border:1px solid var(--line);border-radius:5px;padding:clamp(22px,2.6vw,34px);
-  background:var(--card);position:relative}
-.plan--pop{border-color:var(--acc);border-width:1.5px}
-.plan__flag{position:absolute;top:-1px;right:clamp(18px,2vw,28px);transform:translateY(-50%);
-  background:var(--acc-text);color:var(--g);font-family:var(--mono);font-size:9.5px;
-  letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
-.plan h3{font-size:clamp(1.2rem,1.7vw,1.55rem);margin-bottom:6px}
-.plan__for{margin:0 0 20px;font-size:13.5px;color:var(--fg-2)}
-.plan__price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
-  padding-bottom:18px;border-bottom:1px solid var(--line-2);margin-bottom:18px}
-.plan__now{font-family:var(--display);font-weight:700;font-size:clamp(2rem,3vw,2.7rem);
+.toggle{display:inline-flex;gap:3px;background:var(--card);border:1px solid var(--line2);
+  border-radius:999px;padding:4px;margin-top:22px}
+.toggle button{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  border:0;background:none;color:var(--fg2);padding:8px 15px;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--acc);color:var(--g)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,30px);
+  align-items:start;margin-top:clamp(26px,3.4vw,44px)}
+@media (max-width:920px){.plans{grid-template-columns:1fr}}
+.plan{border:1px solid var(--line);border-radius:6px;padding:clamp(20px,2.4vw,30px);
+  background:var(--card);position:relative;display:flex;flex-direction:column;gap:14px}
+.plan--pop{border-color:var(--acc);border-width:1.5px;background:var(--black);color:var(--bone);
+  --fg:var(--bone);--fg2:#9A9384;--acc:var(--gold-lift);--line:rgba(244,241,234,.14);--line2:rgba(244,241,234,.08)}
+.plan__flag{position:absolute;top:0;right:22px;transform:translateY(-50%);background:var(--mustard);
+  color:#14120E;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px}
+.plan h3{font-size:clamp(1.15rem,1.6vw,1.45rem)}
+.plan__for{margin:0;font-size:13px;color:var(--fg2)}
+.plan__price{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-block:6px 14px;
+  border-bottom:1px solid var(--line2)}
+.plan__now{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,2.8vw,2.6rem);
   line-height:1;letter-spacing:-.022em}
-.plan__per{font-size:13px;color:var(--fg-2)}
-.plan__was{font-size:13px;color:var(--fg-2);text-decoration:line-through}
-.plan ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
-.plan li{font-size:13.5px;color:var(--fg-2);line-height:1.5;
-  display:grid;grid-template-columns:16px 1fr;gap:9px}
-.plan li::before{content:"";width:9px;height:9px;margin-top:6px;
-  border-left:1.4px solid var(--acc);border-bottom:1.4px solid var(--acc);
-  transform:rotate(-45deg)}
-.draft{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--fg-2);border:1px dashed var(--line);
-  border-radius:3px;padding:4px 8px;display:inline-block;margin-top:14px}
+.plan__was{font-size:13px;color:var(--fg2);text-decoration:line-through}
+.plan__per{font-size:12.5px;color:var(--fg2)}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.plan li{font-size:13px;color:var(--fg2);line-height:1.5;display:grid;grid-template-columns:15px 1fr;gap:9px}
+.plan li::before{content:"";width:8px;height:8px;margin-top:6px;border-left:1.5px solid var(--acc);
+  border-bottom:1.5px solid var(--acc);transform:rotate(-45deg)}
+.plan .btn{width:100%;margin-top:auto}
+.draft{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--fg2);border:1px dashed var(--line);border-radius:3px;padding:4px 8px;display:inline-block}
 
-/* ======================================================= founding gold = */
-.count{display:flex;gap:clamp(10px,1.4vw,20px);flex-wrap:wrap;margin-top:26px}
-.count div{background:rgba(255,255,255,.26);border:1px solid rgba(20,18,14,.18);
-  border-radius:4px;padding:12px 16px;min-width:74px;text-align:center}
-.count b{display:block;font-family:var(--display);font-weight:700;
-  font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1;letter-spacing:-.02em}
-.count span{display:block;margin-top:5px;font-family:var(--mono);font-size:9.5px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-2)}
-.seats{margin-top:26px}
-.seats__bar{height:6px;background:rgba(20,18,14,.18);border-radius:999px;overflow:hidden}
-.seats__bar i{display:block;height:100%;background:#14120E;width:0%}
-.seats__l{margin:10px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--fg-2)}
-.reversal{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px);
-  margin-top:clamp(28px,3.6vw,48px)}
-@media (max-width:760px){.reversal{grid-template-columns:1fr}}
-.reversal div{border-top:1.5px solid rgba(20,18,14,.32);padding-top:16px}
-.reversal b{display:block;font-family:var(--display);font-weight:700;
-  font-size:clamp(1.02rem,1.35vw,1.22rem);margin-bottom:6px}
-.reversal p{margin:0;font-size:13.5px;color:var(--fg-2);line-height:1.55}
+/* price anchor strip */
+.anchor{display:flex;align-items:center;gap:clamp(18px,3vw,54px);flex-wrap:wrap}
+.anchor__p{display:flex;align-items:baseline;gap:7px}
+.anchor__p b{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.3rem);line-height:1}
+.anchor__p span{font-size:12px;color:var(--fg2)}
+.anchor__l{font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,1.6vw,1.4rem);
+  line-height:1.25;max-width:34ch;margin:0}
 
-/* ======================================================= comparison ==== */
-.cmp{margin-top:clamp(28px,3.6vw,48px);overflow-x:auto;border:1px solid var(--line-2);
-  border-radius:5px;background:var(--card);-webkit-overflow-scrolling:touch}
+/* ========================================================= comparison == */
+.cmp{overflow-x:auto;border:1px solid var(--line2);border-radius:5px;background:var(--card);
+  -webkit-overflow-scrolling:touch}
 .cmp table{width:100%;min-width:880px;border-collapse:collapse;font-size:12.5px}
-.cmp thead th{padding:13px 11px;text-align:left;vertical-align:bottom;
-  background:var(--g);color:var(--fg);border-bottom:2px solid var(--acc);font-weight:500}
+.cmp thead th{padding:13px 11px;text-align:left;vertical-align:bottom;background:var(--g);
+  color:var(--fg);border-bottom:2px solid var(--acc);font-weight:500}
 .cmp thead th:first-child{min-width:210px}
-.cmp .col-uc{background:var(--gold-ground);color:#14120E;--fg-2:#3A3118}
-.cmp .cname{display:block;font-family:var(--display);font-size:13.5px;font-weight:700;
-  line-height:1.25;margin-bottom:3px}
-.cmp .cprice{display:block;font-size:10.5px;font-weight:400;color:var(--fg-2);line-height:1.3}
-.cmp tbody th{padding:11px 12px;text-align:left;vertical-align:middle;font-weight:500;
-  color:var(--fg);border-bottom:1px solid var(--line-2);line-height:1.3;font-size:12.5px}
-.cmp tbody th span{display:block;margin-top:3px;font-size:10.5px;font-weight:400;
-  color:var(--fg-2);font-style:italic;line-height:1.25}
-.cmp tbody td{padding:11px 10px;vertical-align:middle;border-bottom:1px solid var(--line-2);
-  color:var(--fg-2);font-size:12px;line-height:1.35}
+.cmp .col-uc{background:var(--mustard);color:#14120E;--fg2:#3A3118}
+.cmp .cname{display:block;font-family:var(--display);font-size:13.5px;font-weight:700;line-height:1.25;margin-bottom:3px}
+.cmp .cprice{display:block;font-size:10.5px;font-weight:400;color:var(--fg2);line-height:1.3}
+.cmp tbody th{padding:11px 12px;text-align:left;font-weight:500;color:var(--fg);
+  border-bottom:1px solid var(--line2);line-height:1.3;font-size:12.5px}
+.cmp tbody th span{display:block;margin-top:3px;font-size:10.5px;font-weight:400;color:var(--fg2);
+  font-style:italic;line-height:1.25}
+.cmp tbody td{padding:11px 10px;border-bottom:1px solid var(--line2);color:var(--fg2);
+  font-size:12px;line-height:1.35}
 .cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
-.cmp td.uc{background:rgba(169,139,51,.12);color:var(--fg);font-weight:500;
-  border-left:2px solid rgba(169,139,51,.4);border-right:2px solid rgba(169,139,51,.4)}
+.cmp td.uc{background:rgba(187,171,105,.16);color:var(--fg);font-weight:500;
+  border-inline:2px solid rgba(187,171,105,.42)}
 .cmp .y::before{content:"✓ ";color:#2D6B4F;font-weight:700}
-.cmp .p::before{content:"~ ";color:var(--gold);font-weight:700}
+.cmp .p::before{content:"~ ";color:var(--gold-text);font-weight:700}
 .cmp .n::before{content:"✗ ";color:#A83240;font-weight:700}
-.light .cmp .y::before{color:#2D6B4F}
-.dark .cmp .y::before{color:#5FBF92}
-.dark .cmp .n::before{color:#E2716F}
-.cmp__hint{margin:12px 0 0;font-family:var(--mono);font-size:10px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--fg-2)}
 
-/* ======================================= sticky CTA, thumb zone ======== */
-.thumb{
-  position:fixed; left:0; right:0; bottom:0; z-index:150;
-  display:none; gap:10px; padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));
-  background:rgba(14,13,11,.94); backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px); border-top:1px solid rgba(244,241,234,.12);
-  transform:translateY(110%); transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-.thumb.on{transform:translateY(0)}
-.thumb .btn{flex:1 1 auto;background:#5560D8;color:#fff;padding:14px 18px}
-.thumb small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
-  text-transform:uppercase;color:#9A9384;text-align:center;padding-bottom:2px}
-@media (max-width:760px){ .thumb{display:block} .pick{bottom:76px} }
-@media (prefers-reduced-motion:reduce){ .thumb{transition:none} }
+/* =========================================================== quotes ==== */
+.quote{background:var(--card);border:1px solid var(--line2);border-radius:5px;
+  padding:clamp(18px,2.2vw,28px);display:flex;flex-direction:column;gap:14px}
+.quote blockquote{margin:0;font-family:var(--display);font-weight:500;
+  font-size:clamp(.98rem,1.2vw,1.15rem);line-height:1.42}
+.quote figcaption{margin-top:auto;font-size:12.5px;color:var(--fg2);line-height:1.5}
+.quote figcaption b{display:block;color:var(--fg);font-weight:500;font-size:13px}
+.tag{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acct);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+/* stars carry a rating, so WCAG 1.4.11 needs 3:1. Mustard on white is 2.30;
+   the ground-aware gold is 4.60 on a white card. */
+.stars{color:var(--acc);font-size:13px;letter-spacing:2px}
 
-/* =============================================================== faq === */
-.faq{display:grid;gap:0;margin-top:clamp(24px,3vw,40px);max-width:78ch}
-.faq details{border-top:1px solid var(--line-2)}
-.faq details:last-child{border-bottom:1px solid var(--line-2)}
-.faq summary{cursor:pointer;list-style:none;padding:19px 34px 19px 0;position:relative;
-  font-family:var(--display);font-weight:700;font-size:clamp(1rem,1.25vw,1.18rem);
-  line-height:1.3;letter-spacing:-.01em}
+/* research band */
+.res{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);
+  border:1px solid var(--line2);border-radius:5px;overflow:hidden}
+.res div{background:var(--g);padding:clamp(18px,2.2vw,28px)}
+.res b{display:block;font-family:var(--display);font-weight:700;color:var(--acc);
+  font-size:clamp(1.7rem,2.8vw,2.5rem);line-height:1;letter-spacing:-.02em;margin-bottom:10px}
+.res p{margin:0;font-size:12.5px;color:var(--fg2);line-height:1.5}
+@media (max-width:860px){.res{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.res{grid-template-columns:1fr}}
+
+/* ============================================================== faq ==== */
+.faq{display:grid;margin-top:clamp(22px,3vw,38px);max-width:78ch}
+.faq details{border-top:1px solid var(--line2)}
+.faq details:last-child{border-bottom:1px solid var(--line2)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 34px 18px 0;position:relative;
+  font-family:var(--display);font-weight:700;font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.3}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;
   border-right:1.5px solid var(--acc);border-bottom:1.5px solid var(--acc);
   transform:translateY(-70%) rotate(45deg);transition:transform .22s ease}
 .faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-.faq p{margin:0 0 20px;font-size:14.5px;color:var(--fg-2);line-height:1.65;max-width:68ch}
+.faq p{margin:0 0 18px;font-size:14px;color:var(--fg2);line-height:1.65;max-width:68ch}
 
 /* ============================================================= close === */
-h2.mission{font-family:var(--display);font-weight:500;
-  font-size:clamp(1.3rem,2.5vw,2.15rem);line-height:1.26;letter-spacing:-.018em;
-  max-width:26ch;margin:0}
-h2.mission em{font-style:italic;color:var(--acc)}
-.foot{border-top:1px solid var(--line-2);margin-top:clamp(44px,6vw,80px);
-  padding-top:clamp(26px,3vw,40px);display:flex;justify-content:space-between;
-  gap:22px;flex-wrap:wrap;font-size:13px;color:var(--fg-2)}
-.foot a{text-decoration:none}
-.foot a:hover{color:var(--acc)}
+.foot{border-top:1px solid var(--line2);margin-top:clamp(40px,5vw,72px);padding-top:clamp(24px,3vw,38px);
+  display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--fg2)}
+.foot a{text-decoration:none}.foot a:hover{color:var(--acc)}
 
-/* =========================================================== controls == */
-.pick{position:fixed;right:14px;bottom:14px;z-index:200;display:flex;align-items:center;
-  gap:3px;flex-wrap:wrap;background:rgba(14,13,11,.94);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border:1px solid rgba(244,241,234,.16);border-radius:999px;padding:5px;
-  max-width:calc(100vw - 28px);color:#F4F1EA}
-.pick__l{font-family:var(--mono);font-size:9px;letter-spacing:.15em;
-  text-transform:uppercase;color:#9A9384;padding:0 7px 0 10px}
-.pick button{font-family:var(--mono);font-size:10px;letter-spacing:.09em;
-  text-transform:uppercase;border:0;background:none;color:#9A9384;padding:7px 12px;
-  border-radius:999px;cursor:pointer;white-space:nowrap}
-.pick button[aria-pressed="true"]{background:var(--gold-lift);color:#0E0D0B}
+/* ============================================= sticky thumb-zone CTA === */
+.thumb{position:fixed;left:0;right:0;bottom:0;z-index:150;display:none;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(14,13,11,.95);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid rgba(244,241,234,.12);transform:translateY(110%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.thumb.on{transform:translateY(0)}
+.thumb .btn{width:100%;background:var(--mustard);color:#14120E;padding:14px 18px}
+.thumb small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:#9A9384;text-align:center;padding-bottom:5px}
+@media (max-width:820px){.thumb{display:block}}
 
-/* ============================================================ motion === */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}
   .caret{display:none}
-  .marquee__track{animation:none;width:auto;flex-wrap:wrap;gap:14px 30px}
-  .marquee__set:nth-child(2){display:none}
-  .marquee{-webkit-mask-image:none;mask-image:none}
-  .rail{height:auto}
-  .rail__sticky{position:static;height:auto;padding-block:clamp(40px,7vw,80px)}
-  .rail__vp{overflow-x:auto;scroll-snap-type:x mandatory}
-  .rail__track{transform:none!important}
-  .beat{scroll-snap-align:start}
-  .rail__prog{display:none}
+  .mq__t{animation:none;width:auto;flex-wrap:wrap;gap:12px 24px}
+  .mq__s:nth-child(2){display:none}
+  .mq{-webkit-mask-image:none;mask-image:none}
+  .hrail{height:auto!important}
+  .hrail__sticky{position:static;height:auto;padding-block:clamp(36px,6vw,72px)}
+  .hrail__vp{overflow-x:auto;scroll-snap-type:x mandatory}
+  .hrail__track{transform:none!important}
+  .card--w{scroll-snap-align:start}
+  .hrail__prog{display:none}
+  .hero__bg img{transform:none}
 }
-
 @media (max-width:760px){
-  .pick{left:10px;right:10px;justify-content:center}
-  .pick__l{display:none}
-  .pick button{padding:7px 9px;font-size:9.5px}
   h1{max-width:none}
-  .hero__row{align-items:flex-start}
-  .hero__cta{width:100%}
-  .hero__cta .btn{flex:1 1 auto}
-  .stage{height:clamp(210px,34vh,280px)}
-  .rail{height:290vh}
-  .callout{flex-direction:column}
+  .hero__cta{width:100%}.hero__cta .btn{flex:1 1 auto}
+  .cdbar__t{margin-left:0;width:100%}
 }
 </style>
 </head>
@@ -464,10 +405,34 @@ h2.mission em{font-style:italic;color:var(--acc)}
 
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- ======================= Lucide icon sprite (MIT) ===================== -->
+<svg class="sr" aria-hidden="true"><defs>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol>
+<symbol id="i-mega" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><path d="m15.5 7.5 3 3L22 7l-3-3"/><path d="m18.5 10.5-8 8"/><circle cx="7.5" cy="15.5" r="5.5"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M21 10V8a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="m14 19 2 2 4-4"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect width="6" height="12" x="9" y="2" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
+<symbol id="i-glass" viewBox="0 0 24 24"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5V3H7v7a5 5 0 0 0 5 5z"/></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1"/><path d="M7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></symbol>
+<symbol id="i-boot" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20"/><path d="M16 17h4M4 13h4"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 15 6 6"/><path d="m19.5 8.5.5-.5a2.12 2.12 0 0 0-3-3l-3 3"/></symbol>
+</defs></svg>
+
 <header class="bar">
   <div class="bar__in">
     <a class="brand" href="#top">
-      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="26" height="26" fill="none" aria-hidden="true">
         <rect width="32" height="32" rx="7" fill="#17150F"/>
         <circle cx="16" cy="13" r="3.4" stroke="#C9A84A" stroke-width="1.5"/>
         <path d="M16 16.4V26M16 13l7-5M16 13l-7-5" stroke="#C9A84A" stroke-width="1.3"/>
@@ -475,496 +440,415 @@ h2.mission em{font-style:italic;color:var(--acc)}
       <b>Uncommon<br>Collective</b>
     </a>
     <nav aria-label="Primary">
-      <a href="#problem">The problem</a>
-      <a href="#third-space">The third space</a>
-      <a href="#rhythm">The rhythm</a>
-      <a href="#proof">Proof</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#problem">The problem</a><a href="#third-space">The third space</a>
+      <a href="#expect">What you get</a><a href="#rhythm">The rhythm</a>
+      <a href="#pricing">Pricing</a><a href="#proof">Proof</a><a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn--sm" href="#founding" style="background:#5560D8;color:#fff">Join the founding waitlist</a>
+    <a class="btn btn--sm btn--gold" href="#pricing">Lock in your founding rate</a>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ═══════════════════════════════ §1 HERO · dark ═══════════════════════ -->
-<section class="hero dark" id="top">
+<!-- ═══════════════════════ 1 · HERO · near-black ════════════════════════ -->
+<section class="hero g-black" id="top">
+  <div class="hero__bg"><img id="heroimg" src="assets/table.jpg" width="1750" height="558" alt="" fetchpriority="high"></div>
   <div class="wrap">
-    <p class="eyebrow" style="color:#C9A84A">Melbourne &nbsp;·&nbsp; founding intake, October</p>
-    <h1>Making it easier, and more common, to build
-      <span class="tail" id="tw">undeniable momentum.</span><span class="caret" aria-hidden="true"></span>
-    </h1>
-    <div class="hero__row">
-      <p class="hero__sub">
-        A third space for <b>founders, operators and creators</b>, from emerging
-        small business through to high growth. Not a desk. Not a program with an
-        end date.
-      </p>
-      <div class="hero__cta">
-        <a class="btn" href="#founding" style="background:#5560D8;color:#fff">Join the founding waitlist</a>
-        <a class="btn btn--ghost" href="#rhythm">Come to the next dinner</a>
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">Melbourne &nbsp;·&nbsp; founding intake open</p>
+        <h1>Making it easier, and more common, to build
+          <span class="tail" id="tw">real opportunities.</span><span class="caret" aria-hidden="true"></span></h1>
+        <p class="hero__sub">A third space for <b>founders, operators and creators</b>, from
+          emerging small business through to high growth. Not a desk. Not a program with an end date.</p>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="#pricing">Lock in your founding rate</a>
+          <a class="btn btn--ghost" href="#pricing">See the plans</a>
+          <a class="btn--link hero__link" href="#pricing">Not ready to commit? Become a Forever Free Community Member instead →</a>
+        </div>
+        <div class="avatars">
+          <div class="avatars__row" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p>With <b style="color:#F4F1EA;font-weight:500">2,300+</b> other driven tech and impact led
+            founders, creators and leaders</p>
+        </div>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="c" aria-hidden="true"></canvas>
+        <p class="stage__hint">Move your cursor</p>
       </div>
     </div>
   </div>
 
-  <div class="stage" id="stage">
-    <div class="stage__photo">
-      <img src="assets/table.jpg" width="1750" height="558" alt="" decoding="async">
-    </div>
-    <canvas id="c" aria-hidden="true"></canvas>
-    <p class="stage__hint">Move your cursor</p>
+  <div class="cdbar" role="group" aria-label="Founding rate deadline">
+    <span class="cdbar__dot" aria-hidden="true"></span>
+    <span>Founding rate closes <b>3 October 2026, 11:59pm AEST</b></span>
+    <span class="cdbar__t" id="count">
+      <i><b data-cd="d">--</b> days</i><i><b data-cd="h">--</b> hrs</i>
+      <i><b data-cd="m">--</b> min</i><i><b data-cd="s">--</b> sec</i>
+    </span>
   </div>
 
-  <!-- §2 credibility -->
-  <div class="marquee" aria-label="Partners, clients and ecosystem collaborators">
-    <p class="marquee__lead">Built for the calibre of founder coming out of</p>
-    <div class="marquee__track">
-      <div class="marquee__set">
-        <span>Square Peg</span><span>LaunchVic</span><span>Startmate</span><span>Blackbird</span>
-        <span>HYPER</span><span>Catalysr</span><span>YGAP</span><span>Stone &amp; Chalk</span>
-        <span>CSIRO</span><span>Press Play</span><span>Study Melbourne</span><span>ACU</span>
-        <span>Swinburne</span><span>Wade Institute</span><span>Scape</span>
-      </div>
-      <div class="marquee__set" aria-hidden="true">
-        <span>Square Peg</span><span>LaunchVic</span><span>Startmate</span><span>Blackbird</span>
-        <span>HYPER</span><span>Catalysr</span><span>YGAP</span><span>Stone &amp; Chalk</span>
-        <span>CSIRO</span><span>Press Play</span><span>Study Melbourne</span><span>ACU</span>
-        <span>Swinburne</span><span>Wade Institute</span><span>Scape</span>
-      </div>
-    </div>
+  <!-- 2 · key benefits strip -->
+  <div class="kbs">
+    <div class="kbs__i"><span class="disc disc--sm"><svg class="ico"><use href="#i-users"/></svg></span>
+      <b>Key connections</b><span>People at your altitude, in person</span></div>
+    <div class="kbs__i"><span class="disc disc--sm"><svg class="ico"><use href="#i-key"/></svg></span>
+      <b>Unlock opportunities</b><span>Intros, grants and rooms that open</span></div>
+    <div class="kbs__i"><span class="disc disc--sm"><svg class="ico"><use href="#i-trend"/></svg></span>
+      <b>Build momentum</b><span>A rhythm that survives a bad month</span></div>
+    <div class="kbs__i"><span class="disc disc--sm"><svg class="ico"><use href="#i-chart"/></svg></span>
+      <b>Gain growth</b><span>Done-for-you services on member terms</span></div>
+    <div class="kbs__i"><span class="disc disc--sm"><svg class="ico"><use href="#i-compass"/></svg></span>
+      <b>Migrant friendly</b><span>Not migrant exclusive. Everyone welcome</span></div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════ stats · dark ════════════════════════ -->
-<section class="dark tight" id="community">
+<!-- ═══════════════════════ 3 · STATS · near-black ═══════════════════════ -->
+<section class="g-black tight" id="community">
   <div class="wrap">
-    <div class="stats__grid">
-      <div><span class="stat__n" data-to="2000">2,000+</span><p class="stat__l">community members</p></div>
+    <div class="stats">
+      <div><span class="stat__n" data-to="2300">2,300+</span><p class="stat__l">driven founders, operators and creators</p></div>
       <div><span class="stat__n" data-to="1100">1,100+</span><p class="stat__l">attendees and clients served</p></div>
       <div><span class="stat__n" data-to="60" data-suffix="%+">60%+</span><p class="stat__l">first-generation migrants engaged</p></div>
       <div><span class="stat__n" data-to="60" data-prefix="$" data-suffix="K+">$60K+</span><p class="stat__l">reinvested or subsidised</p></div>
     </div>
-    <p class="note">The wider Uncommon Collective community. Pro Group is opening now, and the first 50 seats shape it.</p>
   </div>
 </section>
 
-<!-- ═══════════════════ §3 THE PROBLEM · light ══════════════════════════ -->
-<section class="light" id="problem">
+<!-- ═══════════════════ 4 · CREDIBILITY LOGOS · off-white ════════════════ -->
+<section class="g-white tight" id="logos">
+  <div class="wrap"><p class="note" style="margin:0 0 16px">From leading startup communities, coworking
+    spaces and backed by investors, studios and ecosystem organisations</p></div>
+  <div class="mq" style="--dur:46s">
+    <div class="mq__t">
+      <div class="mq__s"><span>LaunchVic</span><span>Startmate</span><span>Blackbird</span><span>Catalysr</span>
+        <span>YGAP</span><span>Stone &amp; Chalk</span><span>CSIRO</span><span>Square Peg</span>
+        <span>HYPER</span><span>Antler</span><span>Stone &amp; Chalk</span><span>inspire9</span></div>
+      <div class="mq__s" aria-hidden="true"><span>LaunchVic</span><span>Startmate</span><span>Blackbird</span><span>Catalysr</span>
+        <span>YGAP</span><span>Stone &amp; Chalk</span><span>CSIRO</span><span>Square Peg</span>
+        <span>HYPER</span><span>Antler</span><span>Stone &amp; Chalk</span><span>inspire9</span></div>
+    </div>
+  </div>
+  <div class="wrap"><p class="note"><span class="tbc">TBC · real logo files needed, these are wordmarks</span></p></div>
+</section>
+
+<!-- ═══════════════════════ 5 · THE PROBLEM · off-white ══════════════════ -->
+<section class="g-white" id="problem">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">Where you are</p>
-      <h2>You are not short on effort. You are short on people at your altitude.</h2>
+      <h2>You are not short on <span class="hl">effort</span>. You are short on people at your
+        <span class="hl">altitude</span>.</h2>
     </div>
-    <div class="cols-3">
-
-      <article class="item">
-        <div class="art" aria-hidden="true">
-          <svg viewBox="0 0 120 64">
-            <circle data-d cx="42" cy="32" r="12"/><circle data-d cx="42" cy="32" r="21"/>
-            <circle data-s cx="42" cy="32" r="29"/>
-            <circle data-f cx="103" cy="18" r="2.6"/>
-            <path data-s d="M74 30 L97 20"/>
-          </svg>
-        </div>
-        <h3>You have outgrown your circle.</h3>
-        <p>The people who knew you at the start cannot follow where you are going,
-           and you are not yet in the rooms where the next ones are.</p>
-      </article>
-
-      <article class="item">
-        <div class="art" aria-hidden="true">
-          <svg viewBox="0 0 120 64">
-            <path data-s d="M60 32 m0 -24 a24 24 0 1 1 -17 41 a17 17 0 1 1 17 -29 a10 10 0 1 1 -7 16"/>
-            <circle data-f cx="54" cy="35" r="2.4"/>
-            <path data-d d="M14 56 H106"/>
-          </svg>
-        </div>
-        <h3>You are burning time and money on things that do not work.</h3>
-        <p>Programs, memberships and groups that deliver content instead of
-           relationships, and noise instead of people worth knowing.</p>
-      </article>
-
-      <article class="item">
-        <div class="art" aria-hidden="true">
-          <svg viewBox="0 0 120 64">
-            <path data-s d="M8 46 C28 46 32 16 50 16 C64 16 68 32 78 32"/>
-            <circle data-f cx="87" cy="34" r="2.1"/><circle data-f cx="95" cy="37" r="1.7"/>
-            <circle data-f cx="102" cy="41" r="1.3"/><circle data-f cx="109" cy="46" r="1"/>
-            <path data-d d="M8 57 H112"/>
-          </svg>
-        </div>
-        <h3>Your confidence is leaking.</h3>
-        <p>Not from lack of ability. From doing it without the connections,
-           opportunities and vehicles that make the next level reachable.</p>
-      </article>
-
+    <div class="grid-4">
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-users"/></svg></span>
+        <h3>You have outgrown your circle</h3>
+        <p>The people who knew you at the start cannot follow where you are going, and you are not yet
+          in the rooms where the next ones are.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-coins"/></svg></span>
+        <h3>You are burning time and money on things that do not work</h3>
+        <p>Programs, memberships and groups that deliver content instead of relationships, and noise
+          instead of people worth knowing.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-chart"/></svg></span>
+        <h3>Your confidence is leaking</h3>
+        <p>Not from lack of ability. From doing it without the connections, opportunities and vehicles
+          that make the next level reachable.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-flag"/></svg></span>
+        <h3>You are ready for a new circle who get it</h3>
+        <p>A third space where you can go from good to great, with people who are building at the same
+          altitude and want you to get there.</p></article>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ §4 WHY THE ALTERNATIVES FAIL · light ════════════ -->
-<section class="light" id="alternatives" style="padding-top:0">
-  <div class="wrap">
-    <hr class="rule" style="margin-bottom:clamp(44px,6vw,90px)">
-    <div class="head">
-      <p class="eyebrow">Why nothing has worked</p>
-      <h2>They are missing one of three things: the right plan, proven systems, or the network and tools to run them.</h2>
-    </div>
-    <div class="cols-4">
-      <article class="item">
-        <h3>Programs and accelerators</h3>
-        <p>A plan with an end date. Momentum stops when the cohort does.</p>
-      </article>
-      <article class="item">
-        <h3>Coaches and consultants</h3>
-        <p>Expensive, rigid, and one relationship rather than a room.</p>
-      </article>
-      <article class="item">
-        <h3>Free groups and online communities</h3>
-        <p>No standard at the door, so no signal inside.</p>
-      </article>
-      <article class="item">
-        <h3>Coworking</h3>
-        <p>Proximity without relationship. A desk is not a network.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ §5 THE THIRD SPACE · dark · THE PEAK ════════════ -->
-<section class="dark" id="third-space">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">The idea</p>
-      <h2>A third space. Not work, not home. The room that grows with you.</h2>
-      <p class="lede">The thing that picks up where programs and coworking spaces
-        stop. We are not a coach and not a landlord. We convene, we navigate, and
-        we catalyse.</p>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <figure class="peak__plate">
-      <img src="assets/table.jpg" width="1750" height="558"
-        alt="Seventeen founders, operators and creators standing together outside a Melbourne café, mid-conversation.">
-      <figcaption>The table, Melbourne</figcaption>
-    </figure>
-  </div>
-
-  <div class="wrap" style="margin-top:clamp(34px,4.5vw,64px)">
-    <div class="cols-4">
-      <article class="item"><h3>It grows with you</h3>
-        <p>Not a 12 week program. A space that changes as your business does,
-           from small business through to high growth.</p></article>
-      <article class="item"><h3>Beyond coworking, beyond programs</h3>
-        <p>Not a desk, not a curriculum. The place that is not work and is not
-           home.</p></article>
-      <article class="item"><h3>Real life, not another feed</h3>
-        <p>Dinners, coworking, walks, retreats. Experiences that build people
-           personally as well as professionally.</p></article>
-      <article class="item"><h3>Migrant friendly, not migrant exclusive</h3>
-        <p>Stated plainly, once. Everyone building something real is welcome at
-           the table.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ §6 A MONTH · dark · horizontal ══════════════════ -->
-<section class="dark" id="rhythm" style="padding:0">
-  <div class="rail" id="rail">
-    <div class="rail__sticky">
-      <div class="rail__head">
-        <p class="eyebrow">The rhythm</p>
-        <h2>A month here, laid out as a month.</h2>
-        <p class="lede">It repeats, it compounds, and it does not stop when a
-          cohort does. Months vary by tier, and growth services sit on top of the
-          rhythm rather than inside it.</p>
+<!-- ═════════════ 6 · WHY THE ALTERNATIVES FAIL · bluish-grey ════════════ -->
+<section class="g-grey" id="alternatives" style="padding:0">
+  <div class="hrail" id="rail-alt">
+    <div class="hrail__sticky">
+      <div class="hrail__head">
+        <div class="callout" style="margin-bottom:26px">
+          <span class="disc"><svg class="ico"><use href="#i-boot"/></svg></span>
+          <p>The old way of building undeniable <span class="hl">momentum</span> is broken.</p>
+        </div>
+        <h2>It is difficult to go from good to <span class="hl">great</span> without the right network,
+          rhythms that grow with you, systems and support.</h2>
       </div>
-      <div class="rail__vp">
-        <div class="rail__track" id="track">
-
-          <article class="beat"><span class="beat__w">Week one</span>
-            <h3>Coworking day</h3>
-            <p>A full day side by side. The kind of proximity that turns into introductions.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <path data-s d="M10 44 H140"/><path data-d d="M10 52 H140"/>
-              <rect data-s x="28" y="26" width="18" height="12" rx="2"/>
-              <rect data-s x="66" y="24" width="18" height="12" rx="2"/>
-              <rect data-s x="104" y="26" width="18" height="12" rx="2"/>
-              <circle data-f cx="56" cy="38" r="1.6"/><circle data-f cx="94" cy="38" r="1.6"/>
-            </svg></div></article>
-
-          <article class="beat"><span class="beat__w">Week one</span>
-            <h3>Build together, on AI</h3>
-            <p>Ask anything, then actually build it in the room. You leave with the thing working.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <rect data-s x="42" y="10" width="66" height="40" rx="3"/>
-              <path data-d d="M50 22 H86 M50 30 H94 M50 38 H70"/>
-              <circle data-f cx="100" cy="42" r="2"/><path data-s d="M64 56 H86"/>
-            </svg></div></article>
-
-          <article class="beat"><span class="beat__w">Week three</span>
-            <h3>Coworking and games</h3>
-            <p>The part everyone underestimates. Nobody becomes friends across a boardroom table.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <rect data-s x="32" y="16" width="32" height="32" rx="4"/>
-              <rect data-s x="84" y="16" width="32" height="32" rx="4"/>
-              <circle data-f cx="42" cy="26" r="2.2"/><circle data-f cx="54" cy="38" r="2.2"/>
-              <circle data-f cx="94" cy="26" r="2.2"/><circle data-f cx="106" cy="26" r="2.2"/>
-              <circle data-f cx="94" cy="38" r="2.2"/><circle data-f cx="106" cy="38" r="2.2"/>
-            </svg></div></article>
-
-          <article class="beat"><span class="beat__w">Week four</span>
-            <h3>Drinks and dinner</h3>
-            <p>The long table. Two seats stay open, because the room is still being built.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <path data-s d="M18 40 H132"/><path data-d d="M24 48 H126"/>
-              <path data-s d="M34 40 v-12 M52 40 v-14 M70 40 v-13 M88 40 v-14 M106 40 v-12"/>
-              <path data-d d="M124 40 v-12"/>
-              <circle data-f cx="61" cy="20" r="1.8"/><circle data-f cx="97" cy="20" r="1.8"/>
-            </svg></div></article>
-
-          <article class="beat"><span class="beat__w">Week four or five</span>
-            <h3>The founders walk</h3>
-            <p>Nine kilometres. Shoulder to shoulder, which is where the honest conversations happen.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <path data-d d="M8 52 C40 52 44 32 72 32 C104 32 108 14 142 14"/>
-              <circle data-f cx="44" cy="40" r="2.4"/><circle data-f cx="72" cy="32" r="2.4"/>
-              <circle data-f cx="112" cy="20" r="1.9"/><circle data-f cx="130" cy="16" r="1.4"/>
-            </svg></div></article>
-
-          <article class="beat"><span class="beat__w">Always on</span>
-            <h3>Tools, perks and early access</h3>
-            <p>Discounted and early access to the events, services and software you were buying anyway.</p>
-            <div class="art" aria-hidden="true"><svg viewBox="0 0 150 64">
-              <circle data-s cx="75" cy="32" r="15"/><path data-s d="M75 17v30M60 32h30"/>
-              <circle data-f cx="75" cy="32" r="2.4"/>
-              <path data-d d="M75 32m-25 0a25 25 0 1 0 50 0a25 25 0 1 0 -50 0"/>
-            </svg></div></article>
-
-          <article class="beat" style="background:#5560D8;border-color:#5560D8;justify-content:center">
-            <span class="beat__w" style="color:rgba(255,255,255,.78)">Founding intake</span>
-            <h3 style="color:#fff">50 seats. Rate locked for 12 months.</h3>
-            <p style="color:rgba(255,255,255,.84)">Join the waitlist. When the founding
-              group reaches critical mass we book a 15 minute fit call.</p>
-            <a class="btn" href="#founding"
-               style="background:#fff;color:#3B48A8;margin-top:6px">Join the founding waitlist</a>
-          </article>
-
-        </div>
-      </div>
-      <div class="rail__prog"><div class="rail__bar"><i id="prog"></i></div></div>
+      <div class="hrail__vp"><div class="hrail__track" id="track-alt">
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-cal"/></svg></span>
+          <h3>Programs and accelerators</h3><p>A plan with an end date. Momentum stops when the cohort does.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-hand"/></svg></span>
+          <h3>Coaches and consultants</h3><p>Expensive, rigid, and one relationship rather than a room.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-mega"/></svg></span>
+          <h3>Free groups and online communities</h3><p>No standard at the door, so no signal inside.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-laptop"/></svg></span>
+          <h3>Coworking</h3><p>Proximity without relationship. A desk is not a network.</p></article>
+        <article class="card card--w" style="background:var(--mustard);border-color:var(--mustard);color:#14120E;justify-content:center">
+          <h3 style="color:#14120E">But it does not need to stay that way.</h3>
+          <p style="color:#3A3118">Building momentum in a community that backs you beyond business success.</p></article>
+      </div></div>
+      <div class="hrail__prog"><div class="hrail__bar"><i id="prog-alt"></i></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ §7 FOUR PILLARS · light ═════════════════════════ -->
-<section class="light" id="pillars">
+<!-- ════════════════ 7 · THE UC PRO GROUP · dark green ═══════════════════ -->
+<section class="g-green" id="third-space">
   <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">What you get</p>
-      <h2>Belonging, momentum, visibility and access. Every month.</h2>
-    </div>
-    <div class="cols-4">
-      <article class="item">
-        <div class="art" style="height:38px" aria-hidden="true"><svg viewBox="0 0 40 30">
-          <circle data-s cx="12" cy="10" r="3.2"/><circle data-s cx="27" cy="10" r="3.2"/>
-          <path data-s d="M5 23a7 7 0 0 1 14 0"/><path data-s d="M20 23a7 7 0 0 1 14 0"/>
-        </svg></div>
-        <h3>Community &amp; belonging</h3>
-        <p>Dinners, coworking and walks. Real relationships, not a feed.</p></article>
-      <article class="item">
-        <div class="art" style="height:38px" aria-hidden="true"><svg viewBox="0 0 40 30">
-          <path data-s d="M5 24 L14 14 L20 19 L34 5"/><path data-s d="M27 5h7v7"/>
-          <circle data-f cx="14" cy="14" r="1.8"/>
-        </svg></div>
-        <h3>Momentum &amp; growth</h3>
-        <p>Done-for-you support and growth services that move the number.</p></article>
-      <article class="item">
-        <div class="art" style="height:38px" aria-hidden="true"><svg viewBox="0 0 40 30">
-          <circle data-s cx="20" cy="15" r="4"/><path data-s d="M20 4v3M20 23v3M6 15h3M31 15h3"/>
-          <path data-d d="M20 15m-10 0a10 10 0 1 0 20 0a10 10 0 1 0 -20 0"/>
-        </svg></div>
-        <h3>Visibility &amp; media</h3>
-        <p>Podcast features, documented content and promo reels.</p></article>
-      <article class="item">
-        <div class="art" style="height:38px" aria-hidden="true"><svg viewBox="0 0 40 30">
-          <path data-s d="M8 26V13l12-8 12 8v13"/><path data-s d="M16 26v-8h8v8"/>
-          <circle data-f cx="20" cy="11" r="1.6"/>
-        </svg></div>
-        <h3>Access &amp; opportunity</h3>
-        <p>Investor intros, grants and partner perks that open doors.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ PROOF · light ═══════════════════════════════════ -->
-<section class="light" id="proof" style="padding-top:0">
-  <div class="wrap">
-    <hr class="rule" style="margin-bottom:clamp(44px,6vw,90px)">
-    <div class="head">
-      <p class="eyebrow">In their words</p>
-      <h2>The Pro Group is new. The community around it is not.</h2>
-      <p class="lede">These are people from the wider Uncommon Collective
-        community, most of whom have never paid us a cent. Names withheld at
-        their request, roles and results as stated.</p>
-    </div>
-
-    <div class="quotes">
-      <figure class="quote">
-        <blockquote>“I came for the grant analysis and stayed for the people. UC
-          found me a grant I didn’t know existed, and the coaching session helped
-          me restructure my pricing in one afternoon. It paid for the year in a
-          week.”</blockquote>
-        <figcaption><b>Founder, e-commerce</b>Melbourne
-          <span class="tag">Free community member</span></figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote>“The podcast feature put my work in front of an audience I’d
-          been chasing for a year, and the $60 promo reel out-performed everything
-          I’d made myself. As a creator, the visibility alone is worth it.”</blockquote>
-        <figcaption><b>Content creator and podcaster</b>Melbourne
-          <span class="tag">Free community member</span></figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote>“I’m not a founder, I run ops for one. The dinners and
-          coworking days are where I’ve met every mentor I now lean on. It’s the
-          only room in Melbourne where operators get treated like builders
-          too.”</blockquote>
-        <figcaption><b>Operations lead, SaaS scale-up</b>Melbourne
-          <span class="tag">Free community member</span></figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote>“UC’s warm intros are the highest signal-to-noise deal flow I
-          get. The founders arrive prepared, coached and backed by a real
-          community, that de-risks them before I’ve read a single deck.”</blockquote>
-        <figcaption><b>Angel investor, APAC early-stage</b>
-          <span class="tag">Ecosystem partner</span></figcaption>
-      </figure>
-    </div>
-
-    <h3 style="font-size:clamp(1.2rem,1.8vw,1.6rem);margin-top:clamp(40px,5vw,72px)">
-      What it has already done for people.</h3>
-    <p class="note" style="margin-top:10px">Drag sideways</p>
-
-    <div class="cases" id="cases">
-      <article class="case">
-        <p class="case__who">Co-founder, AI tools startup</p>
-        <div class="case__figs">
-          <div><span class="case__n">$520K</span><p class="case__k">raised in pre-seed</p></div>
-          <div><span class="case__n">$18K</span><p class="case__k">monthly recurring revenue</p></div>
-          <div><span class="case__n">5 to 12</span><p class="case__k">team size in 12 months</p></div>
-        </div>
-        <blockquote>“The investor intros got us in front of the right people. The
-          coaching helped us nail our pitch deck. But honestly, knowing I could
-          lean on the community during the tough months kept me going.”</blockquote>
-      </article>
-      <article class="case">
-        <p class="case__who">Founder, SaaS for nonprofits</p>
-        <div class="case__figs">
-          <div><span class="case__n">3x</span><p class="case__k">annual revenue growth</p></div>
-          <div><span class="case__n">180+</span><p class="case__k">paying customers now</p></div>
-          <div><span class="case__n">2</span><p class="case__k">new partnerships from UC</p></div>
-        </div>
-        <blockquote>“The podcast feature alone brought in 40 customers. But the
-          real win was the grant analysis, UC found us $50K we’d never have found
-          on our own.”</blockquote>
-      </article>
-      <article class="case">
-        <p class="case__who">Founder, edtech platform</p>
-        <div class="case__figs">
-          <div><span class="case__n">250K</span><p class="case__k">monthly active users</p></div>
-          <div><span class="case__n">Series A</span><p class="case__k">investor-approved metrics</p></div>
-          <div><span class="case__n">2</span><p class="case__k">years in the community</p></div>
-        </div>
-        <blockquote>“The rooms UC put me in changed what I thought was possible
-          for this business, well before the numbers caught up.”</blockquote>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ §8 WHO WE ARE FOR · dark ════════════════════════ -->
-<section class="dark" id="standard">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Be honest with yourself</p>
-      <h2>Who we’re for. Who we’re not.</h2>
-      <p class="lede">We are choosy on purpose. The rooms only stay valuable if
-        the people in them are the right ones. Read both columns before you join.</p>
-    </div>
-    <div class="cols-2">
+    <div class="grid-2" style="align-items:center">
       <div>
-        <h3 style="font-size:1.1rem;color:var(--acc);margin-bottom:18px">This is for you if you are</h3>
-        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:14px">
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Actively building a business, not still deciding whether to start one</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Past the program stage and feeling the momentum quietly drain away</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Willing to show up in person. The dinners and rooms are where this compounds</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Generous by default. You give intros and advice before you ask for them</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Ready to be coachable, to hear hard feedback and actually act on it</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Playing a long game. You want peers for the next decade, not a quick win</li>
-        </ul>
+        <p class="eyebrow">The UC Pro Group</p>
+        <h2>A third space, real connections, with systems and rhythms that grow with you, build
+          <span class="hl">momentum</span> and back you.</h2>
+        <p class="lede">The thing that picks up where programs and coworking spaces stop. We convene and
+          help you build momentum, navigate, and catalyse growth from good to great. Without the anxiety,
+          overwhelm and loneliness.</p>
       </div>
-      <div>
-        <h3 style="font-size:1.1rem;margin-bottom:18px">It is probably not for you if you</h3>
-        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:14px">
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Want a guaranteed investor cheque. We open doors, we do not sell outcomes</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Are looking for a cheap coworking desk</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Are idea-stage with nothing underway yet</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Want a program with an end date and a certificate</li>
-          <li style="font-size:14.5px;color:var(--fg-2);line-height:1.55">Plan to sell to the room rather than build in it. No grifters</li>
-        </ul>
-      </div>
+      <figure class="plate" style="margin:0">
+        <img src="assets/table.jpg" width="1750" height="558"
+          alt="Founders, operators and creators together outside a Melbourne café.">
+      </figure>
     </div>
 
-    <div class="callout" style="margin-top:clamp(32px,4vw,54px)">
-      <svg class="callout__i" viewBox="0 0 34 34" aria-hidden="true">
-        <path data-s d="M17 4 L29 10 v9c0 6.5-5 11-12 13C10 30 5 25.5 5 19v-9z"/>
-        <path data-s d="M12 17.5l3.6 3.6L23 14"/>
-      </svg>
-      <div>
-        <h3>Entry is by fit, not by wallet.</h3>
-        <p>A business underway, real traction for your stage, and a growth
-          trajectory. We would rather turn away revenue than put the wrong person
-          at the table. If now is not your moment, come to a dinner and come back
-          when it is.</p>
-      </div>
+    <div class="grid-5" style="margin-top:clamp(34px,4.4vw,62px)">
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-users"/></svg></span>
+        <h3>Community &amp; belonging</h3><p>Dinners, coworking and walks. Real relationships, not a feed.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-trend"/></svg></span>
+        <h3>Momentum &amp; growth</h3><p>Done-for-you support and growth services that move the number.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-mega"/></svg></span>
+        <h3>Visibility &amp; media</h3><p>Podcast features, documented content and promo reels.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-key"/></svg></span>
+        <h3>Access &amp; opportunity</h3><p>Investor intros, grants and partner perks that open doors.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-coins"/></svg></span>
+        <h3>Capital</h3><p><span class="tbc">TBC · description needed</span></p></article>
+    </div>
+
+    <div class="grid-4" style="margin-top:clamp(28px,3.4vw,48px)">
+      <article class="card"><h3>It grows with you</h3>
+        <p>Not a 12 week program. A space that changes as your business does, from small to medium
+          service businesses through to high-growth startups building deep tech.</p></article>
+      <article class="card"><h3>Beyond coworking, beyond programs</h3>
+        <p>Not a desk, not a curriculum. The place that is not work and is not home.</p></article>
+      <article class="card"><h3>Real life, not another feed</h3>
+        <p>Dinners, coworking, walks, retreats. Experiences that build people personally as well as
+          professionally.</p></article>
+      <article class="card"><h3>Migrant friendly, not migrant exclusive</h3>
+        <p>Stated plainly, once. Everyone building something real is welcome at the table.</p></article>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ COMPARISON · light ══════════════════════════════ -->
-<section class="light" id="compare">
+<!-- ═══════════════ 8 · WHAT YOU CAN EXPECT · off-white ══════════════════ -->
+<section class="g-white" id="expect">
+  <div class="wrap">
+    <div class="grid-2" style="align-items:center">
+      <div class="ph">[ Image placeholder · a real coworking or workshop photo ]</div>
+      <div>
+        <p class="eyebrow">What you can expect</p>
+        <h2>Experiences first. Then the <span class="hl">services</span> that do the heavy lifting.</h2>
+        <p class="lede">Membership is a rhythm of real-life experiences, with practical growth services
+          available on member terms when you need them.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:clamp(32px,4vw,56px);font-size:clamp(1.1rem,1.5vw,1.35rem)">Experiences</h3>
+    <div class="mq mq--cards" style="--dur:38s;margin-top:18px">
+      <div class="mq__t">
+        <div class="mq__s">
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-glass"/></svg></span><h3>Exclusive member-only events</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-mic"/></svg></span><h3>Podcast appearances</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-flag"/></svg></span><h3>Industry events</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-laptop"/></svg></span><h3>Coworking</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-mega"/></svg></span><h3>Speaking</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-users"/></svg></span><h3>Social events</h3></article>
+        </div>
+        <div class="mq__s" aria-hidden="true">
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-glass"/></svg></span><h3>Exclusive member-only events</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-mic"/></svg></span><h3>Podcast appearances</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-flag"/></svg></span><h3>Industry events</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-laptop"/></svg></span><h3>Coworking</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-mega"/></svg></span><h3>Speaking</h3></article>
+          <article class="card card--w"><span class="disc disc--sm"><svg class="ico"><use href="#i-users"/></svg></span><h3>Social events</h3></article>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:clamp(34px,4.2vw,58px);font-size:clamp(1.3rem,2vw,1.8rem)">Growth <span class="hl">services</span></h3>
+    <div class="grid-3" style="margin-top:20px">
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-cam"/></svg></span>
+        <h3>Photo &amp; video production</h3>
+        <p><span class="tbc">From $x members</span> <span class="tbc">From $y non-members</span></p></article>
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-file"/></svg></span>
+        <h3>Grant support &amp; opportunity report</h3>
+        <p><span class="tbc">From $x members</span> <span class="tbc">From $y non-members</span></p></article>
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-mega"/></svg></span>
+        <h3>Marketing</h3>
+        <p><span class="tbc">From $x members</span> <span class="tbc">From $y non-members</span></p></article>
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-sparkle"/></svg></span>
+        <h3>Social media &amp; marketing</h3><p><span class="tbc">Pricing TBC</span></p></article>
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-scale"/></svg></span>
+        <h3>Legal</h3><p><span class="tbc">Pricing TBC</span></p></article>
+      <article class="card"><span class="disc"><svg class="ico"><use href="#i-compass"/></svg></span>
+        <h3>Coaching &amp; consulting</h3><p><span class="tbc">Pricing TBC</span></p></article>
+    </div>
+
+    <div class="grid-2" style="margin-top:clamp(26px,3.2vw,44px);align-items:center">
+      <div class="ph" style="min-height:200px">[ Screenshot placeholder · the perks dashboard ]</div>
+      <div><h3 style="font-size:clamp(1.15rem,1.6vw,1.45rem)">Tools &amp; perks</h3>
+        <p class="lede" style="margin-top:12px">Discounted and early access to the software, events and
+          services you were buying anyway, in one place.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 9 · THE RHYTHM · near-black · horizontal ═════════════ -->
+<section class="g-black" id="rhythm" style="padding:0">
+  <div class="hrail" id="rail-rhythm">
+    <div class="hrail__sticky">
+      <div class="hrail__head">
+        <div class="grid-2" style="align-items:end;gap:clamp(18px,3vw,44px)">
+          <div>
+            <p class="eyebrow">The rhythm</p>
+            <h2>A month here, laid out as a <span class="hl">month</span>.</h2>
+            <p class="lede">It repeats, it compounds, and it does not stop when a cohort does. Months vary
+              by tier, and growth services sit on top of the rhythm rather than inside it.</p>
+          </div>
+          <div class="ph" style="min-height:clamp(120px,14vw,170px)">[ Image placeholder · a real coworking day ]</div>
+        </div>
+      </div>
+      <div class="hrail__vp"><div class="hrail__track" id="track-rhythm">
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-laptop"/></svg></span>
+          <span class="note" style="margin:0">Week one</span><h3>Coworking day</h3>
+          <p>A full day side by side. The kind of proximity that turns into introductions.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-sparkle"/></svg></span>
+          <span class="note" style="margin:0">Week one</span><h3>Build together, on AI</h3>
+          <p>Ask anything, then actually build it in the room. You leave with the thing working.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-users"/></svg></span>
+          <span class="note" style="margin:0">Week three</span><h3>Coworking and games</h3>
+          <p>The part everyone underestimates. Nobody becomes friends across a boardroom table.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-glass"/></svg></span>
+          <span class="note" style="margin:0">Week four</span><h3>Drinks and dinner</h3>
+          <p>The long table. Two seats stay open, because the room is still being built.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-boot"/></svg></span>
+          <span class="note" style="margin:0">Week four or five</span><h3>The founders walk</h3>
+          <p>Nine kilometres. Shoulder to shoulder, which is where the honest conversations happen.</p></article>
+        <article class="card card--w"><span class="disc"><svg class="ico"><use href="#i-key"/></svg></span>
+          <span class="note" style="margin:0">Always on</span><h3>Tools, perks and early access</h3>
+          <p>Discounted and early access to the events, services and software you were buying anyway.</p></article>
+      </div></div>
+      <div class="hrail__prog"><div class="hrail__bar"><i id="prog-rhythm"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 10 · ECOSYSTEM LOGOS · off-white ═════════════════════ -->
+<section class="g-white tight">
+  <div class="wrap"><p class="note" style="margin:0 0 16px">Partners, clients and ecosystem collaborators</p></div>
+  <div class="mq" style="--dur:58s">
+    <div class="mq__t">
+      <div class="mq__s"><span>Square Peg</span><span>LaunchVic</span><span>Startmate</span><span>HYPER</span>
+        <span>Blackbird</span><span>Catalysr</span><span>YGAP</span><span>ACU</span><span>Study Melbourne</span>
+        <span>Press Play</span><span>Deakin</span><span>Swinburne</span><span>CSIRO</span><span>Stone &amp; Chalk</span><span>Scape</span></div>
+      <div class="mq__s" aria-hidden="true"><span>Square Peg</span><span>LaunchVic</span><span>Startmate</span><span>HYPER</span>
+        <span>Blackbird</span><span>Catalysr</span><span>YGAP</span><span>ACU</span><span>Study Melbourne</span>
+        <span>Press Play</span><span>Deakin</span><span>Swinburne</span><span>CSIRO</span><span>Stone &amp; Chalk</span><span>Scape</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 11 · PRICING LADDER · off-white ══════════════════ -->
+<section class="g-white" id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Founding member pricing</p>
+      <h2>Join in the first 100 and lock your rate for <span class="hl">life</span>.</h2>
+      <p class="lede">Our community is already 2,300+ members strong, paid membership is brand new, and
+        only the first 100 founding members lock in these rates. Every plan below closes on 3 October 2026.
+        Prices in AUD, inclusive of GST.</p>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" data-bill="m" aria-pressed="true">Monthly</button>
+        <button type="button" data-bill="q" aria-pressed="false">Quarterly &minus;10%</button>
+        <button type="button" data-bill="y" aria-pressed="false">Yearly &minus;20%</button>
+      </div>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <h3>Forever Free</h3>
+        <p class="plan__for">Belong to the room without the ask.</p>
+        <div class="plan__price"><span class="plan__now">Free</span><span class="plan__per">forever</span></div>
+        <ul><li>The fortnightly Uncommon Newsletter</li><li>Access to the community Slack channel</li>
+          <li>Discounted community events</li><li>A chance to be featured in the newsletter</li></ul>
+        <a class="btn btn--ghost" href="#pricing">Claim my free membership</a>
+      </div>
+      <div class="plan">
+        <h3>Insider</h3>
+        <p class="plan__for">Compound tiny savings into serious runway.</p>
+        <div class="plan__price"><span class="plan__was" data-was="39">$39</span>
+          <span class="plan__now" data-price="19">$19</span><span class="plan__per" data-per>/month</span></div>
+        <ul><li>Everything in Forever Free, plus</li><li>15 to 20 partner perks, tools and platforms</li>
+          <li>Community support and free business walks</li><li>Free monthly members-night events</li>
+          <li>Priority access to growth services</li></ul>
+        <a class="btn" href="#pricing">Choose Insider</a>
+        <span class="draft">Draft pricing, not confirmed</span>
+      </div>
+      <div class="plan plan--pop">
+        <span class="plan__flag">Most popular</span>
+        <h3>Momentum</h3>
+        <p class="plan__for">Keep moving, even when nothing else is working.</p>
+        <div class="plan__price"><span class="plan__was" data-was="79">$79</span>
+          <span class="plan__now" data-price="49">$49</span><span class="plan__per" data-per>/month</span></div>
+        <ul><li>Everything in Insider, plus</li><li>Monthly dinners, drinks and coworking days</li>
+          <li>One free 45 minute coaching session</li><li>Automation and integration AMA group calls</li>
+          <li>Grant and opportunity analysis within one week</li>
+          <li>2 to 3 podcast features per year, promo reel at member rate</li></ul>
+        <a class="btn btn--gold" href="#pricing">Choose Momentum</a>
+        <span class="draft">Draft pricing, not confirmed</span>
+      </div>
+    </div>
+    <p class="note">Inner Circle and Ascend are application-only, for founders wanting investor
+      introductions, retreats and higher-touch delivery. No lock-in contracts, cancel or change tier anytime.</p>
+  </div>
+</section>
+
+<!-- ═════════════════ 12 · PRICE ANCHOR · light gold ═════════════════════ -->
+<section class="g-goldlt tight" id="anchor">
+  <div class="wrap">
+    <div class="anchor">
+      <span class="anchor__p"><b>$19</b><span>/month · Insider</span></span>
+      <span class="anchor__p"><b>$49</b><span>/month · Momentum</span></span>
+      <p class="anchor__l">Build your business for the price of a few <span class="hl">meals</span> a month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════ 13 · HOW WE COMPARE · bluish-grey ══════════════════ -->
+<section class="g-grey" id="compare">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">The alternatives, priced</p>
-      <h2>You have options. Here is how the numbers actually stack up.</h2>
-      <p class="lede">Same eleven questions asked of every option. We are not the
-        cheapest way to meet people and we are not trying to be. We are the only
-        one with no end date and no equity.</p>
+      <h2>You have options. Here is how the numbers actually <span class="hl">stack up</span>.</h2>
+      <p class="lede">The same eleven questions asked of every option. We are not the cheapest way to meet
+        people and we are not trying to be. We are the only one with no end date and no equity.</p>
     </div>
-
     <div class="cmp">
       <table>
-        <caption class="sr-only">Uncommon Collective Pro Group compared with accelerators, studios, coaches and free online groups</caption>
-        <thead>
-          <tr>
-            <th scope="col">What you actually get</th>
-            <th scope="col" class="col-uc"><span class="cname">UC Pro Group</span><span class="cprice">From $49/mo founding rate</span></th>
-            <th scope="col"><span class="cname">Startup accelerator</span><span class="cprice">3 to 6% equity plus $20K to $60K</span></th>
-            <th scope="col"><span class="cname">Startup studio</span><span class="cprice">15 to 40% equity, co-founder role</span></th>
-            <th scope="col"><span class="cname">Solo coach</span><span class="cprice">$300 to $500 per hour</span></th>
-            <th scope="col"><span class="cname">Free Slack or Discord</span><span class="cprice">Free</span></th>
-          </tr>
-        </thead>
+        <caption class="sr">UC Pro Group compared with accelerators, studios, coaches and free online groups</caption>
+        <thead><tr>
+          <th scope="col">What you actually get</th>
+          <th scope="col" class="col-uc"><span class="cname">UC Pro Group</span><span class="cprice">From $19/mo founding rate</span></th>
+          <th scope="col"><span class="cname">Startup accelerator</span><span class="cprice">3 to 6% equity plus $20K to $60K</span></th>
+          <th scope="col"><span class="cname">Startup studio</span><span class="cprice">15 to 40% equity, co-founder role</span></th>
+          <th scope="col"><span class="cname">Solo coach</span><span class="cprice">$300 to $500 per hour</span></th>
+          <th scope="col"><span class="cname">Free Slack or Discord</span><span class="cprice">Free</span></th>
+        </tr></thead>
         <tbody>
           <tr><th scope="row">Keeps going after a program ends<span>A real-life room, not a short cohort</span></th>
             <td class="uc y">Always on, no end date</td><td class="n">Cohort-based, ends</td>
-            <td class="p">Long term, but equity locked</td><td class="p">While the engagement runs</td>
-            <td class="p">Online only, low signal</td></tr>
+            <td class="p">Long term, but equity locked</td><td class="p">While the engagement runs</td><td class="p">Online only, low signal</td></tr>
           <tr><th scope="row">Advisory and growth services on tap<span>Long term, not a fixed program window</span></th>
-            <td class="uc y">Yes, ongoing (Momentum and up)</td><td class="p">Mentor-matched, cohort</td>
+            <td class="uc y">Yes, ongoing from Momentum</td><td class="p">Mentor-matched, cohort</td>
             <td class="p">Studio partners</td><td class="y">Yes, the whole offer</td><td class="n">None</td></tr>
           <tr><th scope="row">Builds your brand and credibility<span>Business and personal brand</span></th>
             <td class="uc y">2 to 3 podcast features a year</td><td class="n">Rare</td>
@@ -988,261 +872,310 @@ h2.mission em{font-style:italic;color:var(--acc)}
             <td class="uc y">Yes, curated groups</td><td class="p">Cohort only</td>
             <td class="p">Portfolio only</td><td class="p">One to one only</td><td class="n">Noisy, unvetted</td></tr>
           <tr><th scope="row">Fair, transparent pricing<span>Total cost per year</span></th>
-            <td class="uc y">$588 to $1,908</td><td class="n">Equity plus $20K to $60K</td>
-            <td class="n">15 to 40% equity</td><td class="n">$14K to $26K at 1hr a month</td>
-            <td class="y">$0</td></tr>
+            <td class="uc y">$228 to $588</td><td class="n">Equity plus $20K to $60K</td>
+            <td class="n">15 to 40% equity</td><td class="n">$14K to $26K at 1hr a month</td><td class="y">$0</td></tr>
           <tr><th scope="row">Change your mind, risk free<span>30 day money-back guarantee</span></th>
             <td class="uc y">30 days, no questions</td><td class="n">No</td><td class="n">No</td>
             <td class="p">Case by case</td><td class="p">Not applicable</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="cmp__hint">Scroll the table sideways &nbsp;·&nbsp; pricing is draft and not yet confirmed</p>
+    <p class="note">Scroll the table sideways &nbsp;·&nbsp; <span class="tbc">Pricing is draft and not yet confirmed</span></p>
   </div>
 </section>
 
-<!-- ═══════════════════ §9 PRICING · light ══════════════════════════════ -->
-<section class="light" id="pricing" style="padding-top:0">
+<!-- ═══════════════════ 14 · RISK REVERSAL · deep blue ═══════════════════ -->
+<section class="g-blue" id="risk">
   <div class="wrap">
-    <hr class="rule" style="margin-bottom:clamp(44px,6vw,90px)">
     <div class="head">
-      <p class="eyebrow">The club</p>
-      <h2>Two ways in. Both locked at the founding rate for 12 months.</h2>
+      <p class="eyebrow">Risk reversal</p>
+      <h2>Joining shouldn't feel like a <span class="hl">gamble</span>.</h2>
     </div>
-    <div class="plans">
-      <div class="plan">
-        <h3>Momentum</h3>
-        <p class="plan__for">For founders actively building, who want the room and the rhythm.</p>
-        <div class="plan__price">
-          <span class="plan__now">$49</span><span class="plan__per">/month</span>
-          <span class="plan__was">$79 after founding intake</span>
-        </div>
-        <ul>
-          <li>Every coworking day, dinner and founders walk</li>
-          <li>The AI build-together sessions</li>
-          <li>Member rates on growth services</li>
-          <li>Partner perks and early access</li>
-        </ul>
-        <a class="btn" href="#founding">Join the founding waitlist</a>
-        <span class="draft">Draft pricing, not confirmed</span>
-      </div>
-      <div class="plan plan--pop">
-        <span class="plan__flag">Most popular</span>
-        <h3>Inner Circle</h3>
-        <p class="plan__for">For scaling founders who want the highest-leverage rooms and introductions.</p>
-        <div class="plan__price">
-          <span class="plan__now">$159</span><span class="plan__per">/month</span>
-          <span class="plan__was">$249 after founding intake</span>
-        </div>
-        <ul>
-          <li>Everything in Momentum</li>
-          <li>Warm investor introductions</li>
-          <li>Retreats and member-only rooms</li>
-          <li>Priority on podcast and media features</li>
-          <li>Grant and opportunity analysis</li>
-        </ul>
-        <a class="btn" href="#founding">Join the founding waitlist</a>
-        <span class="draft">Draft pricing, not confirmed</span>
-      </div>
+    <div class="grid-4">
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-shield"/></svg></span>
+        <h3>No payment to express interest</h3><p>Put your hand up now, decide after we talk.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-cal"/></svg></span>
+        <h3>Month to month</h3><p>No lock-in contracts. <span class="tbc">TBC · confirm cancellation terms</span></p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-mega"/></svg></span>
+        <h3>Feedback either way</h3><p>Inner Circle founders hear back from investors, even when it is a pass.</p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-hand"/></svg></span>
+        <h3>We will tell you if it is not a fit</h3><p>Your first chat is about matching you to the right
+          tier, or telling you honestly if none of them are right yet.</p></article>
     </div>
-    <p class="note">Quarterly saves 10 per cent and yearly saves 20 per cent, on
-      top of the founding rate. No lock-in contracts. Cancel or change tier
-      anytime. Prices exclude GST.</p>
-
-    <!-- §12 risk reversal, immediately under the pricing decision -->
-    <div class="callout" style="margin-top:clamp(30px,3.6vw,50px)">
-      <svg class="callout__i" viewBox="0 0 34 34" aria-hidden="true">
-        <path data-s d="M17 4 L29 10 v9c0 6.5-5 11-12 13C10 30 5 25.5 5 19v-9z"/>
-        <path data-s d="M12 17.5l3.6 3.6L23 14"/>
-      </svg>
-      <div style="flex:1 1 300px">
-        <h3>Three ways to find out before you commit.</h3>
-        <div class="reversal" style="margin-top:20px">
-          <div><b>Your first event is free</b>
-            <p>Come to a dinner or a coworking day before you decide anything.
-               No card, no pitch.</p></div>
-          <div><b>A trial month</b>
-            <p>Join, use everything, and see whether the room does what we say
-               it does.</p></div>
-          <div><b>30 day money back</b>
-            <p>If it is not right in the first 30 days we refund you in full.
-               No conversation required.</p></div>
-        </div>
-      </div>
-    </div>
+    <p class="note" style="margin-top:28px">No payment to express interest. Takes 2 minutes.</p>
   </div>
 </section>
 
-<!-- ═══════════════════ §10 GROWTH SERVICES · light ═════════════════════ -->
-<section class="light" id="services" style="padding-top:0">
+<!-- ═══════════════════ 15 · HOW IT WORKS · off-white ════════════════════ -->
+<section class="g-white" id="how">
   <div class="wrap">
-    <hr class="rule" style="margin-bottom:clamp(44px,6vw,90px)">
     <div class="head">
-      <p class="eyebrow">Growth services</p>
-      <h2>Done for you, priced against what an agency charges.</h2>
-      <p class="lede">These sit on top of membership rather than inside it, so the
-        entry point stays honest and these get judged on agency terms.</p>
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps, and the first one takes two <span class="hl">minutes</span>.</h2>
     </div>
-    <div class="cols-2">
-      <article class="item">
-        <h3>Agentic workflow automation</h3>
-        <p style="max-width:52ch">Built and managed from a library of proven
-          workflows, deployed to fit your business. Marketing, sales and ops
-          automations that run without you. <b style="color:var(--fg);font-weight:500">Saves
-          6 to 10 hours or $600 a month and up.</b></p>
-        <p style="margin-top:14px;font-size:14px">
-          <span style="font-family:var(--display);font-weight:700;font-size:1.5rem">$290</span>
-          <span style="color:var(--fg-2)">/month member rate, from $450 standard</span></p>
-      </article>
-      <article class="item">
-        <h3>Ascend and content production</h3>
-        <p style="max-width:52ch">Hands-on growth support, content production and
-          the personal growth lab. Scoped per business rather than sold as a tier,
-          because the work is not the same for any two members.</p>
-        <p style="margin-top:14px;font-size:14px;color:var(--fg-2)">Priced on scope. Members first.</p>
-      </article>
+    <div class="grid-3">
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-flag"/></svg></span>
+        <h3>1 · Join the waitlist and get invited to a momentum call</h3>
+        <p><span class="tbc">TBC · step description needed</span></p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-check"/></svg></span>
+        <h3>2 · Complete your kick-off onboarding</h3>
+        <p><span class="tbc">TBC · step description needed</span></p></article>
+      <article class="item"><span class="disc"><svg class="ico"><use href="#i-boot"/></svg></span>
+        <h3>3 · Get ready for kick-off</h3>
+        <p><span class="tbc">TBC · step description needed</span></p></article>
     </div>
+    <div style="margin-top:34px"><a class="btn" href="#pricing">Lock in your founding rate</a></div>
   </div>
 </section>
 
-<!-- ═══════════ §11 FOUNDING OFFER + §12 RISK REVERSAL · GOLD ═══════════ -->
-<section class="gold" id="founding">
+<!-- ══════════ 16 · WHY COMMUNITY IS THE UNFAIR ADVANTAGE · black ════════ -->
+<section class="g-black" id="research">
   <div class="wrap">
-    <div class="head" style="margin-bottom:clamp(20px,2.6vw,34px)">
-      <p class="eyebrow">The founding intake</p>
-      <h2>The room is being built. The first 50 shape it.</h2>
-      <p class="lede" style="color:var(--fg-2)">Being early is the point, not a
-        consolation. Founding members set the standard at the door, name the
-        rituals, and hold their rate for 12 months while it rises behind them.</p>
+    <div class="head">
+      <p class="eyebrow">Why community is the unfair advantage</p>
+      <h2>The most successful founders don't build <span class="hl">alone</span>.</h2>
+      <p class="lede">From behavioural science to the world's most respected founders and thinkers, the
+        evidence lands where it lands.</p>
+    </div>
+    <div class="grid-3">
+      <figure class="quote"><blockquote>"You are the average of the five people you spend the most time with."</blockquote>
+        <figcaption><b>Jim Rohn</b>Author and entrepreneur</figcaption></figure>
+      <figure class="quote"><blockquote>"You want to be around high quality people because who you spend
+        your time with directly impacts the quality of your life."</blockquote>
+        <figcaption><b>Naval Ravikant</b>Founder, AngelList</figcaption></figure>
+      <figure class="quote"><blockquote>"It's better to hang around people better than you. Pick out
+        associates whose behaviour is better than yours and you'll drift in that direction."</blockquote>
+        <figcaption><b>Warren Buffett</b>Berkshire Hathaway</figcaption></figure>
+    </div>
+    <div class="res" style="margin-top:clamp(26px,3.2vw,44px)">
+      <div><b>76%</b><p>of people who share weekly progress with accountability partner achieve their goals,
+        versus 43% who don't.</p></div>
+      <div><b>65%</b><p>higher chance of completing a goal when you commit to another person, jumping to
+        95% with a scheduled progress check-in.</p></div>
+      <div><b>2&times;</b><p>the survival rate for startups embedded in an accelerator or founder community
+        versus those building in isolation.</p></div>
+      <div><b>75 yr</b><p>Harvard's longitudinal study found relationship quality, not wealth, is the
+        strongest predictor of a long, happy life.</p></div>
+    </div>
+    <p class="note"><span class="tbc">TBC · confirm sources and exact figures before launch</span></p>
+  </div>
+</section>
+
+<!-- ═══════════════════ 17 · PROOF · off-white ═══════════════════════════ -->
+<section class="g-white" id="proof">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">In their words</p>
+      <h2>The Pro Group is new. The community around it is <span class="hl">not</span>.</h2>
+      <p class="lede">People from the wider Uncommon Collective community, most of whom have never paid us
+        a cent. Names withheld at their request, roles and results as stated.</p>
+    </div>
+    <div class="grid-4">
+      <figure class="quote"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>"I came for the grant analysis and stayed for the people. UC found me a grant I didn't
+          know existed, and the coaching session helped me restructure my pricing in one afternoon."</blockquote>
+        <figcaption><b>Founder, e-commerce</b>Melbourne<span class="tag">Free community member</span></figcaption></figure>
+      <figure class="quote"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>"The podcast feature put my work in front of an audience I'd been chasing for a year,
+          and the $60 promo reel out-performed everything I'd made myself."</blockquote>
+        <figcaption><b>Content creator and podcaster</b>Melbourne<span class="tag">Free community member</span></figcaption></figure>
+      <figure class="quote"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>"I'm not a founder, I run ops for one. The dinners and coworking days are where I've
+          met every mentor I now lean on."</blockquote>
+        <figcaption><b>Operations lead, SaaS scale-up</b>Melbourne<span class="tag">Free community member</span></figcaption></figure>
+      <figure class="quote"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>"UC's warm intros are the highest signal-to-noise deal flow I get. The founders arrive
+          prepared, coached and backed by a real community."</blockquote>
+        <figcaption><b>Angel investor, APAC early-stage</b><span class="tag">Ecosystem partner</span></figcaption></figure>
     </div>
 
-    <div class="count" id="count" aria-label="Time until the founding intake closes">
-      <div><b data-cd="d">--</b><span>days</span></div>
-      <div><b data-cd="h">--</b><span>hrs</span></div>
-      <div><b data-cd="m">--</b><span>min</span></div>
-      <div><b data-cd="s">--</b><span>sec</span></div>
-    </div>
-
-    <div class="seats">
-      <div class="seats__bar"><i id="seatbar"></i></div>
-      <p class="seats__l">Founding seats &nbsp;·&nbsp; intake closes 3 October 2026
-        &nbsp;·&nbsp; <span id="seatsleft">50 remaining</span></p>
-    </div>
-
-    <div class="reversal">
-      <div><b>Your rate, held for 12 months</b>
-        <p>Locked while it rises behind you. Later members pay the later price.</p></div>
-      <div><b>A hand on the standard</b>
-        <p>The first 50 help decide who else gets in, and what the room is for.</p></div>
-      <div><b>The rituals are yours to name</b>
-        <p>The month is not finished. Founding members shape what it becomes.</p></div>
-    </div>
-
-    <div style="margin-top:clamp(28px,3.4vw,44px);display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-      <a class="btn" href="#founding">Join the founding waitlist</a>
-      <a class="btn btn--ghost" href="#rhythm" style="border-color:rgba(20,18,14,.34)">Come to the next dinner</a>
-      <span class="seats__l" style="margin:0">Then a 15 minute fit call once the group reaches critical mass</span>
+    <h3 style="margin-top:clamp(36px,4.4vw,62px);font-size:clamp(1.2rem,1.8vw,1.6rem)">What it has already
+      done for <span class="hl">people</span>.</h3>
+    <div class="grid-3" style="margin-top:22px">
+      <article class="card"><p class="note" style="margin:0">Co-founder, AI tools startup</p>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr);gap:12px">
+          <div><span class="stat__n" style="font-size:1.35rem">$520K</span><p class="stat__l" style="font-size:11.5px">raised in pre-seed</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">$18K</span><p class="stat__l" style="font-size:11.5px">monthly recurring revenue</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">5→12</span><p class="stat__l" style="font-size:11.5px">team in 12 months</p></div>
+        </div>
+        <p>"The investor intros got us in front of the right people. Knowing I could lean on the community
+          during the tough months kept me going."</p></article>
+      <article class="card"><p class="note" style="margin:0">Founder, SaaS for nonprofits</p>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr);gap:12px">
+          <div><span class="stat__n" style="font-size:1.35rem">3×</span><p class="stat__l" style="font-size:11.5px">annual revenue growth</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">180+</span><p class="stat__l" style="font-size:11.5px">paying customers</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">2</span><p class="stat__l" style="font-size:11.5px">partnerships from UC</p></div>
+        </div>
+        <p>"The podcast feature alone brought in 40 customers. The real win was the grant analysis, UC
+          found us $50K we'd never have found on our own."</p></article>
+      <article class="card"><p class="note" style="margin:0">Founder, edtech platform</p>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr);gap:12px">
+          <div><span class="stat__n" style="font-size:1.35rem">250K</span><p class="stat__l" style="font-size:11.5px">monthly active users</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">Series A</span><p class="stat__l" style="font-size:11.5px">investor-approved metrics</p></div>
+          <div><span class="stat__n" style="font-size:1.35rem">2 yr</span><p class="stat__l" style="font-size:11.5px">in the community</p></div>
+        </div>
+        <p>"The rooms UC put me in changed what I thought was possible for this business, well before the
+          numbers caught up."</p></article>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ §13 FAQ · light ═════════════════════════════════ -->
-<section class="light" id="faq">
+<!-- ═════════ 18 · THIS IS NOT FOR EVERYONE · bluish-grey ════════════════ -->
+<section class="g-grey" id="standard">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Be honest with yourself</p>
+      <h2>This is not for <span class="hl">everyone</span>, and that is the point.</h2>
+      <p class="lede">We are choosy on purpose. The rooms only stay valuable if the people in them are the
+        right ones. Read both columns before you join.</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size:1.08rem;color:var(--acct);margin-bottom:18px">Membership is for you if you are</h3>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:13px">
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Actively building a business, not still deciding whether to start one</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Past the program stage and feeling the momentum quietly drain away</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Willing to show up in person. The dinners and rooms are where this compounds</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Generous by default. You give intros and advice before you ask for them</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Ready to be coachable, to hear hard feedback and actually act on it</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Playing a long game. You want peers for the next decade, not a quick win</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.08rem;margin-bottom:18px">It is probably not for you if you</h3>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:13px">
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Want a guaranteed investor cheque. We open doors, we do not sell outcomes</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Are looking for a cheap coworking desk</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Are idea-stage with nothing underway yet</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Want a program with an end date and a certificate</li>
+          <li style="font-size:14px;color:var(--fg2);line-height:1.55">Plan to sell to the room rather than build in it. No grifters</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 19 · WHY I STARTED UC · dark green ═══════════════════ -->
+<section class="g-green" id="story">
+  <div class="wrap">
+    <div class="grid-2" style="align-items:center">
+      <div class="ph">[ Image placeholder · a candid photo of Eli at a UC dinner or Founders Walk, not a headshot ]</div>
+      <div>
+        <p class="eyebrow">Your story</p>
+        <h2>Why I started <span class="hl">UC</span>.</h2>
+        <div class="lede">
+          <p>I've spent my career in rooms that don't usually meet. Tech, community services, law, and the
+            startup scene. <span class="tbc">TBC · one line about your own starting point</span></p>
+          <p>In every one of those rooms I saw the same thing. Capable people stalling, not because they
+            lacked ability, but because they didn't have the right people around them. No one to call. No
+            one opening doors. No one telling them honestly where they stood.</p>
+          <p>The founders who break through rarely have more talent. They have a better room.</p>
+          <p>UC Pro Group is that room. It's the community, access and systems I wish more founders had
+            from day one, especially the ones building without an inherited network.</p>
+          <p style="color:var(--fg);margin-top:18px"><b style="font-weight:500">Eli D'Souza</b><br>
+            <span style="font-size:13.5px">Founder, Uncommon Collective</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 20 · TWO FUTURES · deep blue ═════════════════════════ -->
+<section class="g-blue" id="futures">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">The cost of staying put</p>
+      <h2>Six months from now, one of these is <span class="hl">true</span>.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="background:transparent;border-style:dashed">
+        <h3>Still building alone</h3>
+        <p>You're still pitching and still not hearing why investors passed.</p>
+        <p>Your week is full, but the business feels about the same.</p>
+        <p>The good intros keep going to people who already know people.</p>
+      </div>
+      <div class="card" style="border-color:var(--mustard);border-width:1.5px">
+        <h3>Building with a room behind you</h3>
+        <p>You know your numbers cold and exactly what investors think.</p>
+        <p>Your month has a rhythm, and the business moved because of it.</p>
+        <p>The intros come to you, because someone in the room made them.</p>
+      </div>
+    </div>
+    <div style="margin-top:32px"><a class="btn" href="#pricing">Lock in your founding rate</a></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 21 · FAQ · off-white ═════════════════════════════ -->
+<section class="g-white" id="faq">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">Before you decide</p>
-      <h2>Everything else you might be weighing up.</h2>
+      <h2>Everything else you might be <span class="hl">weighing up</span>.</h2>
     </div>
     <div class="faq">
-      <details open>
-        <summary>There are no paid members yet. Why join now?</summary>
-        <p>Because that is exactly what you are buying. The Pro Group opens with
-          its founding intake, and the first 50 people set the standard at the
-          door, the rhythm of the month and the culture of the room. The wider
-          Uncommon Collective community is 2,000 people and six years old, so the
-          room is not being built from nothing. It is being built from a community
-          that already exists, with you helping to choose who is in it. If you
-          would rather join something finished, join later and pay the later rate.</p>
-      </details>
-      <details>
-        <summary>Am I the right stage? I run a small business, not a startup.</summary>
-        <p>Yes. This is explicitly not a tech-only room. Service businesses with
-          real revenue and a small team, emerging small businesses on a growth
-          trajectory, high-growth startups, operators and creators building
-          something of their own. What matters is that something is underway and
-          you are going somewhere with it, not what category you fit.</p>
-      </details>
-      <details>
-        <summary>What does the founding rate actually mean?</summary>
-        <p>The prices on this page are guaranteed for the first 50 members and
-          close on 3 October 2026. Join in that window and your rate stays locked
-          for 12 months, even as prices rise behind you.</p>
-      </details>
-      <details>
-        <summary>What is the time commitment?</summary>
-        <p>Realistically, one evening and one working day a month gets you most of
-          the value. Everything is optional and nothing is graded. The people who
-          get the most out of it show up in person, because that is where
-          relationships actually form.</p>
-      </details>
-      <details>
-        <summary>What if I cannot make the events?</summary>
-        <p>The month repeats, so missing one is not missing your chance. Coworking
-          days, dinners and walks all recur, and the perks, tools and growth
-          services run whether you attend or not. If you can never make anything
-          in person, this is honestly not the right spend for you.</p>
-      </details>
-      <details>
-        <summary>How is this different from coworking or a program?</summary>
-        <p>Coworking sells you proximity and calls it community. A program sells
-          you a plan with an end date. We are the third space that picks up where
-          both stop: it grows as your business does, it is built on relationships
-          rather than a curriculum, and it has no finish line to fall off.</p>
-      </details>
-      <details>
-        <summary>Can I cancel or change tiers later?</summary>
-        <p>Yes. No lock-in contracts, cancel anytime, and move up or down a tier
-          whenever your needs change. There is also a 30 day money-back guarantee.</p>
-      </details>
+      <details open><summary>There are no paid members yet. Why join now?</summary>
+        <p>Because that is exactly what you are buying. The Pro Group opens with its founding intake, and
+          the first 100 people set the standard at the door, the rhythm of the month and the culture of the
+          room. The wider Uncommon Collective community is 2,300 people and six years old, so the room is not
+          being built from nothing. If you would rather join something finished, join later and pay the
+          later rate.</p></details>
+      <details><summary>Am I the right stage? I run a small business, not a startup.</summary>
+        <p>Yes. This is explicitly not a tech-only room. Service businesses with real revenue and a small
+          team, emerging small businesses on a growth trajectory, high-growth startups, operators and
+          creators building something of their own. What matters is that something is underway.</p></details>
+      <details><summary>What does the founding rate actually mean?</summary>
+        <p>The prices on this page are guaranteed for the first 100 members and close on 3 October 2026.
+          Join in that window and your rate stays locked for as long as you remain a member, even after
+          prices rise.</p></details>
+      <details><summary>What is the time commitment?</summary>
+        <p>Realistically, one evening and one working day a month gets you most of the value. Everything is
+          optional and nothing is graded. The people who get the most out of it show up in person.</p></details>
+      <details><summary>What if I cannot make the events?</summary>
+        <p>The month repeats, so missing one is not missing your chance. If you can never make anything in
+          person, this is honestly not the right spend for you.</p></details>
+      <details><summary>How is this different from coworking or a program?</summary>
+        <p>Coworking sells you proximity and calls it community. A program sells you a plan with an end
+          date. We are the third space that picks up where both stop.</p></details>
+      <details><summary>Can I cancel or change tiers later?</summary>
+        <p>Yes. No lock-in contracts, cancel anytime, and move up or down a tier whenever your needs change.
+          There is also a 30 day money-back guarantee.</p></details>
     </div>
-    <p class="note">Still unsure? Email
-      <a href="mailto:contact@uncommoncollectiveau.com" style="color:var(--acc-text)">contact@uncommoncollectiveau.com</a>
-      and we will help you work out whether this is your moment.</p>
+    <p class="note">Still unsure? Email <a href="mailto:contact@uncommoncollectiveau.com" style="color:var(--acct)">contact@uncommoncollectiveau.com</a>
+      &nbsp;·&nbsp; <span class="tbc">TBC · more questions from the board</span></p>
   </div>
 </section>
 
-<!-- ═══════════════════ §14 MISSION + §15 CLOSE · dark ══════════════════ -->
-<section class="dark" id="close">
+<!-- ═══════════════ 22 · BE PART OF THE MOVEMENT · near-black ════════════ -->
+<section class="g-black" id="close">
   <div class="wrap">
-    <p class="eyebrow">Why we do this</p>
-    <h2 class="mission">Making the uncommon common, so every founder can flourish
-      in business <em>and</em> in life.</h2>
-    <p class="lede" style="margin-top:26px">To cultivate, equip and empower the
-      next generation of founders, operators and creators to build momentum and
-      growth beyond programs, while levelling the playing field for migrants.
-      Migrant friendly, not migrant exclusive.</p>
+    <p class="eyebrow">Uncommon and proud</p>
+    <h2>Be part of the <span class="hl">movement</span>.</h2>
+    <p class="lede">2,300+ driven founders, operators and creators, backed by a strong investor network.
+      This isn't a community starting from zero. Thousands are already members through our free community,
+      and the first 100 founding members set its rate for life.</p>
 
-    <div style="margin-top:clamp(40px,5vw,72px);display:flex;gap:14px;flex-wrap:wrap;align-items:center">
-      <a class="btn" href="#founding" style="background:#5560D8;color:#fff">Join the founding waitlist</a>
+    <div class="stats" style="margin-top:clamp(32px,4vw,56px)">
+      <div><span class="stat__n">2,300+</span><p class="stat__l">members across the community</p></div>
+      <div><span class="stat__n">1,100+</span><p class="stat__l">attendees and clients served</p></div>
+      <div><span class="stat__n">70+</span><p class="stat__l">combined years of team experience</p></div>
+      <div><span class="stat__n">$60K+</span><p class="stat__l">reinvested and subsidised for members</p></div>
+    </div>
+
+    <div style="margin-top:clamp(32px,4vw,58px);display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <a class="btn btn--gold" href="#pricing">Lock in your founding rate</a>
       <a class="btn btn--ghost" href="#rhythm">Come to the next dinner</a>
-      <span class="note" style="margin:0">50 seats &nbsp;·&nbsp; rate locked 12 months &nbsp;·&nbsp; intake closes 3 October 2026</span>
+      <span class="note" style="margin:0">100 founding seats &nbsp;·&nbsp; rate locked for life &nbsp;·&nbsp; closes 3 October 2026</span>
     </div>
 
     <div class="foot">
-      <div>
-        <b style="color:var(--fg);font-weight:500">Uncommon Collective</b><br>
-        Melbourne, Australia<br>
-        <a href="mailto:contact@uncommoncollectiveau.com">contact@uncommoncollectiveau.com</a>
-      </div>
-      <div>
-        Not ready yet? <a href="#close" style="color:var(--acc-text)">Get the monthly note</a><br>
+      <div><b style="color:var(--fg);font-weight:500">Uncommon Collective</b><br>Melbourne, Australia<br>
+        <a href="mailto:contact@uncommoncollectiveau.com">contact@uncommoncollectiveau.com</a></div>
+      <div>Not ready yet? <a href="#close" style="color:var(--acct)">Get the monthly note</a><br>
         <span>One email a month. What the room is doing, who is in it.</span><br>
         <span style="display:inline-flex;gap:14px;margin-top:10px">
           <a href="https://www.linkedin.com/company/uncommon-collective">LinkedIn</a>
           <a href="https://www.instagram.com/uncommoncollectiveau">Instagram</a>
-          <a href="https://www.uncommoncollectiveau.com">Website</a>
-        </span>
-      </div>
+          <a href="https://www.uncommoncollectiveau.com">Website</a></span></div>
       <div>© 2026 Uncommon Collective.<br>A community-led social enterprise.</div>
     </div>
   </div>
@@ -1250,17 +1183,9 @@ h2.mission em{font-style:italic;color:var(--acc)}
 
 </main>
 
-<!-- Conversion rule 6: sticky CTA in the thumb zone on mobile. Appears once
-     the hero CTAs have scrolled away, so it never duplicates a visible button. -->
 <div class="thumb" id="thumb">
-  <small>50 seats &nbsp;·&nbsp; rate locked 12 months &nbsp;·&nbsp; closes 3 Oct</small>
-  <a class="btn" href="#founding">Join the founding waitlist</a>
-</div>
-
-<div class="pick" role="group" aria-label="Hero graphic direction">
-  <span class="pick__l">Hero</span>
-  <button type="button" data-g="room" aria-pressed="true">Lattice over the room</button>
-  <button type="button" data-g="void" aria-pressed="false">Lattice only</button>
+  <small>100 seats &nbsp;·&nbsp; rate locked for life &nbsp;·&nbsp; closes 3 Oct</small>
+  <a class="btn" href="#pricing">Lock in your founding rate</a>
 </div>
 
 <script>
@@ -1269,241 +1194,166 @@ h2.mission em{font-style:italic;color:var(--acc)}
 var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ------------------------------------------------------- typewriter ---- */
-var TAILS=['undeniable momentum.','real opportunities.','friendships that last.',
-           'the life behind the business.'];
+var TAILS=['real opportunities.','undeniable momentum.','friendships that last.','the life behind the business.'];
 var tw=document.getElementById('tw');
-if(tw && !reduced){
-  var ti=0,tc=TAILS[0].length,del=false;
-  (function tick(){
-    var w=TAILS[ti];
+if(tw&&!reduced){var ti=0,tc=TAILS[0].length,del=false;
+  (function tick(){var w=TAILS[ti];
     if(!del){tc++;if(tc>=w.length){tc=w.length;del=true;tw.textContent=w;return setTimeout(tick,2500);}}
     else{tc--;if(tc<=0){tc=0;del=false;ti=(ti+1)%TAILS.length;return setTimeout(tick,220);}}
-    tw.textContent=w.slice(0,tc); setTimeout(tick,del?25:50);
-  })();
+    tw.textContent=w.slice(0,tc);setTimeout(tick,del?25:50);})();}
+
+/* ------------------------------------------- hero background parallax -- */
+var heroimg=document.getElementById('heroimg');
+if(heroimg&&!reduced){
+  var hp=false;
+  addEventListener('scroll',function(){
+    if(hp)return; hp=true;
+    requestAnimationFrame(function(){
+      var y=Math.min(scrollY,900);
+      heroimg.style.transform='scale(1.12) translate3d(0,'+(y*0.16).toFixed(1)+'px,0)';
+      hp=false;});
+  },{passive:true});
 }
 
-/* =======================================================================
-   THE HERO GRAPHIC · a 3D node lattice
-   Points in real 3D, rotated by the pointer, perspective projected, with
-   edges between near neighbours and thought-pulses travelling along them.
-   No avatar glyphs: the object is abstract, and depth does the work.
-   ==================================================================== */
-var stage=document.getElementById('stage'), cv=document.getElementById('c');
-var ctx=cv.getContext('2d'), W=0,H=0,DPR=1;
+/* ============ the 3D node lattice, right side of the hero ============== */
+var stage=document.getElementById('stage'),cv=document.getElementById('c');
+if(cv){
+var ctx=cv.getContext('2d'),W=0,H=0,DPR=1;
 var ptr={x:0,y:0,tx:0,ty:0,inside:false};
-var nodes=[], edges=[], pulses=[], t=0, running=false, raf=0;
-var yaw=0, pitch=0, yawT=0, pitchT=0;
+var nodes=[],edges=[],pulses=[],t=0,running=false,raf=0,yaw=0,pitch=0;
 
-function size(){
-  var r=stage.getBoundingClientRect();
-  DPR=Math.min(devicePixelRatio||1,2);
-  W=r.width; H=r.height;
-  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-  ptr.x=ptr.tx=W/2; ptr.y=ptr.ty=H/2;
-  seed();
-}
+function size(){var r=stage.getBoundingClientRect();
+  DPR=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;
+  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);ptr.x=ptr.tx=W/2;ptr.y=ptr.ty=H/2;seed();}
 
-function seed(){
-  nodes=[]; edges=[]; pulses=[];
-  var N = W<640 ? 38 : W<1100 ? 62 : 88;
-  /* spans most of the band: a lattice bunched in the middle reads as a
-     widget sitting on the photo rather than a field over the room */
-  var RX = Math.min(W*0.42, 620), RY = Math.min(H*0.44, 172), RZ = 250;
-  for(var i=0;i<N;i++){
-    /* distribute through a flattened ellipsoid volume, biased to the shell */
-    var u=Math.random()*2-1, th=Math.random()*Math.PI*2;
-    var rr=Math.pow(Math.random(),0.34);          /* shell bias */
-    var s=Math.sqrt(1-u*u);
-    nodes.push({
-      x:Math.cos(th)*s*RX*rr, y:u*RY*rr, z:Math.sin(th)*s*RZ*rr,
-      ph:Math.random()*Math.PI*2, sp:0.3+Math.random()*0.5,
-      r:Math.random()<0.16?2.1:1.25
-    });
-  }
-  /* edges between genuine near-neighbours, capped so it reads as a lattice
-     rather than a hairball */
-  var LINK = Math.min(W,1100)*0.155;
-  for(var a=0;a<nodes.length;a++){
-    var deg=0;
-    for(var b=a+1;b<nodes.length && deg<3;b++){
-      var dx=nodes[a].x-nodes[b].x, dy=nodes[a].y-nodes[b].y, dz=nodes[a].z-nodes[b].z;
-      var d=Math.sqrt(dx*dx+dy*dy+dz*dz);
-      if(d<LINK){ edges.push([a,b,d]); deg++; }
-    }
-  }
-  for(var p=0;p<6;p++) pulses.push({e:(Math.random()*edges.length)|0, t:Math.random()});
-}
+function seed(){nodes=[];edges=[];pulses=[];
+  var N=W<560?30:W<900?46:64,RX=Math.min(W*0.40,340),RY=Math.min(H*0.42,160),RZ=210;
+  for(var i=0;i<N;i++){var u=Math.random()*2-1,th=Math.random()*Math.PI*2,
+    rr=Math.pow(Math.random(),0.34),s=Math.sqrt(1-u*u);
+    nodes.push({x:Math.cos(th)*s*RX*rr,y:u*RY*rr,z:Math.sin(th)*s*RZ*rr,
+      ph:Math.random()*Math.PI*2,sp:0.3+Math.random()*0.5,r:Math.random()<0.16?2:1.2});}
+  var LINK=Math.min(W,900)*0.17;
+  for(var a=0;a<nodes.length;a++){var deg=0;
+    for(var b=a+1;b<nodes.length&&deg<3;b++){
+      var dx=nodes[a].x-nodes[b].x,dy=nodes[a].y-nodes[b].y,dz=nodes[a].z-nodes[b].z;
+      if(Math.sqrt(dx*dx+dy*dy+dz*dz)<LINK){edges.push([a,b]);deg++;}}}
+  for(var p=0;p<5;p++)pulses.push({e:(Math.random()*edges.length)|0,t:Math.random()});}
 
-function proj(n,f){
-  var cy2=Math.cos(yaw), sy=Math.sin(yaw), cp=Math.cos(pitch), sp2=Math.sin(pitch);
-  var x1=n.x*cy2 - n.z*sy, z1=n.x*sy + n.z*cy2;
-  var y2=n.y*cp - z1*sp2,  z2=n.y*sp2 + z1*cp;
-  var sc=f/(f+z2+430);
-  return [W/2 + x1*sc, H/2 + y2*sc, sc, z2];
-}
+function proj(n,f){var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+  var x1=n.x*cy-n.z*sy,z1=n.x*sy+n.z*cy,y2=n.y*cp-z1*sp,z2=n.y*sp+z1*cp;
+  var sc=f/(f+z2+400);return [W/2+x1*sc,H/2+y2*sc,sc,z2];}
 
 function draw(){
-  if(!reduced) t+=0.006;
+  if(!reduced)t+=0.006;
   ctx.clearRect(0,0,W,H);
-
-  ptr.x+=(ptr.tx-ptr.x)*0.07; ptr.y+=(ptr.ty-ptr.y)*0.07;
-  yawT   = ptr.inside ? ((ptr.x-W/2)/W)*1.5  : Math.sin(t*0.5)*0.34;
-  pitchT = ptr.inside ? ((ptr.y-H/2)/H)*0.85 : Math.cos(t*0.38)*0.13;
-  yaw   += (yawT-yaw)*0.06;
-  pitch += (pitchT-pitch)*0.06;
-
-  var F=820, P=[];
-  for(var i=0;i<nodes.length;i++){
-    var n=nodes[i];
-    var breathe = reduced?0:Math.sin(t*n.sp+n.ph)*4;
-    P.push(proj({x:n.x+breathe, y:n.y+breathe*0.4, z:n.z}, F));
-  }
-
-  /* edges, far to near */
-  var order=edges.map(function(e,i){return [i,(P[e[0]][3]+P[e[1]][3])/2];})
-                 .sort(function(a,b){return b[1]-a[1];});
-  for(var k=0;k<order.length;k++){
-    var e=edges[order[k][0]], A=P[e[0]], B=P[e[1]];
-    var depth=(A[2]+B[2])/2;
-    var mx=(A[0]+B[0])/2, my=(A[1]+B[1])/2;
-    var near = ptr.inside ? Math.max(0,1-Math.hypot(mx-ptr.x,my-ptr.y)/260) : 0;
-    var al = (depth-0.55)*0.5 + near*0.52;
-    if(al<=0.015) continue;
-    ctx.strokeStyle='rgba(201,168,74,'+Math.min(al,0.78).toFixed(3)+')';
-    ctx.lineWidth=Math.max(0.5, depth*0.95);
-    ctx.beginPath(); ctx.moveTo(A[0],A[1]); ctx.lineTo(B[0],B[1]); ctx.stroke();
-  }
-
-  /* thought pulses travelling the lattice */
-  if(!reduced){
-    for(var q=0;q<pulses.length;q++){
-      var pu=pulses[q]; pu.t+=0.0042;
-      if(pu.t>1){ pu.t=0; pu.e=(Math.random()*edges.length)|0; }
-      var ed=edges[pu.e]; if(!ed) continue;
-      var A2=P[ed[0]], B2=P[ed[1]];
-      var px=A2[0]+(B2[0]-A2[0])*pu.t, py=A2[1]+(B2[1]-A2[1])*pu.t;
-      var dep=(A2[2]+B2[2])/2, fade=Math.sin(pu.t*Math.PI);
-      ctx.fillStyle='rgba(244,241,234,'+(fade*dep*0.62).toFixed(3)+')';
-      ctx.beginPath(); ctx.arc(px,py,Math.max(1,dep*1.7),0,Math.PI*2); ctx.fill();
-    }
-  }
-
-  /* nodes, far to near */
-  var ord2=P.map(function(p,i){return [i,p[3]];}).sort(function(a,b){return b[1]-a[1];});
-  for(var m=0;m<ord2.length;m++){
-    var pt=P[ord2[m][0]], nd=nodes[ord2[m][0]];
-    var near2 = ptr.inside ? Math.max(0,1-Math.hypot(pt[0]-ptr.x,pt[1]-ptr.y)/230) : 0;
-    var a2=Math.min(0.95,(pt[2]-0.52)*1.25 + near2*0.55);
-    if(a2<=0.02) continue;
+  ptr.x+=(ptr.tx-ptr.x)*0.07;ptr.y+=(ptr.ty-ptr.y)*0.07;
+  var yT=ptr.inside?((ptr.x-W/2)/W)*1.5:Math.sin(t*0.5)*0.34;
+  var pT=ptr.inside?((ptr.y-H/2)/H)*0.85:Math.cos(t*0.38)*0.13;
+  yaw+=(yT-yaw)*0.06;pitch+=(pT-pitch)*0.06;
+  var F=780,P=[];
+  for(var i=0;i<nodes.length;i++){var n=nodes[i],br=reduced?0:Math.sin(t*n.sp+n.ph)*4;
+    P.push(proj({x:n.x+br,y:n.y+br*0.4,z:n.z},F));}
+  var ord=edges.map(function(e,i){return [i,(P[e[0]][3]+P[e[1]][3])/2];})
+               .sort(function(a,b){return b[1]-a[1];});
+  for(var k=0;k<ord.length;k++){var e=edges[ord[k][0]],A=P[e[0]],B=P[e[1]];
+    var dp=(A[2]+B[2])/2,mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2;
+    var nr=ptr.inside?Math.max(0,1-Math.hypot(mx-ptr.x,my-ptr.y)/240):0;
+    var d01=Math.min(1,Math.max(0,(dp-0.55)/0.27));
+    var al=0.16+d01*0.5+nr*0.4; if(al<=0.02)continue;
+    ctx.strokeStyle='rgba(201,168,74,'+Math.min(al,0.85).toFixed(3)+')';
+    ctx.lineWidth=Math.max(0.5,dp*0.95);
+    ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(B[0],B[1]);ctx.stroke();}
+  if(!reduced)for(var q=0;q<pulses.length;q++){var pu=pulses[q];pu.t+=0.0042;
+    if(pu.t>1){pu.t=0;pu.e=(Math.random()*edges.length)|0;}
+    var ed=edges[pu.e];if(!ed)continue;var A2=P[ed[0]],B2=P[ed[1]];
+    var px=A2[0]+(B2[0]-A2[0])*pu.t,py=A2[1]+(B2[1]-A2[1])*pu.t;
+    var dep=(A2[2]+B2[2])/2,fd=Math.sin(pu.t*Math.PI);
+    ctx.fillStyle='rgba(244,241,234,'+(fd*dep*0.62).toFixed(3)+')';
+    ctx.beginPath();ctx.arc(px,py,Math.max(1,dep*1.7),0,Math.PI*2);ctx.fill();}
+  var o2=P.map(function(p,i){return [i,p[3]];}).sort(function(a,b){return b[1]-a[1];});
+  for(var m=0;m<o2.length;m++){var pt=P[o2[m][0]],nd=nodes[o2[m][0]];
+    var n2=ptr.inside?Math.max(0,1-Math.hypot(pt[0]-ptr.x,pt[1]-ptr.y)/220):0;
+    var e01=Math.min(1,Math.max(0,(pt[2]-0.55)/0.27));
+    var a2=Math.min(1,0.38+e01*0.55+n2*0.3); if(a2<=0.03)continue;
     ctx.fillStyle='rgba(201,168,74,'+a2.toFixed(3)+')';
-    ctx.beginPath(); ctx.arc(pt[0],pt[1],nd.r*pt[2]*1.25,0,Math.PI*2); ctx.fill();
-    if(near2>0.55){
-      ctx.strokeStyle='rgba(244,241,234,'+((near2-0.55)*0.85).toFixed(3)+')';
-      ctx.lineWidth=1;
-      ctx.beginPath(); ctx.arc(pt[0],pt[1],nd.r*pt[2]*3.6,0,Math.PI*2); ctx.stroke();
-    }
-  }
-  if(running) raf=requestAnimationFrame(draw);
-}
-function start(){ if(running)return; running=true; raf=requestAnimationFrame(draw); }
-function stop(){ running=false; cancelAnimationFrame(raf); }
+    ctx.beginPath();ctx.arc(pt[0],pt[1],nd.r*pt[2]*1.7,0,Math.PI*2);ctx.fill();}
+  if(running)raf=requestAnimationFrame(draw);}
 
-stage.addEventListener('pointermove',function(e){
-  var r=stage.getBoundingClientRect();
-  ptr.tx=e.clientX-r.left; ptr.ty=e.clientY-r.top; ptr.inside=true;
-},{passive:true});
+function start(){if(running)return;running=true;raf=requestAnimationFrame(draw);}
+function stop(){running=false;cancelAnimationFrame(raf);}
+stage.addEventListener('pointermove',function(e){var r=stage.getBoundingClientRect();
+  ptr.tx=e.clientX-r.left;ptr.ty=e.clientY-r.top;ptr.inside=true;},{passive:true});
 stage.addEventListener('pointerleave',function(){ptr.inside=false;},{passive:true});
-addEventListener('resize',size,{passive:true});
-size();
+addEventListener('resize',size,{passive:true});size();
 if('IntersectionObserver' in window){
   new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?start():stop();});},
-    {threshold:0.01}).observe(stage);
-} else start();
-if(reduced){ stop(); draw(); }
-
-document.querySelectorAll('.pick button').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.documentElement.dataset.graphic=b.dataset.g;
-    document.querySelectorAll('.pick button').forEach(function(o){
-      o.setAttribute('aria-pressed',String(o===b));});
-    if(reduced) draw();
-  });
-});
+    {threshold:0.01}).observe(stage);} else start();
+if(reduced){stop();draw();}
+}
 
 /* ------------------------------------------------- stats, counting up -- */
-var nums=document.querySelectorAll('.stat__n');
 function fmt(v){return v>=1000?v.toLocaleString('en-AU'):String(v);}
-if(!reduced && 'IntersectionObserver' in window){
+var nums=document.querySelectorAll('.stat__n[data-to]');
+if(!reduced&&'IntersectionObserver' in window){
   nums.forEach(function(n){n.textContent=(n.dataset.prefix||'')+'0'+(n.dataset.suffix||'+');});
-  var io2=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting)return;
-      var n=e.target,to=+n.dataset.to,t0=performance.now(),dur=1250;
-      var suf=n.dataset.suffix||'+', pre=n.dataset.prefix||'';
-      (function step(now){
-        var p=Math.min(1,(now-t0)/dur),ez=1-Math.pow(1-p,3);
-        n.textContent=pre+fmt(Math.round(to*ez))+suf;
-        if(p<1)requestAnimationFrame(step);
-      })(t0);
-      io2.unobserve(n);
-    });
-  },{threshold:0.5});
-  nums.forEach(function(n){io2.observe(n);});
-}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;var n=e.target,to=+n.dataset.to,t0=performance.now();
+    var suf=n.dataset.suffix||'+',pre=n.dataset.prefix||'';
+    (function step(now){var p=Math.min(1,(now-t0)/1250),ez=1-Math.pow(1-p,3);
+      n.textContent=pre+fmt(Math.round(to*ez))+suf;if(p<1)requestAnimationFrame(step);})(t0);
+    io.unobserve(n);});},{threshold:0.5});
+  nums.forEach(function(n){io.observe(n);});}
 
-/* ---------------------------------------------- countdown and seats ---- */
+/* ---------------------------------------------------------- countdown -- */
 var INTAKE=new Date('2026-10-03T23:59:00+10:00').getTime();
-var SEATS_TOTAL=50, SEATS_TAKEN=13;    /* draft, pending confirmation */
 var cd=document.getElementById('count');
 function pad(n){return String(n).padStart(2,'0');}
-function tickCd(){
-  if(!cd) return;
-  var left=INTAKE-Date.now();
-  if(left<0) left=0;
-  var d=Math.floor(left/864e5), h=Math.floor(left%864e5/36e5),
-      m=Math.floor(left%36e5/6e4), s=Math.floor(left%6e4/1000);
-  cd.querySelector('[data-cd="d"]').textContent=d;
-  cd.querySelector('[data-cd="h"]').textContent=pad(h);
-  cd.querySelector('[data-cd="m"]').textContent=pad(m);
-  cd.querySelector('[data-cd="s"]').textContent=pad(s);
-}
-tickCd(); setInterval(tickCd,1000);
-var sb=document.getElementById('seatbar'), sl=document.getElementById('seatsleft');
-if(sb){ sb.style.width=(SEATS_TAKEN/SEATS_TOTAL*100)+'%'; }
-if(sl){ sl.textContent=(SEATS_TOTAL-SEATS_TAKEN)+' of '+SEATS_TOTAL+' remaining'; }
+function tickCd(){if(!cd)return;var l=Math.max(0,INTAKE-Date.now());
+  cd.querySelector('[data-cd="d"]').textContent=Math.floor(l/864e5);
+  cd.querySelector('[data-cd="h"]').textContent=pad(Math.floor(l%864e5/36e5));
+  cd.querySelector('[data-cd="m"]').textContent=pad(Math.floor(l%36e5/6e4));
+  cd.querySelector('[data-cd="s"]').textContent=pad(Math.floor(l%6e4/1000));}
+tickCd();setInterval(tickCd,1000);
 
-/* --------------------------------------------- sticky CTA, thumb zone -
-   Shown only once the hero's own CTAs are off screen, so the page never
-   has two live copies of the same button competing.                     */
-var thumb=document.getElementById('thumb'), heroCta=document.querySelector('.hero__cta');
-if(thumb && heroCta && 'IntersectionObserver' in window){
-  new IntersectionObserver(function(es){
-    es.forEach(function(e){ thumb.classList.toggle('on', !e.isIntersecting); });
-  },{threshold:0}).observe(heroCta);
-}
+/* ------------------------------------------------------ billing toggle - */
+var MULT={m:{f:1,per:'/month'},q:{f:0.9,per:'/month, billed quarterly'},y:{f:0.8,per:'/month, billed yearly'}};
+document.querySelectorAll('.toggle button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.dataset.bill,cfg=MULT[k];
+    document.querySelectorAll('.toggle button').forEach(function(o){
+      o.setAttribute('aria-pressed',String(o===b));});
+    document.querySelectorAll('[data-price]').forEach(function(el){
+      el.textContent='$'+Math.round(+el.dataset.price*cfg.f);});
+    document.querySelectorAll('[data-was]').forEach(function(el){
+      el.textContent='$'+Math.round(+el.dataset.was*cfg.f);});
+    document.querySelectorAll('[data-per]').forEach(function(el){el.textContent=cfg.per;});
+  });});
 
-/* ============================ vertical becomes horizontal ============== */
-var rail=document.getElementById('rail'), track=document.getElementById('track'),
-    prog=document.getElementById('prog');
-if(rail&&track&&!reduced){
+/* ------------------------------------------------- sticky thumb CTA ---- */
+var thumb=document.getElementById('thumb'),heroCta=document.querySelector('.hero__cta');
+if(thumb&&heroCta&&'IntersectionObserver' in window){
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    thumb.classList.toggle('on',!e.isIntersecting);});},{threshold:0}).observe(heroCta);}
+
+/* =============== vertical becomes horizontal, per rail ================= */
+function wireRail(railId,trackId,progId,vh){
+  var rail=document.getElementById(railId),track=document.getElementById(trackId),
+      prog=document.getElementById(progId);
+  if(!rail||!track||reduced)return;
+  rail.style.height=vh+'vh';
   var tk=false;
-  function onScroll(){
-    if(tk)return; tk=true;
+  function onScroll(){if(tk)return;tk=true;
     requestAnimationFrame(function(){
-      var r=rail.getBoundingClientRect();
-      var total=rail.offsetHeight-innerHeight;
+      var r=rail.getBoundingClientRect(),total=rail.offsetHeight-innerHeight;
       var p=Math.min(1,Math.max(0,(-r.top)/total));
       var travel=Math.max(0,track.scrollWidth-innerWidth+40);
       track.style.transform='translate3d('+(-p*travel).toFixed(2)+'px,0,0)';
-      if(prog)prog.style.width=(p*100).toFixed(1)+'%';
-      tk=false;
-    });
-  }
+      if(prog)prog.style.width=(p*100).toFixed(1)+'%';tk=false;});}
   addEventListener('scroll',onScroll,{passive:true});
-  addEventListener('resize',onScroll,{passive:true});
-  onScroll();
-}
+  addEventListener('resize',onScroll,{passive:true});onScroll();}
+wireRail('rail-alt','track-alt','prog-alt',280);
+wireRail('rail-rhythm','track-rhythm','prog-rhythm',330);
 })();
 </script>
 </body>

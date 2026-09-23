@@ -11,14 +11,20 @@ await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=600){
   scrollTo(0,y); await new Promise(r=>setTimeout(r,55));}});
 await p.waitForTimeout(700);
 await p.evaluate(()=>{
-  const t=document.getElementById('track'); if(t) t.style.transform='translate3d(-520px,0,0)';
+  // a static capture cannot show horizontal travel, so collapse each rail to
+// its natural height instead of printing the reserved scroll distance as a gap
+document.querySelectorAll('.hrail').forEach(r=>{r.style.height='auto';});
+document.querySelectorAll('.hrail__sticky').forEach(s=>{s.style.position='static';s.style.height='auto';
+  s.style.paddingBlock='64px';});
+document.querySelectorAll('.hrail__vp').forEach(v=>{v.style.overflow='hidden';});
+['track-alt','track-rhythm'].forEach(id=>{const t=document.getElementById(id); if(t) t.style.transform='translate3d(0,0,0)';});
   document.querySelectorAll('.pick,.thumb').forEach(e=>e.style.display='none');
   const bar=document.querySelector('.bar'); if(bar) bar.style.position='absolute';
   scrollTo(0,0);
 });
 await p.waitForTimeout(400);
 const H=await p.evaluate(()=>document.documentElement.scrollHeight);
-const W=1100, N=5, slice=Math.ceil(H/N);
+const W=1100, N=6, slice=Math.ceil(H/N);
 for(let i=0;i<N;i++){
   const y=i*slice, h=Math.min(slice, H-y);
   await p.screenshot({path:`lab/print-${i+1}.png`, fullPage:true, clip:{x:0,y,width:W,height:h}});
