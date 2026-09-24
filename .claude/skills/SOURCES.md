@@ -37,6 +37,11 @@ hostile was found.
 - **Left out**: `.git`, `.github`, test suites, plugin manifests, a stale
   `SKILL.md.backup`. None are read when a skill runs.
 - **Added** the upstream LICENSE where the skill folder didn't already ship one.
+- **ccd-animated-video and ccd-create-design-system** belong to a larger suite
+  (claude-code-design) whose other skills and commands aren't installed. Each
+  now opens with a "Local setup (this repo)" table mapping those references to
+  what exists here. ccd-animated-video also bundles `starters/animations.jsx`
+  from the same upstream commit, and its copy step points at that file.
 
 ## What reaches the network when used
 
@@ -51,6 +56,9 @@ hostile was found.
   straight to GitHub.
 - **design-system** has a `fetch-background.py` that pulls Pexels stock photos.
   Stock imagery was cut from the UC page, so don't use it there.
+- **ccd-animated-video** pages load React and Babel from a CDN. unpkg.com and
+  cdn.jsdelivr.net are blocked in the cloud environment (the npm registry is
+  not), so previews here need local copies installed from npm.
 
 ## Known quirk
 

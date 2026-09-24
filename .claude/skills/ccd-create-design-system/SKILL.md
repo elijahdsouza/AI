@@ -7,6 +7,19 @@ allowed-tools: Read Write Edit Glob Grep Bash(cp:*) Bash(open:*) Bash(mkdir:*) m
 
 # Create Design System
 
+## Local setup (this repo)
+
+This skill comes from the claude-code-design suite. Only this skill and
+ccd-animated-video are installed here, so resolve its references like this:
+
+| Upstream reference | Use here |
+|---|---|
+| `/register-asset` and `assets.html` (Phase 3) | Not installed. Skip Phase 3 |
+| `/ingest-github` | Not installed. Clone the repo and treat it as a local codebase (source 1) |
+| `Skill: frontend-design` | `taste-skill` |
+| `/make-deck`, `/interactive-prototype`, `/use-design-system` | Not installed |
+| `~/.claude/design-systems/` registry (Phases 0 and 5) | Wiped between cloud sessions. Commit `.claude/design-tokens.json` to the repo instead; that is what persists |
+
 Produce a living HTML style guide with colors, typography, spacing, radii, shadows, and components. Uses `register-asset` to feed `assets.html`.
 
 ## Phase 0 — Registry check (avoid re-extracting what you already have)
