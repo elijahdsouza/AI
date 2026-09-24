@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@import "@fontsource/playfair-display/latin-700.css";
+@import "@fontsource/playfair-display/latin-700-italic.css";
+@import "@fontsource/playfair-display/latin-500-italic.css";
+@import "@fontsource/poppins/latin-300.css";
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
+
+/*
+  One brand gold, #BBAB69, for every gold thing on the page: icons, buttons,
+  gold sections, heading highlights and stats. It is a light gold, so:
+  - text and icon symbols on gold are dark ink (8.0:1)
+  - on dark sections (black 8.5:1, green 6.9:1) gold is used as a text colour
+  - on blue (3.4:1) gold is used only for large heading words
+  - on white and grey (2.1 to 2.3:1) gold never carries text; the heading
+    word stays dark and sits on a gold highlight stripe instead
+*/
+:root {
+  --black: #0e0d0b;
+  --ink: #16140f;
+  --bone: #f3efe6;
+  --gold: #bbab69;
+  --gold-rgb: 187, 171, 105;
+  --blue: #3b48a8;
+  --green: #16251e;
+  --grey: #f2f4f7;
+  --offwhite: #fafaf7;
+
+  --display: "Playfair Display", Georgia, serif;
+  --text: "Poppins", -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --gutter: clamp(20px, 5vw, 64px);
+  --maxw: 1200px;
+}
+
+@layer base {
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--bone);
+  font-family: var(--text);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--gold); color: var(--ink); }
+
+}
+
+@layer components {
+/* ---------- grounds ---------- */
+.g { background: var(--bg); color: var(--fg); position: relative; }
+.g-black { --bg: var(--black); --fg: var(--bone); --fg2: #aaa395; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold); --stripe: none;
+  --line: rgba(243,239,230,.12); --card: #16140f; --cardline: rgba(243,239,230,.10); --chip: rgba(var(--gold-rgb),.16); }
+.g-white { --bg: #fff; --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+  --line: #e7e3da; --card: #fff; --cardline: #e7e3da; --chip: rgba(var(--gold-rgb),.24); }
+.g-off { --bg: var(--offwhite); --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+  --line: #e7e3da; --card: #fff; --cardline: #e7e3da; --chip: rgba(var(--gold-rgb),.24); }
+.g-grey { --bg: var(--grey); --fg: var(--ink); --fg2: #4f5563; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+  --line: #dde2e9; --card: #fff; --cardline: #e1e5eb; --chip: rgba(var(--gold-rgb),.24); }
+.g-green { --bg: var(--green); --fg: var(--bone); --fg2: #a9b4ac; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold); --stripe: none;
+  --line: rgba(243,239,230,.12); --card: rgba(255,255,255,.04); --cardline: rgba(243,239,230,.10); --chip: rgba(var(--gold-rgb),.16); }
+.g-blue { --bg: var(--blue); --fg: #fff; --fg2: rgba(255,255,255,.84); --acc: var(--gold); --acc-sm: #fff; --eyebrow: rgba(255,255,255,.88); --dash: var(--gold); --focus: #fff; --stripe: none;
+  --line: rgba(255,255,255,.18); --card: rgba(255,255,255,.07); --cardline: rgba(255,255,255,.16); --chip: rgba(255,255,255,.12); }
+.g-gold { --bg: var(--gold); --fg: var(--ink); --fg2: #34301f; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--ink); --focus: var(--ink); --stripe: none;
+  --line: rgba(22,20,15,.2); --card: rgba(255,255,255,.2); --cardline: rgba(22,20,15,.18); --chip: rgba(255,255,255,.32); }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.sec { padding: clamp(80px, 11vw, 150px) 0; }
+.sec-tight { padding: clamp(40px, 5vw, 64px) 0; }
+
+/* ---------- type ---------- */
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--eyebrow); font-weight: 500; margin: 0 0 18px; }
+.eyebrow::before { content: ""; display: inline-block; width: 22px; height: 2px; background: var(--dash); vertical-align: middle; margin: -2px 12px 0 0; }
+.h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 3.9vw, 3.7rem); line-height: 1.05; text-wrap: balance;
+  letter-spacing: -.015em; margin: 0; }
+.h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08;
+  letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.h3 { font-family: var(--display); font-weight: 700; font-size: 1.28rem; line-height: 1.25; margin: 0; }
+/* heading highlight: gold text on dark sections, a gold stripe behind dark text on light ones */
+.accent { color: var(--acc); font-style: italic; background: var(--stripe); padding: 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.lede { font-size: clamp(1rem, 1.3vw, 1.14rem); line-height: 1.7; color: var(--fg2); margin: 22px 0 0; max-width: 60ch; }
+.body { font-size: .95rem; line-height: 1.65; color: var(--fg2); margin: 8px 0 0; }
+.head-center { text-align: center; margin: 0 auto; max-width: 820px; }
+.head-center .lede { margin-left: auto; margin-right: auto; }
+.tbc { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--fg2); border: 1px dashed currentColor; padding: 4px 8px; display: inline-block; opacity: .85; }
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--gold); color: var(--ink); font-family: var(--text); font-weight: 600; font-size: 16px;
+  line-height: 1; padding: 18px 30px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer;
+  transition: transform 160ms cubic-bezier(.23,1,.32,1), box-shadow 200ms cubic-bezier(.23,1,.32,1), filter 160ms ease;
+  box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 10px 26px -12px rgba(var(--gold-rgb),.75); white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 16px 34px -14px rgba(var(--gold-rgb),.95); }
+}
+.btn:active { transform: scale(.97); }
+.btn:focus-visible, .link:focus-visible, button:focus-visible, summary:focus-visible, a:focus-visible {
+  outline: 2px solid var(--focus, var(--gold)); outline-offset: 3px; }
+.btn-sm { font-size: 14px; padding: 12px 20px; }
+.link { color: var(--fg); font-weight: 500; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.link:hover { text-decoration-thickness: 2px; }
+
+/* ---------- icon disc: dark symbol on gold ---------- */
+.disc { width: 46px; height: 46px; border-radius: 999px; background: var(--gold); color: var(--ink);
+  display: inline-grid; place-items: center; flex: none; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset; }
+.disc svg { width: 21px; height: 21px; stroke-width: 1.8; }
+
+/* ---------- cards ---------- */
+.card { background: var(--card); border: 1px solid var(--cardline); border-radius: 18px; }
+
+/* ---------- photo frames ---------- */
+.photo { position: relative; overflow: hidden; border-radius: 18px; background: #1d1a14; isolation: isolate; }
+.photo img { width: 100%; height: 100%; object-fit: cover; color: transparent; transition: transform .9s cubic-bezier(.23,1,.32,1); }
+@media (hover: hover) and (pointer: fine) { .photo:hover img { transform: scale(1.035); } }
+.photo .scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,9,7,.88) 0%, rgba(10,9,7,.35) 45%, rgba(10,9,7,0) 70%); }
+.photo .over { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; color: #fff; }
+.photo .over .body { color: rgba(255,255,255,.86); }
+.photo-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(243,239,230,.35); z-index: -1; }
+
+/* ---------- marquee ---------- */
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee__track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee__track, [data-ambient="paused"] .marquee__track { animation-play-state: paused; }
+.marquee__item { font-family: var(--mono); font-size: 15px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg2); padding: 0 34px; white-space: nowrap; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee { mask-image: none; }
+  .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 14px; }
+}
+
+/* ---------- header ---------- */
+.bar { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s ease, backdrop-filter .3s ease, border-color .3s; border-bottom: 1px solid transparent; }
+.bar.scrolled { background: rgba(14,13,11,.82); backdrop-filter: blur(14px); border-color: rgba(243,239,230,.08); }
+.bar__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.bar nav a { font-size: 13px; color: #cfc8b8; text-decoration: none; font-weight: 400; }
+.bar nav a:hover { color: #fff; }
+
+/* ---------- grain: a flat dark ground bands on real screens; 5% noise makes it a lit room ---------- */
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: .05; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- pause control for the moving hero ---------- */
+.pause { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; z-index: 2;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg2);
+  background: rgba(14,13,11,.55); border: 1px solid var(--line); cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease, transform 160ms cubic-bezier(.23,1,.32,1); }
+@media (hover: hover) and (pointer: fine) { .pause:hover { color: var(--fg); border-color: rgba(var(--gold-rgb),.6); } }
+.pause:active { transform: scale(.97); }
+
+/* ---------- misc ---------- */
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+.check { color: var(--acc); flex: none; margin-top: 3px; }
+details summary { list-style: none; cursor: pointer; }
+details summary::-webkit-details-marker { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ---------- helpers (kept out of Tailwind arbitrary values for clarity) ---------- */
+.mono { font-family: var(--mono); }
+.serif { font-family: var(--display); }
+.fg { color: var(--fg); }
+.fg2 { color: var(--fg2); }
+.c-acc { color: var(--acc); }
+.c-gold { color: var(--gold); }
+.c-acc-sm { color: var(--acc-sm); }
+.c-bone { color: var(--bone); }
+.b-line { border-color: var(--line); }
+.b-black { border-color: var(--black); }
+.bg-gold { background: var(--gold); }
+.bg-card { background: var(--card); }
+.bg-chip { background: var(--chip); }
+
+}

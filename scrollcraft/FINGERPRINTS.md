@@ -28,9 +28,8 @@ changes only grammar and world will fail it.
 
 | Build | Grammar | Nav treatment | Hero device | Act-sequence shape | Close pattern | Signature move | World | Port |
 |---|---|---|---|---|---|---|---|---|
+| uc-pro-group v4 (`sites/uc-pro-group`, 2026-09) | Editorial landing (media × community) | Sticky translucent bar, anchor nav, one gold CTA | Three-plane split hero: dim real room, pointer-driven magnetic particle U, type in front | 23 sections, ~31 screens at 1440×900: count, marquee, pinned pan, seam callout, arrival, 360vh peak pin, flow, pinned pan, pricing toggle, arrival, flow to close | Dark close with drifting photo, CTA and founding strip, then footer | "The magnet opens": belief lit word by word, then a gold U mask opens onto the real community photo | Photographic: real group photo + photoreal event images; black, bone, gold #BBAB69, green and blue grounds | React 19 + Vite + Motion; single-file HTML build |
 
-*(empty: your first build has nothing to clear, so build whatever the interview
-points at. From the second onwards, this table is the constraint.)*
 
 ---
 
@@ -41,7 +40,7 @@ reusing: a grammar, a nav treatment, a close pattern, a signature move, an
 act-count-and-length band. The shared columns are what the next build inherits
 as a constraint, so writing them down is the whole point.
 
-Nothing is taken yet.
+- **uc-pro-group v4:** signature move "a logo-shaped mask opens onto the real room"; hero "pointer magnet drawing particles into the logo"; the pan, arrival, peak-pin, pan rhythm across a ~31-screen landing.
 
 ---
 

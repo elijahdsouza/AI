@@ -349,3 +349,94 @@ Pricing is drafted from v19 ($49 Momentum, $159 Inner Circle) and is labelled
 placeholder. The intake date 3 October 2026 comes from v19 and drives a live
 countdown; the narrative doc says late October, so these disagree and the page
 currently follows v19.
+
+---
+
+# Direction change · v4 (React build, shipped)
+
+**Status:** interviewed across several rounds. The React build in
+`sites/uc-pro-group` replaces the v3 HTML page as the live candidate. Messaging
+is the user's section-by-section copy (hero, "What we believe", Two futures,
+close) as approved in conversation. Quotes below are the user's words; anything
+not quoted is an authored decision.
+
+## What the user asked for, in their words
+
+- "I want to avoid ai native slop.."
+- "Because I want to design a website that has both subtle entrance animations and immersive experiences"
+- "Obviously only where it makes sense and don't overuse it as I also don't want to use too many credits unnecessarily"
+- "Yes the website needs to look expensive and fit for wealthy people to buy from"
+- Hero eyebrow: "Meet entrepreneurs in your city". Every button gold, every label "Join the waitlist".
+- Board notes (paraphrased from the marked-up screenshots): magnetic U lattice in the hero that reads as the logo; logos scroll infinitely; stats count up; problem, alternatives and testimonials come in sideways from off the page; the "old way" callout overlaps two sections; one gold, `#BBAB69`, with dark text on it.
+
+## Grammar
+
+**Editorial landing (media × community).** Sticky translucent bar with anchor nav
+and one CTA. Sections cut on distinct grounds (black, white, grey, gold, green,
+blue), each ground doing one job. Flow + one quiet entrance is the resting state;
+immersive devices are rationed to five places.
+
+## Feeling curve
+
+| Act | Feeling | What causes it |
+|---|---|---|
+| Hero | **Invited** | "Meet entrepreneurs in your city", real faces, the gold magnet pulling particles into the logo's U |
+| Stats, logos | **Reassured** | Real figures counting up once, partner names drifting past |
+| Problem (pan) | **Seen** | Four pressures arrive one at a time while the frame holds still |
+| Callout, alternatives | **Named, then turned** | "The old way... is broken"; the options fly in and fall short; the gold card says it doesn't need to stay that way |
+| **What we believe (PEAK)** | **Lift, belonging** | The belief lights up word by word, the stage empties, then a gold U opens onto the real room |
+| Pro Group, what to expect | **Clear** | Quiet flow straight after the peak: what it is, what you get |
+| A month (pan) | **Assured** | A real month travels sideways; frequency as proof |
+| Pricing, anchor, compare | **Respected** | A clean ladder, the value anchor, an honest comparison |
+| Risk, how it works | **Safe** | No gamble, three steps |
+| Research, proof, standard | **Convinced, selected** | Evidence, testimonials flying in, "This isn't for everyone" |
+| Story, two futures | **Moved** | The founder's why; "You didn't come this far to be average." |
+| FAQ, close | **Committed** | Answers, then "Your dream business could start here." |
+
+## The peak
+
+"The line about not building alone lit up word by word, and then the gold U from
+the logo opened like a window into a room full of real founders." Lives in
+**What we believe**, 360vh, the largest span on the page (the next largest, the
+month pan, measures 310vh at 1440 wide; the problem pan 256vh).
+
+**Tell-someone sentence:** It's the site where the sentence about not building
+alone lights up, and then a gold magnet opens into a room full of real founders.
+
+**Authored silence:** peak progress 0.45 to 0.54. The words clear to an empty
+black stage before the room begins. Deliberate; not dead scroll.
+
+## Score
+
+| Section | Device |
+|---|---|
+| Hero | `pointer` (magnet canvas) + `drift` (three planes) + `in` |
+| Stats | `count` |
+| Logos (twice) | `marquee`, paused by the ambient pause control |
+| Problem | `pan`, pinned |
+| Callout | overlap across the seam + `in` |
+| Alternatives | `arrival`, scrubbed from past the right edge, no pin |
+| What we believe | `pin`: scrubbed words, silence, U mask reveal (**PEAK**, signature move) |
+| Pro Group, Expect, Anchor, Compare, Risk, How, Research, Standard, Story, Futures, FAQ | `flow` + `in` (resting state) |
+| A month | `pan`, pinned |
+| Pricing | `drift` photo + layout toggle |
+| Proof | `arrival` |
+| Close | `drift` photo + `in` |
+
+Nine families; no immersive device twice in a row; no video scrubs.
+
+## Kept bans
+
+No looping attention motion (no pulse, no bounce, no scroll cue), no section
+counters, eyebrows on five of 23 sections only (city, belief, product, pricing, comparison), hover only on fine pointers,
+no em dashes in visible copy, gold never carries text on light grounds,
+testimonials without star ratings. Reduced motion keeps fades and drops
+movement; the pinned sections become ordinary sections.
+
+## Verification
+
+Desktop 1440×900 (27,991px), 390×844 (35,460px), reduced motion (22,727px):
+no horizontal overflow, no page errors. Peak checked at nine progress points on
+desktop and phone. Contrast measured on the render. **Not covered:** a real
+phone, and the 15 Higgsfield photos, whose CDN this environment cannot reach
+(they show as dark placeholders in the screenshots and load in a normal browser).
