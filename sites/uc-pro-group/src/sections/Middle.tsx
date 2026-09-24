@@ -246,6 +246,11 @@ const Mark = ({ k }: { k: string }) =>
   k === "n" ? <X size={15} className="text-[#b0413e] shrink-0 mt-0.5" /> :
   <Minus size={15} className="text-[#9a8a55] shrink-0 mt-0.5" />;
 
+// The first column stays put while the rest scrolls sideways: it sits above the moving
+// cells (the gold header is positioned too, so without a z-index it painted over it),
+// carries a hairline edge, and is narrower on phones to leave room for the comparison.
+const pinned = "sticky left-0 z-[2] bg-white p-4 md:p-5 w-[150px] min-w-[150px] md:w-[22%] shadow-[inset_-1px_0_0_rgba(22,20,15,.1)]";
+
 export function Compare() {
   return (
     <Section id="compare" ground="grey">
@@ -256,7 +261,7 @@ export function Compare() {
             <caption className="sr-only">UC Pro Group compared with accelerators, studios, coaches and free online groups</caption>
             <thead>
               <tr>
-                <th className="p-5 text-[12px] font-medium fg2 align-bottom w-[22%] sticky left-0 bg-white">What you actually get</th>
+                <th className={`${pinned} text-[12px] font-medium fg2 align-bottom`}>What you actually get</th>
                 {compare.columns.map((c, i) => (
                   <th key={c.name} className={`p-5 align-bottom ${i === 0 ? "g g-gold" : ""}`}>
                     <span className="block serif font-bold text-[1rem]">{c.name}</span>
@@ -268,7 +273,7 @@ export function Compare() {
             <tbody>
               {compare.rows.map((r) => (
                 <tr key={r.q} className="border-t b-line">
-                  <th scope="row" className="p-5 text-[13.5px] font-medium sticky left-0 bg-white">{r.q}</th>
+                  <th scope="row" className={`${pinned} text-[12.5px] md:text-[13.5px] font-medium`}>{r.q}</th>
                   {r.cells.map(([k, v], i) => (
                     <td key={i} className={`p-5 text-[13px] leading-snug ${i === 0 ? "bg-[rgba(187,171,105,.1)] font-medium" : "fg2"}`}>
                       <span className="flex gap-2"><Mark k={k} />{v}</span>
