@@ -7,6 +7,25 @@ allowed-tools: Read Write Edit Bash(cp:*) Bash(open:*) Bash(mkdir:*) mcp__chrome
 
 # Animated Video
 
+## Local setup (this repo)
+
+This skill comes from the claude-code-design suite. Only this skill and
+ccd-create-design-system are installed here, so resolve its references like this:
+
+| Upstream reference | Use here |
+|---|---|
+| `starters/animations.jsx` | `.claude/skills/ccd-animated-video/starters/animations.jsx` (bundled) |
+| `Skill: frontend-design` | `taste-skill` |
+| `/serve` | `python3 -m http.server 4567` from the repo root (external `.jsx` needs HTTP, not `file://`) |
+| `/done <url>` | Open it in Playwright (Chromium is preinstalled), screenshot it, check the scrubber, play/pause and a clean console |
+| Ingestion skills (GitHub, Figma, screenshot) | Not installed. Read tokens from `.claude/design-tokens.json` or the page's CSS |
+| `Skill: remotion-best-practices` (Path B) | Not installed. Follow Remotion's own docs |
+| `~/.claude/design-systems/` | Wiped between cloud sessions, so don't rely on it |
+
+unpkg.com and cdn.jsdelivr.net are blocked in the cloud environment. To preview here,
+install `react`, `react-dom` and `@babel/standalone` from npm and point the script tags
+at local copies. A file meant for a normal browser can keep CDN links.
+
 Two paths depending on complexity. **Decide first, tell the user which path you're taking.**
 
 ## Phase 0 — Context pre-flight (auto-detect, ONE question max)
@@ -42,7 +61,7 @@ Uses the Remotion-compatible in-browser engine in `starters/animations.jsx`. Sam
 
 1. Invoke `Skill: frontend-design` for aesthetic direction
 2. Create `artifacts/<slug>.html` with React + Babel + `animations.jsx`
-3. `Bash(cp starters/animations.jsx "$(dirname <html>)/")` — copy starter next to the HTML
+3. `Bash(cp .claude/skills/ccd-animated-video/starters/animations.jsx "$(dirname <html>)/")` — copy starter next to the HTML
 4. Run `/serve` (required for external `.jsx` CORS)
 5. Compose the scene. Pattern:
 
