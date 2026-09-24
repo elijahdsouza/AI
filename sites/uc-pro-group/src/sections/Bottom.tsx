@@ -151,13 +151,14 @@ export function Standard() {
   );
 }
 
-/** Gold by default. Add ?story=green to the address to compare the green version. */
+/** Dark green with white text. Add ?story=gold to the address to compare the gold version. */
 export function Story() {
-  const green = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("story") === "green";
+  const gold = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("story") === "gold";
+  const white = { "--fg": "#fff", "--fg2": "rgba(255,255,255,.84)" } as React.CSSProperties;
   return (
-    <Section id="story" ground={green ? "green" : "gold"}>
+    <Section id="story" ground={gold ? "gold" : "green"} style={gold ? undefined : white}>
       <div className="wrap grid md:grid-cols-[1fr_1.15fr] gap-10 md:gap-16 items-center">
-        <In><Item className="aspect-[4/5] rounded-[20px] border border-dashed border-[rgba(22,20,15,.3)] bg-white/10 grid place-items-center p-8 text-center">
+        <In><Item className={`aspect-[4/5] rounded-[20px] border border-dashed grid place-items-center p-8 text-center ${gold ? "border-[rgba(22,20,15,.3)] bg-white/10" : "border-white/25 bg-white/[.04]"}`}>
           <span className="tbc">{story.photo}</span>
         </Item></In>
         <div>

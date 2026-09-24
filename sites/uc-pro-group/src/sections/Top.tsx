@@ -54,16 +54,17 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const scrollYProgress = useSectionProgress(ref, ["start start", "end start"]);
-  const farY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 160]);
+  const farY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 90]);
   const midY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 70]);
   const midFade = useTransform(scrollYProgress, [0, 0.8], reduce ? [1, 1] : [1, 0.35]);
   return (
     <section ref={ref} id="top" className="g g-black grain relative overflow-hidden">
-      {/* far plane: a real UC night from the live site, behind the magnet */}
-      <motion.div aria-hidden="true" style={{ y: farY }} className="absolute inset-y-[-8%] right-0 w-full lg:w-[70%]">
-        <img src={crowd} alt="" className="w-full h-full object-cover object-[38%_45%] opacity-[.62]" />
+      <div className="relative overflow-hidden">
+      {/* far plane: a real UC night from the live site, under an even dark overlay */}
+      <motion.div aria-hidden="true" style={{ y: farY }} className="absolute inset-x-0 top-[-10%] bottom-[-10%]">
+        <img src={crowd} alt="" className="w-full h-full object-cover object-[50%_40%]" />
       </motion.div>
-      <div aria-hidden="true" className="hero-shade absolute inset-0" />
+      <div aria-hidden="true" className="hero-overlay absolute inset-0" />
 
       <div className="relative wrap grid lg:grid-cols-[1.25fr_1fr] items-center gap-6 min-h-[100svh] pt-[110px] pb-10">
         <In className="relative z-10 max-w-[720px]" stagger={0.08}>
@@ -93,6 +94,7 @@ export function Hero() {
           <HeroMagnet className="absolute inset-0" />
           <PauseToggle className="absolute bottom-3 right-4 lg:right-0" />
         </motion.div>
+      </div>
       </div>
 
       <div className="relative border-t b-line">
