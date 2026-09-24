@@ -1,25 +1,30 @@
 # UC Pro Group landing page
 
-The membership landing page for the Uncommon Collective Pro Group, in two forms:
+The membership landing page for the Uncommon Collective Pro Group.
 
-| Version | What it is | How to open it |
-|---|---|---|
-| `UC-Pro-Group.html` | The whole site in one file: code, fonts, styles and the group photo inside it | Double-click it, or drag it into Chrome |
-| This folder | The React source, for editing and for hosting | `npm install`, then `npm run dev` |
+## Open it on your computer
 
-The 15 event photos are loaded from Higgsfield's image server, so they need an
-internet connection. To bundle them into the file for offline use, see **Photos**.
+**Just want to look at it?** Double-click **`UC-Pro-Group.html`**. It opens in
+your browser with nothing to install. (The event photos need an internet connection.)
+
+**Want the React version, to run and edit it?**
+
+1. Install **Node.js** once: the **LTS** version from [nodejs.org](https://nodejs.org/en/download).
+   Click through the installer with the default options.
+2. **Windows:** double-click **`start-windows.bat`** in this folder.
+   **Mac:** double-click **`start-mac.command`**. The first time, right-click it and choose Open.
+3. The first run installs everything, which takes a minute or two. Then your browser
+   opens the site at **http://localhost:5173**. Leave the black window open while you
+   use it; closing it stops the site. Edits to `src/content.ts` appear the moment you save.
+
+Prefer a terminal? In this folder: `npm install` once, then `npm run dev`.
+
+**Why double-clicking `index.html` shows a blank page:** the Hostinger build
+(`dist/` and `uc-pro-group-dist.zip`) loads its code from separate files, and
+browsers block that for pages opened straight from your computer. It works once it's
+uploaded to Hostinger. To check it locally first, run `npm run preview`.
 
 ---
-
-## Run the React version
-
-Needs [Node.js](https://nodejs.org) 20 or newer.
-
-```bash
-npm install        # once
-npm run dev        # serves the site on http://localhost:5173 and reloads as you edit
-```
 
 ## Change the words
 

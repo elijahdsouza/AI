@@ -9,6 +9,28 @@
     <meta property="og:title" content="UC Pro Group · Uncommon Collective" />
     <meta property="og:description" content="Making it easier, and more common, to build undeniable momentum." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230e0d0b'/%3E%3Cpath d='M11 8v13a9 9 0 0 0 18 0V8' stroke='%23f3efe6' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <script>
+      // Opened as a file from a folder, a build that loads its code from separate
+      // files is blocked by the browser. Explain what to open instead of a blank page.
+      document.addEventListener("DOMContentLoaded", function () {
+        if (location.protocol !== "file:" || !document.querySelector('script[type="module"][src]')) return;
+        var root = document.getElementById("root");
+        if (!root || root.childNodes.length) return;
+        root.innerHTML = `
+          <div style="min-height:100vh;display:grid;place-items:center;padding:24px;background:#0e0d0b;color:#f3efe6;font:16px/1.6 system-ui,sans-serif">
+            <div style="max-width:560px">
+              <p style="margin:0 0 14px;font:500 12px/1 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#bbab69">UC Pro Group</p>
+              <h1 style="margin:0 0 12px;font:700 28px/1.2 Georgia,serif">This copy only runs from a web server</h1>
+              <p style="margin:0 0 18px;color:#cfc8b8">Browsers block its code when it's opened as a file on your computer, so it would show a blank page.</p>
+              <ul style="margin:0;padding-left:20px;color:#cfc8b8">
+                <li style="margin-bottom:8px"><b style="color:#f3efe6">To look at the site:</b> double-click <b style="color:#f3efe6;white-space:nowrap">UC-Pro-Group.html</b> instead.</li>
+                <li style="margin-bottom:8px"><b style="color:#f3efe6">To run or edit the React version:</b> double-click <b style="color:#f3efe6;white-space:nowrap">start-windows.bat</b> (Mac: <b style="color:#f3efe6;white-space:nowrap">start-mac.command</b>) in the project folder.</li>
+                <li><b style="color:#f3efe6">To put it online:</b> upload these files to your Hostinger subdomain folder.</li>
+              </ul>
+            </div>
+          </div>`;
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
