@@ -1,7 +1,7 @@
 import { ChevronDown, Check, X } from "lucide-react";
 import { Disc, Head, Section, Cta, Accent, Copy } from "../components/ui";
 import { In, Item, useArrive, ArriveItem } from "../components/effects";
-import { LogoMark } from "./Top";
+import { Logo } from "./Top";
 import { DriftPhoto } from "./Middle";
 import { img } from "../images";
 import { site, risk, how, research, proof, standard, story, futures, faq, close, footer } from "../content";
@@ -254,7 +254,7 @@ export function Footer() {
     <footer className="g g-black border-t b-line">
       <div className="wrap py-14 grid md:grid-cols-3 gap-10 text-[13px]">
         <div>
-          <div className="flex items-center gap-3"><LogoMark size={26} /><b className="font-semibold">{footer.org}</b></div>
+          <Logo className="h-[34px]" /><span className="sr-only">{footer.org}</span>
           <p className="mt-3 fg2">{footer.place}<br /><a className="link fg2" href={`mailto:${site.email}`}>{site.email}</a></p>
         </div>
         <div>

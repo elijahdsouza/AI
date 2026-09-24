@@ -17,8 +17,8 @@
   - text and icon symbols on gold are dark ink (8.0:1)
   - on dark sections (black 8.5:1, green 6.9:1) gold is used as a text colour
   - on blue (3.4:1) gold is used only for large heading words
-  - on white and grey (2.1 to 2.3:1) gold never carries text; the heading
-    word stays dark and sits on a gold highlight stripe instead
+  - on white and grey (2.1 to 2.3:1) gold is used only for the italic accent
+    word inside large headings, a brand choice; all other text stays dark
 */
 :root {
   --black: #0e0d0b;
@@ -60,19 +60,19 @@ a { color: inherit; }
 @layer components {
 /* ---------- grounds ---------- */
 .g { background: var(--bg); color: var(--fg); position: relative; }
-.g-black { --bg: var(--black); --fg: var(--bone); --fg2: #aaa395; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold); --stripe: none;
+.g-black { --acc-word: var(--gold); --bg: var(--black); --fg: var(--bone); --fg2: #aaa395; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold);
   --line: rgba(243,239,230,.12); --card: #16140f; --cardline: rgba(243,239,230,.10); --chip: rgba(var(--gold-rgb),.16); }
-.g-white { --bg: #fff; --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+.g-white { --acc-word: var(--gold); --bg: #fff; --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink);
   --line: #e7e3da; --card: #fff; --cardline: #e7e3da; --chip: rgba(var(--gold-rgb),.24); }
-.g-off { --bg: var(--offwhite); --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+.g-off { --acc-word: var(--gold); --bg: var(--offwhite); --fg: var(--ink); --fg2: #57534a; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink);
   --line: #e7e3da; --card: #fff; --cardline: #e7e3da; --chip: rgba(var(--gold-rgb),.24); }
-.g-grey { --bg: var(--grey); --fg: var(--ink); --fg2: #4f5563; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink); --stripe: linear-gradient(transparent 58%, var(--gold) 58%, var(--gold) 92%, transparent 92%);
+.g-grey { --acc-word: var(--gold); --bg: var(--grey); --fg: var(--ink); --fg2: #4f5563; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--gold); --focus: var(--ink);
   --line: #dde2e9; --card: #fff; --cardline: #e1e5eb; --chip: rgba(var(--gold-rgb),.24); }
-.g-green { --bg: var(--green); --fg: var(--bone); --fg2: #a9b4ac; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold); --stripe: none;
+.g-green { --acc-word: var(--gold); --bg: var(--green); --fg: var(--bone); --fg2: #a9b4ac; --acc: var(--gold); --acc-sm: var(--gold); --eyebrow: var(--gold); --dash: var(--gold); --focus: var(--gold);
   --line: rgba(243,239,230,.12); --card: rgba(255,255,255,.04); --cardline: rgba(243,239,230,.10); --chip: rgba(var(--gold-rgb),.16); }
-.g-blue { --bg: var(--blue); --fg: #fff; --fg2: rgba(255,255,255,.84); --acc: var(--gold); --acc-sm: #fff; --eyebrow: rgba(255,255,255,.88); --dash: var(--gold); --focus: #fff; --stripe: none;
+.g-blue { --acc-word: var(--gold); --bg: var(--blue); --fg: #fff; --fg2: rgba(255,255,255,.84); --acc: var(--gold); --acc-sm: #fff; --eyebrow: rgba(255,255,255,.88); --dash: var(--gold); --focus: #fff;
   --line: rgba(255,255,255,.18); --card: rgba(255,255,255,.07); --cardline: rgba(255,255,255,.16); --chip: rgba(255,255,255,.12); }
-.g-gold { --bg: var(--gold); --fg: var(--ink); --fg2: #34301f; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--ink); --focus: var(--ink); --stripe: none;
+.g-gold { --acc-word: var(--ink); --bg: var(--gold); --fg: var(--ink); --fg2: #34301f; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--ink); --focus: var(--ink);
   --line: rgba(22,20,15,.2); --card: rgba(255,255,255,.2); --cardline: rgba(22,20,15,.18); --chip: rgba(255,255,255,.32); }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
@@ -88,8 +88,8 @@ a { color: inherit; }
 .h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08;
   letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 .h3 { font-family: var(--display); font-weight: 700; font-size: 1.28rem; line-height: 1.25; margin: 0; }
-/* heading highlight: gold text on dark sections, a gold stripe behind dark text on light ones */
-.accent { color: var(--acc); font-style: italic; background: var(--stripe); padding: 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+/* heading accent word: gold italic on every ground, dark ink on the gold one */
+.accent { color: var(--acc-word); font-style: italic; }
 .lede { font-size: clamp(1rem, 1.3vw, 1.14rem); line-height: 1.7; color: var(--fg2); margin: 22px 0 0; max-width: 60ch; }
 .body { font-size: .95rem; line-height: 1.65; color: var(--fg2); margin: 8px 0 0; }
 .head-center { text-align: center; margin: 0 auto; max-width: 820px; }
@@ -138,10 +138,6 @@ a { color: inherit; }
 .marquee__item { font-family: var(--mono); font-size: 15px; letter-spacing: .14em; text-transform: uppercase;
   color: var(--fg2); padding: 0 34px; white-space: nowrap; }
 @keyframes marquee { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .marquee { mask-image: none; }
-  .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 14px; }
-}
 
 /* ---------- header ---------- */
 .bar { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s ease, backdrop-filter .3s ease, border-color .3s; border-bottom: 1px solid transparent; }
@@ -149,6 +145,14 @@ a { color: inherit; }
 .bar__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
 .bar nav a { font-size: 13px; color: #cfc8b8; text-decoration: none; font-weight: 400; }
 .bar nav a:hover { color: #fff; }
+
+/* ---------- hero: the photo sits right, the words need a dark ground on the left ---------- */
+.hero-shade { background: linear-gradient(to bottom, rgba(14,13,11,.8), rgba(14,13,11,.66) 40%, rgba(14,13,11,.82) 80%, #0e0d0b); }
+@media (min-width: 1024px) {
+  .hero-shade { background:
+    linear-gradient(90deg, #0e0d0b 0%, #0e0d0b 27%, rgba(14,13,11,.74) 48%, rgba(14,13,11,.34) 70%, rgba(14,13,11,.5) 100%),
+    linear-gradient(to bottom, rgba(14,13,11,.62), rgba(14,13,11,0) 26%, rgba(14,13,11,0) 66%, #0e0d0b); }
+}
 
 /* ---------- grain: a flat dark ground bands on real screens; 5% noise makes it a lit room ---------- */
 .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: .05; mix-blend-mode: soft-light;

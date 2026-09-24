@@ -52,8 +52,11 @@ A local file always wins over the online one. No code changes needed.
 | `walk` | Above the pricing |
 | `toast` | The closing section |
 
-The real group photo is `src/assets/table.jpg`. It carries the hero and the
-"What we believe" moment.
+Real UC photos, cropped from uncommoncollectiveau.com, already fill `speaking`,
+`games`, `industry` and `cowork`. The hero background is `src/assets/hero-crowd.jpg`
+(also from the live site), the group photo in "What we believe" is
+`src/assets/table.jpg`, and the logo is `src/assets/uc-logo-white.png`. They came from
+a screen capture, so swapping in the original files will make them sharper.
 
 To download the current generated photos so every build works offline:
 
@@ -89,13 +92,18 @@ effects are kept to the places that carry the story:
 
 | Where | Effect |
 |---|---|
-| Hero | The gold U magnet, the logo's own shape, drawn in particles that follow the cursor. The photo, the magnet and the words move at different depths. |
+| Hero | The UC magnet as a Lottie (`src/assets/uc-magnet.json`): it draws itself on, then its field flows pole to pole over a lattice of dots. It leans toward the cursor and its field speeds up near the poles. Behind it, a real UC night from the live site. |
 | The problem, and "What a month inside looks like" | The section holds still while the cards travel in sideways |
 | The alternatives, and the testimonials | Cards fly in from past the right edge as you scroll |
-| What we believe | The page's signature moment: the belief lights up word by word, then a gold U opens onto the real room |
+| What we believe | The page's signature moment: the belief lights up word by word, then you fly through the gold magnet (the logo's own outline) into the real room |
 
-Visitors who set "reduce motion" on their device get the same page with the
-movement removed. The hero has a pause button, so any moving element can be stopped.
+Visitors who set "reduce motion" on their device get the same effects, softened:
+parallax drift, slide-in offsets and the button lean are dropped, and the photo
+doesn't push in. The hero has a pause button that stops everything that moves on
+its own (the magnet, the rotating headline and the logo strips).
+
+The magnet Lottie is generated from the logo's measured geometry
+(`src/components/ucMark.ts`): `npm run make-magnet` rewrites it.
 
 To compare the founder story on green instead of gold, add `?story=green` to the address.
 

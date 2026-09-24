@@ -16,7 +16,10 @@ import { Pause, Play } from "lucide-react";
     once only, fired a little inside the viewport so the reader is looking
   - scroll-scrubbed motion is reserved for the immersive moments; everything else
     is triggered once and runs on its own clock
-  - reduced motion keeps the fades and drops every change of position
+  - "reduce motion" softens rather than strips: the scroll-driven moments, the logo
+    strips and the hero keep running (the visitor's own scroll drives most of them),
+    while parallax drift, slide-in offsets and the pointer lean are dropped. Anything
+    that moves on its own can be stopped with the pause control.
 */
 export const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 export const EASE_IN_OUT = [0.77, 0, 0.175, 1] as const;
@@ -115,14 +118,12 @@ export function Item({ children, className = "", as = "div" }: { children: React
 export function CountUp({ value, prefix = "", suffix = "", className = "" }: { value: number; prefix?: string; suffix?: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
-  const reduce = useReducedMotion();
-  const [n, setN] = useState(reduce ? value : 0);
+  const [n, setN] = useState(0);
   useEffect(() => {
-    if (reduce) { setN(value); return; }
     if (!inView) return;
     const c = animate(0, value, { duration: 1.5, ease: EASE_OUT, onUpdate: (v) => setN(Math.round(v)) });
     return () => c.stop();
-  }, [inView, reduce, value]);
+  }, [inView, value]);
   return (
     <span ref={ref} className={`tabular-nums ${className}`} aria-label={`${prefix}${value.toLocaleString("en-AU")}${suffix}`}>
       <span aria-hidden="true">{prefix}{n.toLocaleString("en-AU")}{suffix}</span>
@@ -138,22 +139,21 @@ export function Marquee({ items, speed = 38 }: { items: string[]; speed?: number
     <div className="marquee" role="list" aria-label="Organisations">
       <div className="marquee__track" style={{ animationDuration: `${speed}s` }}>
         <div className="flex">{items.map((t) => <span role="listitem" key={t} className="marquee__item">{t}</span>)}</div>
-        <div className="flex motion-reduce:hidden" aria-hidden="true">{items.map((t) => <span key={t} className="marquee__item">{t}</span>)}</div>
+        <div className="flex" aria-hidden="true">{items.map((t) => <span key={t} className="marquee__item">{t}</span>)}</div>
       </div>
     </div>
   );
 }
 
-/** Cycles the end of a headline. Stops when paused; with reduced motion only the first phrase shows. */
+/** Cycles the end of a headline. Stops when paused; with reduced motion the phrases crossfade in place. */
 export function Rotator({ phrases, interval = 2800 }: { phrases: string[]; interval?: number }) {
-  const reduce = useReducedMotion();
   const paused = useAmbientPaused();
   const [i, setI] = useState(0);
   useEffect(() => {
-    if (reduce || paused) return;
+    if (paused) return;
     const t = setInterval(() => setI((v) => (v + 1) % phrases.length), interval);
     return () => clearInterval(t);
-  }, [reduce, paused, phrases.length, interval]);
+  }, [paused, phrases.length, interval]);
   return (
     <span className="relative grid" style={{ gridTemplateAreas: "'s'" }}>
       {/* the longest phrase, invisible, reserves the space so the layout never jumps */}
@@ -182,11 +182,10 @@ export function Rotator({ phrases, interval = 2800 }: { phrases: string[]; inter
 
 /**
  * The section pins and scrolling down slides the rail in from beyond the right
- * edge. Used for a range or a timeline. Reduced motion turns it into a native
- * swipeable row so every item stays reachable.
+ * edge. Used for a range or a timeline. The visitor's scroll drives it, so it
+ * runs with reduced motion too.
  */
 export function HScroll({ intro, children }: { intro?: ReactNode; children: ReactNode }) {
-  const reduce = useReducedMotion();
   const outer = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const [m, setM] = useState({ dist: 0, start: 0 });
@@ -213,16 +212,6 @@ export function HScroll({ intro, children }: { intro?: ReactNode; children: Reac
 
   const progress = useSectionProgress(outer, ["start start", "end end"]);
   const x = useTransform(progress, [0.04, 0.94], [m.start, -m.dist]);
-
-  if (reduce) {
-    // an ordinary swipeable row; the bottom room leaves space for anything that overlaps the next seam
-    return (
-      <div className="wrap pt-[clamp(72px,9vw,128px)] pb-[clamp(124px,14vw,190px)]">
-        {intro && <div className="mb-10">{intro}</div>}
-        <div className="flex gap-5 overflow-x-auto pb-4 no-scrollbar snap-x snap-proximity">{children}</div>
-      </div>
-    );
-  }
 
   // pacing: about 1.5px of scroll per px of travel, so the rail reads as a drawer, not a flick
   const travel = m.start + m.dist;
@@ -268,12 +257,10 @@ export function useArrive<T extends HTMLElement>() {
 export function ArriveItem({
   progress, i, n, children, className = "",
 }: { progress: MotionValue<number>; i: number; n: number; children: ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
   const s = (i / Math.max(1, n)) * 0.34;
   const e = Math.min(1, s + 0.6);
   const x = useTransform(progress, [s, e], ["64vw", "0vw"], { ease: easeOutFn });
   const opacity = useTransform(progress, [s, s + (e - s) * 0.7], [0, 1]);
-  if (reduce) return <div className={className}>{children}</div>;
   return <motion.div className={className} style={{ x, opacity }}>{children}</motion.div>;
 }
 

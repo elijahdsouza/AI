@@ -1,8 +1,8 @@
-// Photos. Generated with Higgsfield (Nano Banana 2) and served from its CDN.
-// Run `npm run fetch-images` to download them into src/assets/photos/, after
-// which every build uses the local copies (and the single-file build inlines
-// them, so it works offline). Drop a file with the same name into that folder
-// to replace any image with a real photo.
+// Photos. Real UC photos from uncommoncollectiveau.com live in src/assets/ and
+// src/assets/photos/ (speaking, games, industry, cowork); the rest were generated
+// with Higgsfield (Nano Banana 2) and load from its CDN. Run `npm run fetch-images`
+// to download those too, after which every build is fully offline. Drop a file
+// with the same name into src/assets/photos/ to replace any image with your own.
 import groupPhoto from "./assets/table.jpg";
 
 const CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_3DYZO3a1JqlMj1bd9WwaeBKEITS/";
@@ -41,3 +41,5 @@ export function img(key: string): string {
 }
 
 export const group = groupPhoto;
+export { default as crowd } from "./assets/hero-crowd.jpg";
+export { default as logoWhite } from "./assets/uc-logo-white.png";

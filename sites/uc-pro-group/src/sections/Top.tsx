@@ -4,8 +4,8 @@ import { Disc, Head, Section, Cta, Accent } from "../components/ui";
 import {
   CountUp, Marquee, Rotator, HScroll, HCard, In, Item, Magnetic, PauseToggle, useArrive, ArriveItem, useSectionProgress,
 } from "../components/effects";
-import MagneticU from "../components/MagneticU";
-import { group } from "../images";
+import HeroMagnet from "../components/HeroMagnet";
+import { group, crowd, logoWhite } from "../images";
 import { site, nav, hero, stats, logosTop, problem, callout, alternatives } from "../content";
 
 export function Header() {
@@ -18,9 +18,8 @@ export function Header() {
   return (
     <header className={`bar ${scrolled ? "scrolled" : ""}`}>
       <div className="wrap bar__in">
-        <a href="#top" className="flex items-center gap-3 no-underline" aria-label="Uncommon Collective, back to top">
-          <LogoMark />
-          <span className="mono text-[11px] tracking-[.22em] leading-[1.15] c-bone">UNCOMMON<br />COLLECTIVE</span>
+        <a href="#top" className="flex items-center no-underline" aria-label="Uncommon Collective, back to top">
+          <Logo className="h-[30px] lg:h-[34px]" />
         </a>
         <nav aria-label="Sections" className="hidden lg:flex gap-7">
           {nav.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}
@@ -31,14 +30,9 @@ export function Header() {
   );
 }
 
-/** Placeholder mark traced from the logo screenshot. Swap for the real SVG. */
-export function LogoMark({ size = 30 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
-      <path d="M11 8v13a9 9 0 0 0 18 0V8" stroke="#f3efe6" strokeWidth="5" strokeLinecap="round" />
-      <path d="M11 8v4M29 8v4" stroke="#bbab69" strokeWidth="5" strokeLinecap="round" />
-    </svg>
-  );
+/** The Uncommon Collective logo (magnet mark and wordmark), white, from the live site. */
+export function Logo({ className = "" }: { className?: string }) {
+  return <img src={logoWhite} alt="" width={534} height={147} className={`w-auto ${className}`} />;
 }
 
 function useCountdown(iso: string) {
@@ -65,10 +59,11 @@ export function Hero() {
   const midFade = useTransform(scrollYProgress, [0, 0.8], reduce ? [1, 1] : [1, 0.35]);
   return (
     <section ref={ref} id="top" className="g g-black grain relative overflow-hidden">
-      {/* far plane: the real room, kept dim */}
-      <motion.div aria-hidden="true" style={{ y: farY, backgroundImage: `url(${group})` }}
-        className="absolute inset-[-8%_0_-8%_0] bg-cover bg-center opacity-[.13] grayscale-[.3]" />
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: "radial-gradient(120% 90% at 75% 45%, rgba(14,13,11,.2), rgba(14,13,11,.92) 60%), linear-gradient(to bottom, rgba(14,13,11,.5), rgba(14,13,11,1))" }} />
+      {/* far plane: a real UC night from the live site, behind the magnet */}
+      <motion.div aria-hidden="true" style={{ y: farY }} className="absolute inset-y-[-8%] right-0 w-full lg:w-[70%]">
+        <img src={crowd} alt="" className="w-full h-full object-cover object-[38%_45%] opacity-[.62]" />
+      </motion.div>
+      <div aria-hidden="true" className="hero-shade absolute inset-0" />
 
       <div className="relative wrap grid lg:grid-cols-[1.25fr_1fr] items-center gap-6 min-h-[100svh] pt-[110px] pb-10">
         <In className="relative z-10 max-w-[720px]" stagger={0.08}>
@@ -95,7 +90,7 @@ export function Hero() {
         </In>
         {/* middle plane: the magnetic field */}
         <motion.div style={{ y: midY, opacity: midFade }} className="relative h-[46vh] min-h-[320px] lg:h-[74vh] -mx-[var(--gutter)] lg:mx-0">
-          <MagneticU className="absolute inset-0 w-full h-full" />
+          <HeroMagnet className="absolute inset-0" />
           <PauseToggle className="absolute bottom-3 right-4 lg:right-0" />
         </motion.div>
       </div>

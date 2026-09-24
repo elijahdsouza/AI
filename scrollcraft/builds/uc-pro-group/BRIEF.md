@@ -440,3 +440,13 @@ no horizontal overflow, no page errors. Peak checked at nine progress points on
 desktop and phone. Contrast measured on the render. **Not covered:** a real
 phone, and the 15 Higgsfield photos, whose CDN this environment cannot reach
 (they show as dark placeholders in the screenshots and load in a normal browser).
+
+---
+
+# v5 changes (user feedback, 2026-09-24)
+
+- "Please just make sure all of the animations and transitions that affects work on a downloaded version of a HTML page first". Cause found: the user's desktop reports `prefers-reduced-motion: reduce` (Windows "Animation effects" off), which switched the page to its static version. **Decision:** reduce motion now softens rather than strips. Scroll-driven moments, logo strips, counters and the hero keep running; parallax, slide-in offsets, the pointer lean and the peak's photo push-in are dropped; the pause control stops all ambient motion.
+- Real logo (tilted magnet mark plus wordmark) from the live site replaces the placeholder U everywhere. The mark was rebuilt as geometry (`src/components/ucMark.ts`, 89% pixel overlap).
+- Hero: "a u-shaped Lottie file magnet ... interactive and the u-shaped logo resembles our actual logo". Built as `src/assets/uc-magnet.json` (draw-on 0-60, seamless field loop 60-180), verified in the Skottie player and in lottie-web; it leans toward the cursor and its field speeds up near the poles, over the existing dot lattice. Background: a real UC night cropped from the live site.
+- Peak: the window is now the logo's own outline, and the view flies into its band (vector `clip-path`, exponential zoom) instead of a generic U growing. Tell-someone sentence updated: "it's the site where the sentence about not building alone lights up, and then you fly through the gold magnet into a room full of real founders."
+- Accent words: gold text on every ground (dark on the gold one) instead of the highlighter stripe, by the user's choice; gold on white is 2.3:1, used only for the italic word inside large headings.
