@@ -256,14 +256,15 @@ export function Compare() {
     <Section id="compare" ground="grey">
       <div className="wrap">
         <Head center eyebrow={compare.eyebrow} title={compare.h2} lede={compare.lede} />
-        <In><Item className="mt-14 overflow-x-auto rounded-[20px] border b-line bg-white no-scrollbar">
+        <In><Item className="mt-14 relative">
+          <div className="overflow-x-auto rounded-[20px] bg-white no-scrollbar">
           <table className="w-full min-w-[900px] border-collapse text-left">
             <caption className="sr-only">UC Pro Group compared with accelerators, studios, coaches and free online groups</caption>
             <thead>
               <tr>
                 <th className={`${pinned} text-[12px] font-medium fg2 align-bottom`}>What you actually get</th>
                 {compare.columns.map((c, i) => (
-                  <th key={c.name} className={`p-5 align-bottom ${i === 0 ? "g g-gold" : ""}`}>
+                  <th key={c.name} className={`p-5 align-bottom ${i === 0 ? "g g-gold border-b border-b-white" : ""}`}>
                     <span className="block serif font-bold text-[1rem]">{c.name}</span>
                     <span className={`block text-[11.5px] mt-1 ${i === 0 ? "opacity-90" : "fg2"} font-normal`}>{c.sub}</span>
                   </th>
@@ -283,6 +284,12 @@ export function Compare() {
               ))}
             </tbody>
           </table>
+          </div>
+          {/* The frame is drawn above the table. On phones with fractional pixel ratios the
+              scrolling cells show through as a one-pixel sliver along the pinned column's left
+              edge (and the gold header's white foot does the same job at the header seam);
+              the frame's inner white edge covers it. Outward shadows on table cells aren't painted. */}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[3] rounded-[20px] shadow-[inset_3px_0_0_#fff,inset_0_0_0_1px_var(--line)]" />
         </Item></In>
         <p className="mt-4 text-center"><span className="tbc">{compare.tbc}</span></p>
       </div>
