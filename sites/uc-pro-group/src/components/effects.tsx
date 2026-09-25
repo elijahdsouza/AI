@@ -3,7 +3,7 @@ import {
   type ReactNode, type RefObject,
 } from "react";
 import {
-  motion, useScroll, useTransform, useInView, animate, useReducedMotion, AnimatePresence,
+  motion, useScroll, useTransform, useInView, animate, useReducedMotion,
   useMotionValue, useSpring, cubicBezier, type MotionValue,
 } from "motion/react";
 import { Pause, Play } from "lucide-react";
@@ -63,7 +63,7 @@ export function useAmbientPaused() {
 export function isAmbientPaused() { return ambientPaused; }
 export function subscribeAmbient(l: () => void) { ambientListeners.add(l); return () => { ambientListeners.delete(l); }; }
 
-/** Pauses the hero field, the rotating headline and the logo strips. */
+/** Pauses the hero field, the typed headlines and the logo strips. */
 export function PauseToggle({ className = "" }: { className?: string }) {
   const paused = useAmbientPaused();
   return (
@@ -145,35 +145,46 @@ export function Marquee({ items, speed = 38 }: { items: string[]; speed?: number
   );
 }
 
-/** Cycles the end of a headline. Stops when paused; with reduced motion the phrases crossfade in place. */
-export function Rotator({ phrases, interval = 2800 }: { phrases: string[]; interval?: number }) {
+/**
+ * Types the end of a headline, holds it, backs it out and types the next.
+ * The first phrase is already in place, so a screenshot, a link preview or a slow
+ * connection reads a complete headline. The longest phrase, invisible, reserves
+ * the space so the line never reflows mid-cycle. Screen readers get `still`
+ * instead of the letters. Stops (on the whole current phrase) when paused or
+ * off screen.
+ */
+export function Typewriter({ phrases, still, className = "accent" }: { phrases: string[]; still: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { amount: 0 });
   const paused = useAmbientPaused();
   const [i, setI] = useState(0);
+  const [n, setN] = useState(phrases[0].length);
+  const [phase, setPhase] = useState<"hold" | "back" | "type">("hold");
+  const running = inView && !paused;
   useEffect(() => {
-    if (paused) return;
-    const t = setInterval(() => setI((v) => (v + 1) % phrases.length), interval);
-    return () => clearInterval(t);
-  }, [paused, phrases.length, interval]);
+    if (!running) { setN(phrases[i].length); setPhase("hold"); return; }
+    let t: number;
+    if (phase === "hold") t = window.setTimeout(() => setPhase("back"), 2600);
+    else if (phase === "back") {
+      t = n > 0
+        ? window.setTimeout(() => setN(n - 1), 26)
+        : window.setTimeout(() => { setI((i + 1) % phrases.length); setPhase("type"); }, 320);
+    } else {
+      // a little unevenness per letter reads as typing rather than a ticker
+      t = n < phrases[i].length
+        ? window.setTimeout(() => setN(n + 1), 52 + ((n * 37) % 29))
+        : window.setTimeout(() => setPhase("hold"), 0);
+    }
+    return () => window.clearTimeout(t);
+  }, [running, phase, n, i, phrases]);
+  const longest = phrases.reduce((a, b) => (b.length > a.length ? b : a));
   return (
-    <span className="relative grid" style={{ gridTemplateAreas: "'s'" }}>
-      {/* the longest phrase, invisible, reserves the space so the layout never jumps */}
-      <span className="invisible" style={{ gridArea: "s" }} aria-hidden="true">
-        {phrases.reduce((a, b) => (b.length > a.length ? b : a))}
-      </span>
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.em
-          key={i}
-          aria-hidden="true"
-          className="accent"
-          style={{ gridArea: "s" }}
-          initial={{ y: "0.5em", opacity: 0, filter: "blur(6px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.6, ease: EASE_OUT } }}
-          exit={{ y: "-0.3em", opacity: 0, filter: "blur(4px)", transition: { duration: 0.32, ease: EASE_OUT } }}
-        >
-          {phrases[i]}
-        </motion.em>
-      </AnimatePresence>
-      <span className="sr-only">{phrases[0]}</span>
+    <span ref={ref} className="grid" style={{ gridTemplateAreas: "'s'" }}>
+      <em className={`${className} invisible`} style={{ gridArea: "s" }} aria-hidden="true">{longest}</em>
+      <em className={`${className} tw`} style={{ gridArea: "s" }} data-busy={phase !== "hold" || undefined} aria-hidden="true">
+        {phrases[i].slice(0, n)}<span className="tw-caret" />
+      </em>
+      <span className="sr-only">{still}</span>
     </span>
   );
 }

@@ -450,3 +450,18 @@ phone, and the 15 Higgsfield photos, whose CDN this environment cannot reach
 - Hero: "a u-shaped Lottie file magnet ... interactive and the u-shaped logo resembles our actual logo". Built as `src/assets/uc-magnet.json` (draw-on 0-60, seamless field loop 60-180), verified in the Skottie player and in lottie-web; it leans toward the cursor and its field speeds up near the poles, over the existing dot lattice. Background: a real UC night cropped from the live site.
 - Peak: the window is now the logo's own outline, and the view flies into its band (vector `clip-path`, exponential zoom) instead of a generic U growing. Tell-someone sentence updated: "it's the site where the sentence about not building alone lights up, and then you fly through the gold magnet into a room full of real founders."
 - Accent words: gold text on every ground (dark on the gold one) instead of the highlighter stripe, by the user's choice; gold on white is 2.3:1, used only for the italic word inside large headings.
+
+---
+
+# v6 changes (annotated screenshots and messaging handover v1.4, 2026-09-25)
+
+The user's grey-box annotations came first, then the handover document's locked copy.
+
+- Copy: hero eyebrow "Meet Driven Melbourne Builders", the handover's locked sub-headline, countdown to 29 October 2026, "Across Uncommon Collective" over the stats, the new problem heading ("Your friends cheer..."), "Effort got you here...", the belief line "Every builder builds better...", 50 founding seats with the rate locked for 12 months (not for life), and the banned-phrase list applied (good to great, third space, curated, exclusive, altitude and so on are gone).
+- Structure: three gold callouts now sit across seams (the old way is broken / but it doesn't have to stay that way / that's why we created the UC Pro Group). The risk section became a four-part guarantee block under the pricing cards (first event free, 14-day trial, 30-day money-back guarantee, we'll tell you if it's not a fit). New order at the back: How, Proof (now grey), Research, Story, Standard, Futures. Proof and Futures were collapsed: one row of reviews and three results side by side, each flying in from the right.
+- Motion: both rotating headlines (hero, Pro Group) are now typewriters with a reserved slot, a zero-width caret, a whole-sentence screen-reader version and a pause. They keep running under reduced motion, consistent with v5.
+- Hero magnet: raised 18vh on desktop and drawn at 82% of the logo's stroke weight.
+- Comparison: Art of Mondays and Entrepreneurship Dinner Club added (attendees organise their own events in WhatsApp groups; UC organises the dinners), seven columns in a wider frame.
+- Research: quotes from Steven Bartlett, Daniel Priestley and Patrick Bet-David, with initials in place of headshots until licensed photos exist.
+- The v4 ban on em dashes in visible copy is lifted: the handover's sentence-rhythm rule prefers em dashes to parentheses.
+- Not applied, flagged to the user: the handover's pricing restructure (Momentum and Inner Circle only), because the prices it depends on are still open.

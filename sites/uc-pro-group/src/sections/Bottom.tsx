@@ -1,30 +1,10 @@
 import { ChevronDown, Check, X } from "lucide-react";
-import { Disc, Head, Section, Cta, Accent, Copy } from "../components/ui";
+import { Head, Section, Cta, Accent, Copy } from "../components/ui";
 import { In, Item, useArrive, ArriveItem } from "../components/effects";
 import { Logo } from "./Top";
 import { DriftPhoto } from "./Middle";
-import { img } from "../images";
-import { site, risk, how, research, proof, standard, story, futures, faq, close, footer } from "../content";
-
-/** Four promises as plain type on the blue, split by hairlines rather than boxed in cards. */
-export function Risk() {
-  return (
-    <Section id="risk" ground="blue">
-      <div className="wrap">
-        <Head center title={risk.h2} />
-        <In className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-y-10" stagger={0.06}>
-          {risk.points.map((p, i) => (
-            <Item key={p.title} className={`sm:px-6 ${i > 0 ? "lg:border-l b-line" : ""} ${i % 2 === 1 ? "sm:border-l lg:border-l" : ""}`}>
-              <Disc name={p.icon} />
-              <h3 className="h3 mt-6 !text-[1.12rem]">{p.title}</h3>
-              <p className="body !text-[.92rem]">{p.body}</p>
-            </Item>
-          ))}
-        </In>
-      </div>
-    </Section>
-  );
-}
+import { img, localPhoto } from "../images";
+import { site, how, research, proof, standard, story, futures, faq, close, footer } from "../content";
 
 /** Steps read top to bottom beside the heading, numbered because the order matters here. */
 export function How() {
@@ -51,6 +31,20 @@ export function How() {
   );
 }
 
+/** Initials in a gold ring, or a headshot if one is dropped into src/assets/photos/ under `photo`. */
+function Avatar({ initials, photo, size }: { initials: string; photo: string; size: number }) {
+  const src = localPhoto(photo);
+  const box = { width: size, height: size };
+  return src
+    ? <img src={src} alt="" className="shrink-0 rounded-full object-cover border border-[rgba(var(--gold-rgb),.6)]" style={box} />
+    : (
+      <span aria-hidden="true" style={{ ...box, fontSize: size * (initials.length > 2 ? 0.3 : 0.36) }}
+        className="shrink-0 grid place-items-center rounded-full border border-[rgba(var(--gold-rgb),.6)] bg-[rgba(var(--gold-rgb),.12)] serif font-bold c-gold tracking-[.02em]">
+        {initials}
+      </span>
+    );
+}
+
 /** One quote leads; the other two sit beside it. The figures follow on a hairline. */
 export function Research() {
   const [lead, ...rest] = research.quotes;
@@ -61,13 +55,19 @@ export function Research() {
         <In className="mt-14 grid lg:grid-cols-[1.35fr_1fr] gap-5" stagger={0.08}>
           <Item as="figure" className="card p-9 md:p-12 m-0 flex flex-col">
             <blockquote className="m-0 serif text-[clamp(1.6rem,2.6vw,2.2rem)] leading-[1.25]">“{lead.q}”</blockquote>
-            <figcaption className="mt-auto pt-8 text-[13px]"><b className="font-semibold">{lead.who}</b><span className="fg2"> · {lead.role}</span></figcaption>
+            <figcaption className="mt-auto pt-9 flex items-center gap-4 text-[13px]">
+              <Avatar initials={lead.initials} photo={lead.photo} size={56} />
+              <span><b className="font-semibold block text-[14px]">{lead.who}</b><span className="fg2">{lead.role}</span></span>
+            </figcaption>
           </Item>
           <div className="grid gap-5">
             {rest.map((q) => (
               <Item as="figure" key={q.who} className="card p-8 m-0">
                 <blockquote className="m-0 serif text-[1.12rem] leading-snug">“{q.q}”</blockquote>
-                <figcaption className="pt-5 text-[13px]"><b className="font-semibold">{q.who}</b><span className="fg2"> · {q.role}</span></figcaption>
+                <figcaption className="pt-6 flex items-center gap-3.5 text-[13px]">
+                  <Avatar initials={q.initials} photo={q.photo} size={44} />
+                  <span><b className="font-semibold block">{q.who}</b><span className="fg2">{q.role}</span></span>
+                </figcaption>
               </Item>
             ))}
           </div>
@@ -86,46 +86,48 @@ export function Research() {
   );
 }
 
-/** The reviews fly in from beyond the right edge beside the heading; the results read as rows. */
+// On phones the rows below become swipe rails; from desktop up they're plain grids.
+const rail = "flex lg:grid gap-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory no-scrollbar -mx-[var(--gutter)] px-[var(--gutter)] scroll-px-[var(--gutter)] lg:mx-0 lg:px-0";
+
+/** Compact: the reviews arrive in one row from beyond the right edge, then the results do the same. */
 export function Proof() {
-  const { ref, progress } = useArrive<HTMLDivElement>();
+  const { ref: quotesRef, progress: quotesIn } = useArrive<HTMLDivElement>();
+  const { ref: casesRef, progress: casesIn } = useArrive<HTMLDivElement>();
   return (
-    <section id="proof" className="g g-white sec overflow-x-clip">
-      <div className="wrap grid lg:grid-cols-[minmax(300px,400px)_1fr] gap-10 lg:gap-14 items-start">
-        <div className="lg:sticky lg:top-28">
-          <Head title={proof.h2} lede={proof.lede} className="[&_.h2]:text-[clamp(1.9rem,2.8vw,2.6rem)]" />
-        </div>
-        <div ref={ref} className="grid md:grid-cols-2 gap-5">
+    <section id="proof" className="g g-grey sec overflow-x-clip">
+      <div className="wrap">
+        <Head title={proof.h2} lede={proof.lede} className="max-w-[780px] [&_.h2]:text-[clamp(1.9rem,3.2vw,2.8rem)]" />
+        <div ref={quotesRef} className={`mt-12 lg:grid-cols-4 ${rail}`}>
           {proof.quotes.map((q, i) => (
-            <ArriveItem key={q.role} progress={progress} i={i} n={proof.quotes.length}>
-              <figure className="card p-8 m-0 h-full flex flex-col">
+            <ArriveItem key={q.role} progress={quotesIn} i={i} n={proof.quotes.length} className="shrink-0 w-[80vw] sm:w-[46vw] lg:w-auto snap-start">
+              <figure className="card p-6 m-0 h-full flex flex-col">
                 <span className="block w-[22px] h-[2px] bg-gold" aria-hidden="true" />
-                <blockquote className="m-0 mt-5 serif text-[1.2rem] leading-[1.45]">“{q.q}”</blockquote>
-                <figcaption className="mt-auto pt-6 flex flex-wrap items-center justify-between gap-3">
-                  <span className="text-[13px] fg2">{q.role}</span>
-                  <span className="mono text-[10px] tracking-[.12em] uppercase px-3 py-1.5 rounded-full border b-line whitespace-nowrap">{q.tag}</span>
+                <blockquote className="m-0 mt-4 serif text-[1.04rem] leading-[1.5]">“{q.q}”</blockquote>
+                <figcaption className="mt-auto pt-5">
+                  <span className="block text-[12.5px] leading-snug fg2">{q.role}</span>
+                  <span className="inline-block mt-3 mono text-[9.5px] tracking-[.12em] uppercase px-2.5 py-1 rounded-full border b-line">{q.tag}</span>
                 </figcaption>
               </figure>
             </ArriveItem>
           ))}
         </div>
-      </div>
 
-      <div className="wrap mt-24">
-        <In><Item as="h3" className="h2 text-center !text-[clamp(1.7rem,3vw,2.4rem)]"><Accent text={proof.casesTitle} /></Item></In>
-        <In className="mt-10 border-t b-line" stagger={0.08}>
-          {proof.cases.map((c) => (
-            <Item as="article" key={c.who} className="grid lg:grid-cols-[220px_1.1fr_1fr] gap-6 lg:gap-10 py-9 border-b b-line items-start">
-              <p className="mono text-[11px] tracking-[.14em] uppercase fg2 m-0 pt-1">{c.who}</p>
-              <div className="grid grid-cols-3 gap-4">
-                {c.stats.map(([v, l]) => (
-                  <div key={l}><p className="serif font-bold text-[1.7rem] leading-none m-0">{v}</p><p className="mt-2 text-[11.5px] leading-snug fg2">{l}</p></div>
-                ))}
-              </div>
-              <p className="serif italic text-[1.08rem] leading-relaxed m-0">“{c.q}”</p>
-            </Item>
+        <In className="mt-20"><Item as="h3" className="h2 !text-[clamp(1.6rem,2.6vw,2.2rem)]"><Accent text={proof.casesTitle} /></Item></In>
+        <div ref={casesRef} className={`mt-8 lg:grid-cols-3 ${rail}`}>
+          {proof.cases.map((c, i) => (
+            <ArriveItem key={c.who} progress={casesIn} i={i} n={proof.cases.length} className="shrink-0 w-[84vw] sm:w-[60vw] lg:w-auto snap-start">
+              <article className="card p-6 md:p-7 h-full flex flex-col">
+                <p className="mono text-[10.5px] tracking-[.14em] uppercase fg2 m-0">{c.who}</p>
+                <div className="mt-5 grid grid-cols-3 gap-3">
+                  {c.stats.map(([v, l]) => (
+                    <div key={l}><p className="serif font-bold text-[1.4rem] leading-none m-0 whitespace-nowrap">{v}</p><p className="mt-1.5 text-[11px] leading-snug fg2 m-0">{l}</p></div>
+                  ))}
+                </div>
+                <p className="mt-auto pt-5 serif italic text-[.98rem] leading-relaxed m-0"><span className="block border-t b-line pt-5">“{c.q}”</span></p>
+              </article>
+            </ArriveItem>
           ))}
-        </In>
+        </div>
       </div>
     </section>
   );
@@ -141,9 +143,10 @@ export function Standard() {
             <h3 className="h3">{standard.forTitle}</h3>
             <ul className="mt-5 space-y-3.5">{standard.forItems.map((i) => <li key={i} className="flex gap-3 text-[14.5px] leading-snug"><Check size={18} className="check" />{i}</li>)}</ul>
           </Item>
-          <Item className="card p-8">
+          <Item className="card p-8 flex flex-col">
             <h3 className="h3">{standard.notTitle}</h3>
             <ul className="mt-5 space-y-3.5">{standard.notItems.map((i) => <li key={i} className="flex gap-3 text-[14.5px] leading-snug fg2"><X size={18} className="shrink-0 mt-[3px] text-[#9a4a42]" />{i}</li>)}</ul>
+            <p className="mt-auto pt-6 text-[13.5px] leading-snug"><a className="link" href={site.freeUrl}>{standard.notFoot}</a></p>
           </Item>
         </In>
       </div>
@@ -175,27 +178,35 @@ export function Story() {
   );
 }
 
+/** Compact: the heading holds on the left while the two futures slide in from the right. */
 export function Futures() {
+  const { ref, progress } = useArrive<HTMLDivElement>();
   return (
-    <Section id="futures" ground="blue">
-      <div className="wrap">
-        <Head center title={futures.h2} lede={futures.sub} />
-        <In className="mt-14 grid md:grid-cols-2 gap-5 max-w-[1040px] mx-auto" stagger={0.12}>
-          <Item className="rounded-[20px] p-8 border border-white/15 bg-black/15">
-            <h3 className="h3">{futures.alone.title}</h3>
-            <ul className="mt-5 space-y-3">{futures.alone.items.map((i) => <li key={i} className="text-[14.5px] leading-snug fg2">{i}</li>)}</ul>
+    <Section id="futures" ground="blue" className="overflow-x-clip !py-[clamp(72px,8vw,112px)]">
+      <div className="wrap grid lg:grid-cols-[minmax(280px,380px)_1fr] gap-10 lg:gap-14 items-center">
+        <Head title={futures.h2} lede={futures.sub} className="[&_.h2]:text-[clamp(1.9rem,3vw,2.6rem)]" />
+        <div ref={ref} className="grid sm:grid-cols-2 gap-4">
+          <ArriveItem progress={progress} i={0} n={2}>
+            <div className="rounded-[18px] p-6 md:p-7 h-full border border-white/15 bg-black/15">
+              <h3 className="h3 !text-[1.12rem]">{futures.alone.title}</h3>
+              <ul className="mt-4 space-y-2.5">{futures.alone.items.map((i) => <li key={i} className="text-[14px] leading-snug fg2">{i}</li>)}</ul>
+            </div>
+          </ArriveItem>
+          <ArriveItem progress={progress} i={1} n={2}>
+            <div className="rounded-[18px] p-6 md:p-7 h-full border border-[rgba(var(--gold-rgb),.95)] bg-white/10">
+              <h3 className="h3 !text-[1.12rem]">{futures.room.title}</h3>
+              <ul className="mt-4 space-y-2.5">{futures.room.items.map((i) => <li key={i} className="text-[14px] leading-snug">{i}</li>)}</ul>
+            </div>
+          </ArriveItem>
+        </div>
+      </div>
+      <div className="wrap mt-12 lg:mt-14">
+        <In className="pt-10 border-t b-line flex flex-col lg:flex-row items-center justify-between gap-7 text-center lg:text-left" stagger={0.07}>
+          <Item as="p" className="serif text-[clamp(1.1rem,1.6vw,1.35rem)] leading-snug max-w-[680px] m-0">
+            {futures.closeLead}:{" "}
+            <span className="italic font-bold c-acc">{futures.closeWords.join(" · ")}</span>
           </Item>
-          <Item className="rounded-[20px] p-8 border border-[rgba(var(--gold-rgb),.95)] bg-white/10">
-            <h3 className="h3">{futures.room.title}</h3>
-            <ul className="mt-5 space-y-3">{futures.room.items.map((i) => <li key={i} className="text-[14.5px] leading-snug">{i}</li>)}</ul>
-          </Item>
-        </In>
-        <In className="mt-16 text-center" stagger={0.07}>
-          <Item as="p" className="serif text-[clamp(1.25rem,2vw,1.6rem)] max-w-[720px] mx-auto leading-snug">{futures.closeLead}:</Item>
-          <Item as="p" className="mt-5 flex flex-wrap justify-center gap-x-3 gap-y-2 serif font-bold italic c-acc text-[clamp(1.3rem,2.4vw,2rem)]">
-            {futures.closeWords.map((w, i) => <span key={w}>{w}{i < futures.closeWords.length - 1 && <span aria-hidden="true" className="text-white/40 not-italic font-normal"> · </span>}</span>)}
-          </Item>
-          <Item className="mt-10"><Cta /></Item>
+          <Item className="shrink-0"><Cta /></Item>
         </In>
       </div>
     </Section>
@@ -231,15 +242,15 @@ export function Faq() {
 export function Close() {
   return (
     <Section id="close" ground="black" className="grain overflow-hidden">
-      <div className="wrap grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
+      <div className="wrap grid lg:grid-cols-[1.12fr_1fr] gap-10 lg:gap-14 items-center">
         <div>
           <Head title={close.h2} className="[&_.h2]:text-[clamp(2.4rem,5vw,4rem)]" />
           <In className="mt-6" stagger={0.08}>
             <Item as="p" className="serif italic text-[clamp(1.3rem,2.2vw,1.8rem)] c-gold m-0">{close.line1}</Item>
             <Item as="p" className="lede !mt-4 max-w-[46ch]">{close.line2}</Item>
-            <Item className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <Item className="mt-9 flex flex-wrap items-center gap-3">
               <Cta />
-              <a className="link" href={site.dinnerUrl}>{close.dinner}</a>
+              <a className="btn btn-ghost" href={site.walkUrl}>{site.walk}</a>
             </Item>
             <Item as="p" className="mt-7 mono text-[11px] tracking-[.14em] uppercase fg2">{close.seats}</Item>
           </In>
@@ -253,13 +264,16 @@ export function Close() {
 export function Footer() {
   return (
     <footer className="g g-black border-t b-line">
-      <div className="wrap py-14 grid md:grid-cols-3 gap-10 text-[13px]">
+      <div className="wrap pt-14">
+        <p className="serif italic text-[clamp(1.1rem,1.8vw,1.4rem)] leading-snug max-w-[780px] c-bone m-0">{footer.mission}</p>
+      </div>
+      <div className="wrap pt-10 pb-14 grid md:grid-cols-3 gap-10 text-[13px]">
         <div>
           <Logo className="h-[34px]" /><span className="sr-only">{footer.org}</span>
           <p className="mt-3 fg2">{footer.place}<br /><a className="link fg2" href={`mailto:${site.email}`}>{site.email}</a></p>
         </div>
         <div>
-          <p>{footer.noteLead} <a className="link c-gold" href={site.waitlistUrl}>{footer.noteLink}</a></p>
+          <p>{footer.noteLead} <a className="link c-gold" href={site.freeUrl}>{footer.noteLink}</a></p>
           <p className="mt-2 fg2">{footer.noteBody}</p>
           <p className="mt-4 flex gap-5">{footer.links.map((l) => <a key={l} className="link fg2" href="#">{l}</a>)}</p>
         </div>

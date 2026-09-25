@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useTransform, useReducedMotion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { Disc, Head, Section, Cta, Accent } from "../components/ui";
 import {
-  CountUp, Marquee, Rotator, HScroll, HCard, In, Item, Magnetic, PauseToggle, useArrive, ArriveItem, useSectionProgress,
+  CountUp, Marquee, Typewriter, HScroll, HCard, In, Item, Magnetic, PauseToggle, useArrive, ArriveItem, useSectionProgress,
 } from "../components/effects";
 import HeroMagnet from "../components/HeroMagnet";
 import { group, crowd, logoWhite } from "../images";
-import { site, nav, hero, stats, logosTop, problem, callout, alternatives } from "../content";
+import { site, nav, hero, statsTitle, stats, logosTop, problem, alternatives } from "../content";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -71,14 +72,19 @@ export function Hero() {
           <Item as="p" className="eyebrow">{hero.eyebrow}</Item>
           <Item as="h1" className="h1">
             {hero.stem}{" "}
-            <Rotator phrases={hero.rotating} />
+            <Typewriter phrases={hero.rotating} still={hero.rotating[0]} />
           </Item>
-          <Item as="p" className="lede text-[1.08rem]">{hero.sub}</Item>
-          <Item className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <Item as="p" className="lede text-[1.04rem]">{hero.sub}</Item>
+          <Item className="mt-9 flex flex-wrap items-center gap-3">
             <Magnetic><Cta /></Magnetic>
-            <a className="link" href="#pricing">{hero.secondary}</a>
+            <a className="btn btn-ghost" href={site.walkUrl}>{site.walk}</a>
           </Item>
-          <Item as="p" className="mt-5 text-sm fg2"><a className="link fg2" href={site.freeUrl}>{hero.freeLink}</a></Item>
+          <Item className="mt-6 flex flex-col items-start gap-2 text-sm">
+            <a className="link inline-flex items-center gap-1.5" href="#pricing">{hero.plans}<ArrowRight size={14} aria-hidden="true" /></a>
+            <a className="link fg2 !font-normal" href={site.freeUrl}>
+              {hero.free.before}<b className="font-semibold fg">{hero.free.bold}</b>{hero.free.after}
+            </a>
+          </Item>
           <Item className="mt-9 pt-7 border-t b-line flex items-center gap-4">
             <div className="flex">
               {faces.map((p, i) => (
@@ -89,8 +95,8 @@ export function Hero() {
             <p className="text-[13px] leading-snug fg2 max-w-[300px]">{hero.proof}</p>
           </Item>
         </In>
-        {/* middle plane: the magnetic field */}
-        <motion.div style={{ y: midY, opacity: midFade }} className="relative h-[46vh] min-h-[320px] lg:h-[74vh] -mx-[var(--gutter)] lg:mx-0">
+        {/* middle plane: the magnetic field, sitting high on desktop so the mark meets the headline */}
+        <motion.div style={{ y: midY, opacity: midFade }} className="relative h-[46vh] min-h-[320px] lg:h-[74vh] -mx-[var(--gutter)] lg:mx-0 lg:-translate-y-[18vh]">
           <HeroMagnet className="absolute inset-0" />
           <PauseToggle className="absolute bottom-3 right-4 lg:right-0" />
         </motion.div>
@@ -115,10 +121,9 @@ export function Hero() {
       <div className="relative border-t b-line">
         <In className="wrap grid grid-cols-2 md:grid-cols-5" stagger={0.05}>
           {hero.benefits.map((b, i) => (
-            <Item key={b.title} className={`py-7 pr-4 ${i > 0 ? "md:pl-6 md:border-l b-line" : ""}`}>
+            <Item key={b.title} className={`py-6 pr-4 flex items-center gap-3.5 ${i > 0 ? "md:pl-6 md:border-l b-line" : ""} ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}>
               <Disc name={b.icon} className="!w-10 !h-10" />
-              <p className="mt-4 serif font-bold text-[1.02rem]">{b.title}</p>
-              <p className="mt-1 text-[13px] leading-snug fg2">{b.body}</p>
+              <p className="serif font-bold text-[1rem] leading-snug m-0">{b.title}</p>
             </Item>
           ))}
         </In>
@@ -130,7 +135,8 @@ export function Hero() {
 export function Stats() {
   return (
     <Section ground="black" tight className="border-t b-line grain">
-      <In className="wrap grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6" stagger={0.07}>
+      <div className="wrap"><p className="eyebrow !mb-0">{statsTitle}</p></div>
+      <In className="wrap mt-9 grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6" stagger={0.07}>
         {stats.map((s) => (
           <Item key={s.label}>
             <CountUp className="block serif font-bold text-[clamp(2.4rem,4.5vw,3.6rem)] leading-none c-gold" value={s.value} prefix={s.prefix} suffix={s.suffix} />
@@ -156,7 +162,7 @@ export function LogosTop() {
 export function Problem() {
   return (
     <section id="problem" className="g g-white">
-      <HScroll intro={<Head title={problem.h2} className="max-w-[760px]" />}>
+      <HScroll intro={<Head eyebrow={problem.eyebrow} title={problem.h2} className="max-w-[780px]" />}>
         {problem.points.map((p, i) => (
           <HCard key={p.title} width={380} first={i === 0}>
             <article className="card p-8 h-full min-h-[300px] flex flex-col">
@@ -171,13 +177,19 @@ export function Problem() {
   );
 }
 
-/** Sits across the seam between the problem and the alternatives. */
-export function Callout() {
+/**
+ * A gold statement that sits across the seam between two sections, half over each.
+ * The section after it carries extra top padding to make room.
+ */
+export function Callout({ text, sub }: { text: string; sub?: string }) {
   return (
     <div className="relative z-20 h-0">
       <div className="wrap">
-        <div className="g g-gold -translate-y-1/2 rounded-[22px] px-8 py-9 md:px-14 md:py-12 text-center shadow-[0_30px_80px_-30px_rgba(60,48,12,.55)]">
-          <In><Item as="p" className="serif font-bold text-[clamp(1.5rem,3vw,2.4rem)] leading-tight text-balance m-0"><Accent text={callout} /></Item></In>
+        <div className="g g-gold -translate-y-1/2 rounded-[22px] px-7 py-9 md:px-14 md:py-12 text-center shadow-[0_30px_80px_-30px_rgba(60,48,12,.55)]">
+          <In stagger={0.1}>
+            <Item as="p" className="serif font-bold text-[clamp(1.5rem,3vw,2.4rem)] leading-tight text-balance m-0"><Accent text={text} /></Item>
+            {sub && <Item as="p" className="mt-3 text-[clamp(.98rem,1.3vw,1.1rem)] leading-snug fg2 font-normal m-0 text-balance">{sub}</Item>}
+          </In>
         </div>
       </div>
     </div>
@@ -187,9 +199,9 @@ export function Callout() {
 /** Arrival: the options fly in from beyond the right edge as you scroll, no pin. */
 export function Alternatives() {
   const { ref, progress } = useArrive<HTMLDivElement>();
-  const n = alternatives.cards.length + 1;
+  const n = alternatives.cards.length;
   return (
-    <section id="alternatives" className="g g-grey overflow-x-clip pt-[150px] md:pt-[180px] pb-[clamp(80px,11vw,150px)]">
+    <section id="alternatives" className="g g-grey overflow-x-clip pt-[150px] md:pt-[180px] pb-[clamp(170px,16vw,230px)]">
       <div className="wrap grid lg:grid-cols-[minmax(300px,420px)_1fr] gap-10 lg:gap-14 items-start">
         <In className="lg:sticky lg:top-28">
           <Item as="h2" className="h2 !text-[clamp(1.7rem,2.6vw,2.4rem)]"><Accent text={alternatives.h2} /></Item>
@@ -204,12 +216,6 @@ export function Alternatives() {
               </article>
             </ArriveItem>
           ))}
-          <ArriveItem progress={progress} i={n - 1} n={n} className="sm:col-span-2">
-            <article className="g g-gold rounded-[18px] p-8 md:p-10">
-              <h3 className="h3 !text-[1.6rem]">{alternatives.final.title}</h3>
-              <p className="body fg2 !text-[1rem]">{alternatives.final.body}</p>
-            </article>
-          </ArriveItem>
         </div>
       </div>
     </section>

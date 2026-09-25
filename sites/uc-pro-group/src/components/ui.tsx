@@ -1,17 +1,17 @@
 import type { ReactNode } from "react";
 import {
-  Users, KeyRound, TrendingUp, ChartColumn, Globe, Coins, Flag, Calendar, User, Megaphone,
-  Laptop, Sparkles, Dices, Wine, Footprints, ShieldCheck, Handshake, ClipboardList, Rocket,
+  Users, KeyRound, TrendingUp, ChartColumn, HeartHandshake, Coins, Flag, Calendar, CalendarCheck, User, Megaphone,
+  Laptop, Sparkles, Dices, Wine, Footprints, ShieldCheck, Handshake, Gift,
   type LucideIcon,
 } from "lucide-react";
 import { site } from "../content";
 import { In, Item } from "./effects";
 
 const icons: Record<string, LucideIcon> = {
-  users: Users, key: KeyRound, trending: TrendingUp, chart: ChartColumn, globe: Globe, coins: Coins,
-  flag: Flag, calendar: Calendar, user: User, megaphone: Megaphone, laptop: Laptop, sparkles: Sparkles,
-  dice: Dices, wine: Wine, footprints: Footprints, shield: ShieldCheck, handshake: Handshake,
-  clipboard: ClipboardList, rocket: Rocket,
+  users: Users, key: KeyRound, trending: TrendingUp, chart: ChartColumn, belong: HeartHandshake, coins: Coins,
+  flag: Flag, calendar: Calendar, calendarCheck: CalendarCheck, user: User, megaphone: Megaphone, laptop: Laptop,
+  sparkles: Sparkles, dice: Dices, wine: Wine, footprints: Footprints, shield: ShieldCheck, handshake: Handshake,
+  gift: Gift,
 };
 
 /** White glyph on a gold disc, the one icon treatment used outside the hero. */

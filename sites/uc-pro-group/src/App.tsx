@@ -2,7 +2,8 @@ import { MotionConfig } from "motion/react";
 import { Header, Hero, Stats, LogosTop, Problem, Callout, Alternatives } from "./sections/Top";
 import { Peak } from "./sections/Peak";
 import { ProGroup, Expect, Rhythm, LogosBottom, Pricing, Anchor, Compare } from "./sections/Middle";
-import { Risk, How, Research, Proof, Standard, Story, Futures, Faq, Close, Footer } from "./sections/Bottom";
+import { How, Research, Proof, Standard, Story, Futures, Faq, Close, Footer } from "./sections/Bottom";
+import { callouts } from "./content";
 
 export default function App() {
   return (
@@ -14,9 +15,11 @@ export default function App() {
         <Stats />
         <LogosTop />
         <Problem />
-        <Callout />
+        <Callout {...callouts.broken} />
         <Alternatives />
+        <Callout {...callouts.turn} />
         <Peak />
+        <Callout {...callouts.bridge} />
         <ProGroup />
         <Expect />
         <Rhythm />
@@ -24,12 +27,11 @@ export default function App() {
         <Pricing />
         <Anchor />
         <Compare />
-        <Risk />
         <How />
-        <Research />
         <Proof />
-        <Standard />
+        <Research />
         <Story />
+        <Standard />
         <Futures />
         <Faq />
         <Close />

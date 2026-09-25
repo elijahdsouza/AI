@@ -2,15 +2,26 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, X, Minus } from "lucide-react";
 import { Disc, Head, Section, Cta, Accent, Copy, Photo } from "../components/ui";
-import { Marquee, HScroll, HCard, In, Item, useDrift, EASE_OUT } from "../components/effects";
-import { img } from "../images";
+import { Marquee, HScroll, HCard, In, Item, Typewriter, useDrift, EASE_OUT } from "../components/effects";
+import { img, proGroupPhoto } from "../images";
 import { proGroup, expect, rhythm, logosBottom, pricing, anchor, compare, type Period } from "../content";
 
+/** Opens under the gold bridge callout, hence the deep top padding. The photo takes the right-hand page. */
 export function ProGroup() {
   return (
-    <Section id="pro-group" ground="green" className="grain !pt-[clamp(72px,8vw,120px)]">
+    <Section id="pro-group" ground="green" className="grain !pt-[clamp(150px,14vw,200px)]">
       <div className="wrap">
-        <Head eyebrow={proGroup.eyebrow} title={proGroup.h2} lede={proGroup.lede} className="max-w-[900px] [&_.h2]:text-[clamp(1.9rem,3.6vw,3rem)]" />
+        <div className="grid lg:grid-cols-[1.08fr_1fr] gap-10 lg:gap-16 items-center">
+          <In>
+            <Item as="p" className="eyebrow">{proGroup.eyebrow}</Item>
+            <Item as="h2" className="h2 !text-[clamp(2.1rem,4.2vw,3.5rem)]">
+              {proGroup.stem}{" "}
+              <Typewriter phrases={proGroup.rotating} still={proGroup.still} />
+            </Item>
+            <Item as="p" className="lede">{proGroup.lede}</Item>
+          </In>
+          <In><Item><Photo src={proGroupPhoto} alt={proGroup.photoAlt} label="community meetup" className="aspect-[4/3] lg:aspect-square" /></Item></In>
+        </div>
         <In className="mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-10 border-t b-line pt-12" stagger={0.05}>
           {proGroup.pillars.map((p) => (
             <Item key={p.title}>
@@ -52,12 +63,14 @@ export function Expect() {
         </In>
 
         <h3 className="serif font-bold text-[1.5rem] mt-20 mb-6"><Accent text={expect.servicesTitle} /></h3>
+        {/* on phones the cards are too narrow for the discount chip, so it's said once here instead */}
+        <p className="sm:hidden -mt-3 mb-5"><span className="inline-block rounded-full px-3 py-1.5 text-[12px] font-semibold bg-gold text-[#16140f]">{expect.memberDeal}</span></p>
         <In className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" stagger={0.07}>
           {expect.services.map((s) => (
             <Item key={s.title}>
               <Photo src={img(s.img)} alt={s.title} label={s.title} className="aspect-[4/3]">
                 <p className="serif font-bold text-[1.05rem] md:text-[1.25rem] leading-tight">{s.title}</p>
-                <p className="mt-2 hidden sm:block"><span className="tbc !text-[10px] !text-white/80">{s.price.replace(/^\[|\]$/g, "")}</span></p>
+                <p className="mt-2.5 m-0 hidden sm:block"><span className="inline-block rounded-full px-2.5 py-1 text-[10.5px] md:text-[11.5px] leading-snug font-semibold bg-gold text-[#16140f]">{expect.memberDeal}</span></p>
               </Photo>
             </Item>
           ))}
@@ -219,7 +232,18 @@ export function Pricing() {
             </AnimatePresence>
           </motion.div>
         </Item></In>
-        <p className="mt-8 text-center text-[13px] fg2">{pricing.footnote}</p>
+        {/* risk reversal, straight under the decision */}
+        <In className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--line)] rounded-[20px] border b-line overflow-hidden" stagger={0.06}>
+          {pricing.assurances.map((a) => (
+            <Item key={a.title} className="bg-white p-5 sm:p-6 md:p-7 flex gap-4 sm:block">
+              <Disc name={a.icon} className="!w-10 !h-10" />
+              <div>
+                <h3 className="h3 sm:mt-4 !text-[1.05rem]">{a.title}</h3>
+                <p className="body !text-[.88rem] !mt-1.5">{a.body}</p>
+              </div>
+            </Item>
+          ))}
+        </In>
       </div>
     </Section>
   );
@@ -227,7 +251,7 @@ export function Pricing() {
 
 export function Anchor() {
   return (
-    <Section ground="gold" tight>
+    <Section ground="gold" tight className="on-gold-white">
       <In className="wrap flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-center">
         {anchor.prices.map((p) => (
           <Item as="p" key={p.value} className="flex items-baseline gap-2">
@@ -244,27 +268,29 @@ export function Anchor() {
 const Mark = ({ k }: { k: string }) =>
   k === "y" ? <Check size={15} className="text-[#2f7a4f] shrink-0 mt-0.5" /> :
   k === "n" ? <X size={15} className="text-[#b0413e] shrink-0 mt-0.5" /> :
+  k === "t" ? null :
   <Minus size={15} className="text-[#9a8a55] shrink-0 mt-0.5" />;
 
 // The first column stays put while the rest scrolls sideways: it sits above the moving
 // cells (the gold header is positioned too, so without a z-index it painted over it),
 // carries a hairline edge, and is narrower on phones to leave room for the comparison.
-const pinned = "sticky left-0 z-[2] bg-white p-4 md:p-5 w-[150px] min-w-[150px] md:w-[22%] shadow-[inset_-1px_0_0_rgba(22,20,15,.1)]";
+const pinned = "sticky left-0 z-[2] bg-white p-4 w-[150px] min-w-[150px] md:w-[190px] md:min-w-[190px] shadow-[inset_-1px_0_0_rgba(22,20,15,.1)]";
 
 export function Compare() {
   return (
     <Section id="compare" ground="grey">
-      <div className="wrap">
+      {/* wider than the other sections so seven columns fit without scrolling on a laptop */}
+      <div className="wrap max-w-[1360px]">
         <Head center eyebrow={compare.eyebrow} title={compare.h2} lede={compare.lede} />
         <In><Item className="mt-14 relative">
           <div className="overflow-x-auto rounded-[20px] bg-white no-scrollbar">
-          <table className="w-full min-w-[900px] border-collapse text-left">
-            <caption className="sr-only">UC Pro Group compared with accelerators, studios, coaches and free online groups</caption>
+          <table className="w-full min-w-[1100px] border-collapse text-left">
+            <caption className="sr-only">UC Pro Group compared with Art of Mondays, Entrepreneurship Dinner Club, accelerators, studios, coaches and free online groups</caption>
             <thead>
               <tr>
                 <th className={`${pinned} text-[12px] font-medium fg2 align-bottom`}>What you actually get</th>
                 {compare.columns.map((c, i) => (
-                  <th key={c.name} className={`p-5 align-bottom ${i === 0 ? "g g-gold border-b border-b-white" : ""}`}>
+                  <th key={c.name} className={`p-4 align-bottom ${i === 0 ? "g g-gold on-gold-white border-b border-b-white" : ""}`}>
                     <span className="block serif font-bold text-[1rem]">{c.name}</span>
                     <span className={`block text-[11.5px] mt-1 ${i === 0 ? "opacity-90" : "fg2"} font-normal`}>{c.sub}</span>
                   </th>
@@ -276,8 +302,8 @@ export function Compare() {
                 <tr key={r.q} className="border-t b-line">
                   <th scope="row" className={`${pinned} text-[12.5px] md:text-[13.5px] font-medium`}>{r.q}</th>
                   {r.cells.map(([k, v], i) => (
-                    <td key={i} className={`p-5 text-[13px] leading-snug ${i === 0 ? "bg-[rgba(187,171,105,.1)] font-medium" : "fg2"}`}>
-                      <span className="flex gap-2"><Mark k={k} />{v}</span>
+                    <td key={i} className={`p-4 text-[13px] leading-snug ${i === 0 ? "bg-[rgba(187,171,105,.1)] font-medium" : "fg2"}`}>
+                      {k === "t" ? <span className="tbc !text-[10px]">{v}</span> : <span className="flex gap-2"><Mark k={k} />{v}</span>}
                     </td>
                   ))}
                 </tr>

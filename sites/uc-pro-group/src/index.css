@@ -74,6 +74,8 @@ a { color: inherit; }
   --line: rgba(255,255,255,.18); --card: rgba(255,255,255,.07); --cardline: rgba(255,255,255,.16); --chip: rgba(255,255,255,.12); }
 .g-gold { --acc-word: var(--ink); --bg: var(--gold); --fg: var(--ink); --fg2: #34301f; --acc: var(--ink); --acc-sm: var(--ink); --eyebrow: var(--ink); --dash: var(--ink); --focus: var(--ink);
   --line: rgba(22,20,15,.2); --card: rgba(255,255,255,.2); --cardline: rgba(22,20,15,.18); --chip: rgba(255,255,255,.32); }
+/* white words on the gold, as on the buttons: a soft warm shadow keeps them crisp on the light gold */
+.on-gold-white { --fg: #fff; --fg2: rgba(255,255,255,.94); text-shadow: 0 1px 2px rgba(74,60,18,.42); }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
 .sec { padding: clamp(80px, 11vw, 150px) 0; }
@@ -108,6 +110,11 @@ a { color: inherit; }
   .btn:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 16px 34px -14px rgba(var(--gold-rgb),.95); }
 }
 .btn:active { transform: scale(.97); }
+/* the secondary action: an outline on dark grounds */
+.btn-ghost { background: transparent; color: var(--fg); text-shadow: none; box-shadow: inset 0 0 0 1px rgba(243,239,230,.36); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost:hover { filter: none; color: #fff; box-shadow: inset 0 0 0 1px var(--gold); }
+}
 .btn:focus-visible, .link:focus-visible, button:focus-visible, summary:focus-visible, a:focus-visible {
   outline: 2px solid var(--focus, var(--gold)); outline-offset: 3px; }
 .btn-sm { font-size: 14px; padding: 12px 20px; }
@@ -139,6 +146,14 @@ a { color: inherit; }
 .marquee__item { font-family: var(--mono); font-size: 15px; letter-spacing: .14em; text-transform: uppercase;
   color: var(--fg2); padding: 0 34px; white-space: nowrap; }
 @keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- typed headline: a thin caret in a zero-width box, so a line never rewraps for it ---------- */
+.tw-caret { display: inline-block; width: 0; height: .74em; position: relative; vertical-align: baseline; }
+.tw-caret::after { content: ""; position: absolute; left: .08em; bottom: -.04em; width: 2px; height: 100%; border-radius: 1px;
+  background: currentColor; animation: tw-blink 1.05s steps(1) infinite; }
+.tw[data-busy] .tw-caret::after { animation: none; }
+[data-ambient="paused"] .tw-caret::after { animation: none; opacity: 0; }
+@keyframes tw-blink { 50% { opacity: 0; } }
 
 /* ---------- header ---------- */
 .bar { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s ease, backdrop-filter .3s ease, border-color .3s; border-bottom: 1px solid transparent; }

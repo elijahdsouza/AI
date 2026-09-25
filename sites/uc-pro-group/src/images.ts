@@ -1,5 +1,5 @@
 // Photos. Real UC photos from uncommoncollectiveau.com live in src/assets/ and
-// src/assets/photos/ (speaking, games, industry, cowork); the rest were generated
+// src/assets/photos/ (speaking, industry, cowork); the rest were generated
 // with Higgsfield (Nano Banana 2) and load from its CDN. Run `npm run fetch-images`
 // to download those too, after which every build is fully offline. Drop a file
 // with the same name into src/assets/photos/ to replace any image with your own.
@@ -36,6 +36,11 @@ function localFor(key: string): string | undefined {
   return hit ? local[hit] : undefined;
 }
 
+/** A photo you dropped into src/assets/photos/ under this name, if there is one. */
+export function localPhoto(key: string): string | undefined {
+  return localFor(key);
+}
+
 export function img(key: string): string {
   return localFor(key) ?? `${CDN}${remote[key]}_min.webp`;
 }
@@ -43,3 +48,4 @@ export function img(key: string): string {
 export const group = groupPhoto;
 export { default as crowd } from "./assets/hero-crowd.jpg";
 export { default as logoWhite } from "./assets/uc-logo-white.png";
+export { default as proGroupPhoto } from "./assets/pro-group.jpg";

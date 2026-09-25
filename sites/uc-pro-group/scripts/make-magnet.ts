@@ -65,7 +65,9 @@ const layerBase = (ind: number, nm: string) => ({
   ks: { o: { a: 0, k: 100 }, r: { a: 0, k: 0 }, p: { a: 0, k: [0, 0, 0] }, a: { a: 0, k: [0, 0, 0] }, s: { a: 0, k: [100, 100, 100] } },
 });
 
-const STROKE = R(MARK.stroke * S);
+// The logo's own stroke weight, drawn a little finer (82%) so the mark reads as line art.
+const BASE = R(MARK.stroke * S);
+const STROKE = R(BASE * 0.82);
 
 // The mark: the outline draws on like a pen, then the two domes close off the pole caps.
 const mark = {
@@ -94,7 +96,7 @@ const arcs = [150, 280, 410, 540].map((hgt, k) => {
   return {
     ty: "gr", nm: `Field ${k + 1}`, it: [
       sh(`Arc ${k + 1}`, k2),
-      st("Dots", R(STROKE * 0.26), { a: 0, k: alpha }, {
+      st("Dots", R(BASE * 0.26), { a: 0, k: alpha }, {
         d: [
           { n: "d", nm: "dash", v: { a: 0, k: 0.1 } },
           { n: "g", nm: "gap", v: { a: 0, k: 11.9 } },

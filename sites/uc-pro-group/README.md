@@ -32,9 +32,13 @@ Every word on the page is in **`src/content.ts`**, in page order. Change it and 
 
 - `site.waitlistUrl`: paste your form tool's link here (Tally, Typeform, Mailchimp...).
   Every "Join the waitlist" button uses it, and links starting with `http` open in a new tab.
+- `site.walkUrl`: where "Come to the Founders Walk" goes. `site.freeUrl`: the Forever Free sign-up.
 - `site.deadlineISO` / `site.deadlineLabel`: the founding-rate deadline behind the countdown.
-- `*word*` in a heading marks the accent word (gold on dark sections, a gold
-  highlighter stripe on light ones).
+  It's set to 11:59pm Melbourne time on 29 October 2026, which is daylight saving (AEDT, UTC+11).
+- `*words*` in a heading mark the gold italic accent, and can run over several words
+  (on the gold callouts they show as dark italic instead).
+- `hero.rotating` and `proGroup.rotating`: the phrases the two headlines type out, in order.
+  The first one is what shows before anything moves.
 - Anything written `[TBC · ...]` shows on the page as a dashed placeholder tag
   until you replace it.
 
@@ -47,16 +51,18 @@ A local file always wins over the online one. No code changes needed.
 | Slot | Where it appears |
 |---|---|
 | `dinner`, `podcast`, `industry`, `cowork`, `speaking`, `games` | "Experiences" cards |
+| `bartlett`, `priestley`, `betdavid` | Headshots beside the three quotes (initials show until you add them) |
 | `video`, `grant`, `marketing`, `social`, `legal`, `coaching` | "Growth services" cards |
 | `coworkWide` | Beside "What a month inside looks like" |
 | `walk` | Above the pricing |
 | `toast` | The closing section |
 
 Real UC photos, cropped from uncommoncollectiveau.com, already fill `speaking`,
-`games`, `industry` and `cowork`. The hero background is `src/assets/hero-crowd.jpg`
+`industry` and `cowork`. The hero background is `src/assets/hero-crowd.jpg`
 (also from the live site), the group photo in "What we believe" is
-`src/assets/table.jpg`, and the logo is `src/assets/uc-logo-white.png`. They came from
-a screen capture, so swapping in the original files will make them sharper.
+`src/assets/table.jpg`, the community meetup photo beside "A movement, not a membership"
+is `src/assets/pro-group.jpg`, and the logo is `src/assets/uc-logo-white.png`. They came
+from a screen capture, so swapping in the original files will make them sharper.
 
 To download the current generated photos so every build works offline:
 
@@ -92,20 +98,23 @@ effects are kept to the places that carry the story:
 
 | Where | Effect |
 |---|---|
-| Hero | The UC magnet as a Lottie (`src/assets/uc-magnet.json`): it draws itself on, then its field flows pole to pole over a lattice of dots. It leans toward the cursor and its field speeds up near the poles. Behind it, a real UC night from the live site. |
+| Hero | The UC magnet as a Lottie (`src/assets/uc-magnet.json`): it draws itself on, then its field flows pole to pole over a lattice of dots. It leans toward the cursor and its field speeds up near the poles. Behind it, a real UC night from the live site. The end of the headline types itself out, phrase by phrase. |
+| The gold callouts | Three statements sit across the seams between sections: after the problem, after the alternatives, and after "What we believe" |
 | The problem, and "What a month inside looks like" | The section holds still while the cards travel in sideways |
-| The alternatives, and the testimonials | Cards fly in from past the right edge as you scroll |
+| The alternatives, the testimonials, the results and "You didn't come this far" | Cards fly in from past the right edge as you scroll |
+| The Pro Group | Its headline types out "Build real business friendships / systems that back you / undeniable momentum" |
 | What we believe | The page's signature moment: the belief lights up word by word, then you fly through the gold magnet (the logo's own outline) into the real room |
 
 Visitors who set "reduce motion" on their device get the same effects, softened:
 parallax drift, slide-in offsets and the button lean are dropped, and the photo
 doesn't push in. The hero has a pause button that stops everything that moves on
-its own (the magnet, the rotating headline and the logo strips).
+its own (the magnet, the typed headlines and the logo strips). Screen readers hear each
+typed headline as one whole sentence.
 
 The magnet Lottie is generated from the logo's measured geometry
 (`src/components/ucMark.ts`): `npm run make-magnet` rewrites it.
 
-To compare the founder story on green instead of gold, add `?story=green` to the address.
+To compare the founder story on gold instead of green, add `?story=gold` to the address.
 
 ## Stack
 
