@@ -132,7 +132,7 @@ export function DriftPhoto({ src, alt, className = "" }: { src: string; alt: str
   return (
     <figure ref={ref} className={`photo m-0 ${className}`}>
       <span className="photo-fallback">{alt}</span>
-      <motion.img src={src} alt={alt} loading="lazy" decoding="async" style={{ y, scale: 1.14 }} className="!transition-none" />
+      <motion.img src={src} alt={alt} loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} style={{ y, scale: 1.14 }} className="!transition-none" />
     </figure>
   );
 }

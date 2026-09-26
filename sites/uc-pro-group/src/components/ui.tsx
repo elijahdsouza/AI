@@ -83,13 +83,16 @@ export function Cta({ className = "", small = false, label = site.cta }: { class
   );
 }
 
+/** Offline, or where outside images are blocked, show the labelled frame instead of a broken-image icon. */
+const hideBroken = (e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.style.visibility = "hidden"; };
+
 export function Photo({
   src, alt, className = "", children, label,
 }: { src: string; alt: string; className?: string; children?: ReactNode; label?: string }) {
   return (
     <figure className={`photo m-0 ${className}`}>
       <span className="photo-fallback">{label ?? "photo"}</span>
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
+      <img src={src} alt={alt} loading="lazy" decoding="async" onError={hideBroken} />
       {children && (
         <>
           <span className="scrim" />

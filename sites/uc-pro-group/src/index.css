@@ -156,7 +156,7 @@ a { color: inherit; }
 @keyframes tw-blink { 50% { opacity: 0; } }
 
 /* ---------- header ---------- */
-.bar { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s ease, backdrop-filter .3s ease, border-color .3s; border-bottom: 1px solid transparent; }
+.bar { position: fixed; inset: 0 0 auto 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px); transition: background .3s ease, backdrop-filter .3s ease, border-color .3s; border-bottom: 1px solid transparent; }
 .bar.scrolled { background: rgba(14,13,11,.82); backdrop-filter: blur(14px); border-color: rgba(243,239,230,.08); }
 .bar__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
 .bar nav a { font-size: 13px; color: #cfc8b8; text-decoration: none; font-weight: 400; }
